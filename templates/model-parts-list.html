@@ -1,4 +1,8 @@
-<!-- site__body -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title%}{{model}}{% endblock title %}
+{% block content %}
 <div class="site__body">
     <div class="block-header block-header--has-breadcrumb block-header--has-title">
         <div class="container">
@@ -10,13 +14,13 @@
                             <a href="/" class="breadcrumb__item-link">Naslovna</a>
                         </li>
                         <li class="breadcrumb__item breadcrumb__item--parent">
-                            <a href="/showModel?model={{$model}}" class="breadcrumb__item-link">{{$model}}</a>
+                            <a href="/showModel?model={{model}}" class="breadcrumb__item-link">{{model}}</a>
                         </li>
 
                         <li class="breadcrumb__title-safe-area" role="presentation"></li>
                     </ol>
                 </nav>
-                <h1 class="block-header__title">Karoserijski auto delovi za {{$model}}</h1>
+                <h1 class="block-header__title">Karoserijski auto delovi za {{model}}</h1>
             </div>
         </div>
     </div>
@@ -844,17 +848,7 @@
                         <div class="products-view">
                             <div class="products-view__options view-options view-options--offcanvas--always">
                                 <div class="view-options__body">
-{{--                                    <button type="button" class="view-options__filters-button filters-button">--}}
-{{--                                                <span class="filters-button__icon"><svg width="16" height="16">--}}
-{{--                                                        <path d="M7,14v-2h9v2H7z M14,7h2v2h-2V7z M12.5,6C12.8,6,13,6.2,13,6.5v3c0,0.3-0.2,0.5-0.5,0.5h-2--}}
-{{--	C10.2,10,10,9.8,10,9.5v-3C10,6.2,10.2,6,10.5,6H12.5z M7,2h9v2H7V2z M5.5,5h-2C3.2,5,3,4.8,3,4.5v-3C3,1.2,3.2,1,3.5,1h2--}}
-{{--	C5.8,1,6,1.2,6,1.5v3C6,4.8,5.8,5,5.5,5z M0,2h2v2H0V2z M9,9H0V7h9V9z M2,14H0v-2h2V14z M3.5,11h2C5.8,11,6,11.2,6,11.5v3--}}
-{{--	C6,14.8,5.8,15,5.5,15h-2C3.2,15,3,14.8,3,14.5v-3C3,11.2,3.2,11,3.5,11z" />--}}
-{{--                                                    </svg>--}}
-{{--                                                </span>--}}
-{{--                                        <span class="filters-button__title">Filters</span>--}}
-{{--                                        <span class="filters-button__counter">3</span>--}}
-{{--                                    </button>--}}
+
                                     <div class="view-options__layout layout-switcher">
                                         <div class="layout-switcher__list">
                                             <button type="button" class="layout-switcher__button " data-layout="grid" data-with-features="false">
@@ -887,48 +881,48 @@
                                         </div>
                                     </div>
                                     <div class="view-options__legend">
-                                        Prikaz {{$count}} proizvoda
+                                        Prikaz 10 proizvoda
                                     </div>
-{{--                                    <div class="view-options__spring"></div>--}}
-{{--                                    <div class="view-options__select">--}}
-{{--                                        <label for="view-option-sort">Sort:</label>--}}
-{{--                                        <select id="view-option-sort" class="form-control form-control-sm" name="">--}}
-{{--                                            <option value="">Price</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="view-options__select">--}}
-{{--                                        <label for="view-option-limit">Show:</label>--}}
-{{--                                        <select id="view-option-limit" class="form-control form-control-sm" name="">--}}
-{{--                                            <option value="">16</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
+                                    <div class="view-options__spring"></div>
+                                    <div class="view-options__select">
+                                        <label for="view-option-sort">Sort:</label>
+                                        <select id="view-option-sort" class="form-control form-control-sm" name="">
+                                            <option value="">Price</option>
+                                        </select>
+                                    </div>
+                                    <div class="view-options__select">
+                                        <label for="view-option-limit">Show:</label>
+                                        <select id="view-option-limit" class="form-control form-control-sm" name="">
+                                            <option value="">16</option>
+                                        </select>
+                                    </div>
                                 </div>
-{{--                                <div class="view-options__body view-options__body--filters">--}}
-{{--                                    <div class="view-options__label">Active Filters</div>--}}
-{{--                                    <div class="applied-filters">--}}
-{{--                                        <ul class="applied-filters__list">--}}
-{{--                                            <li class="applied-filters__item">--}}
-{{--                                                <a href="" class="applied-filters__button applied-filters__button--filter">--}}
-{{--                                                    Sales: Top Sellers--}}
-{{--                                                    <svg width="9" height="9">--}}
-{{--                                                        <path d="M9,8.5L8.5,9l-4-4l-4,4L0,8.5l4-4l-4-4L0.5,0l4,4l4-4L9,0.5l-4,4L9,8.5z" />--}}
-{{--                                                    </svg>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                            <li class="applied-filters__item">--}}
-{{--                                                <a href="" class="applied-filters__button applied-filters__button--filter">--}}
-{{--                                                    Color: True Red--}}
-{{--                                                    <svg width="9" height="9">--}}
-{{--                                                        <path d="M9,8.5L8.5,9l-4-4l-4,4L0,8.5l4-4l-4-4L0.5,0l4,4l4-4L9,0.5l-4,4L9,8.5z" />--}}
-{{--                                                    </svg>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                            <li class="applied-filters__item">--}}
-{{--                                                <button type="button" class="applied-filters__button applied-filters__button--clear">Clear All</button>--}}
-{{--                                            </li>--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                <div class="view-options__body view-options__body--filters">
+                                    <div class="view-options__label">Active Filters</div>
+                                    <div class="applied-filters">
+                                        <ul class="applied-filters__list">
+                                            <li class="applied-filters__item">
+                                                <a href="" class="applied-filters__button applied-filters__button--filter">
+                                                    Sales: Top Sellers
+                                                    <svg width="9" height="9">
+                                                        <path d="M9,8.5L8.5,9l-4-4l-4,4L0,8.5l4-4l-4-4L0.5,0l4,4l4-4L9,0.5l-4,4L9,8.5z" />
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                            <li class="applied-filters__item">
+                                                <a href="" class="applied-filters__button applied-filters__button--filter">
+                                                    Color: True Red
+                                                    <svg width="9" height="9">
+                                                        <path d="M9,8.5L8.5,9l-4-4l-4,4L0,8.5l4-4l-4-4L0.5,0l4,4l4-4L9,0.5l-4,4L9,8.5z" />
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                            <li class="applied-filters__item">
+                                                <button type="button" class="applied-filters__button applied-filters__button--clear">Clear All</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="products-view__list products-list products-list--grid--6" data-layout="list" data-with-features="true">
                                 <div class="products-list__head">
@@ -939,14 +933,14 @@
                                     <div class="products-list__column products-list__column--price">Price</div>
                                 </div>
                                 <div class="products-list__content">
-                                    @foreach ($articles as $article)
-                                    <div id="{{$article->gbg_id}}" hidden>
-                                        <div id="desctiption">{{$article->description}}</div>
+                                    {% for article in articles %}
+                                    <div id="{{article.gbg_id}}" hidden>
+                                        <div id="desctiption">{{article.description}}</div>
                                     </div>
                                     <div class="products-list__item">
                                         <div class="product-card">
                                             <div class="product-card__actions-list">
-                                                <button class="product-card__action product-card__action--quickview" id="{{$article->gbg_id}}" type="button" aria-label="Quick view">
+                                                <button class="product-card__action product-card__action--quickview" id="{{article.gbg_id}}" type="button" aria-label="Quick view">
                                                     <svg width="16" height="16">
                                                         <path d="M14,15h-4v-2h3v-3h2v4C15,14.6,14.6,15,14,15z M13,3h-3V1h4c0.6,0,1,0.4,1,1v4h-2V3z M6,3H3v3H1V2c0-0.6,0.4-1,1-1h4V3z
 	 M3,13h3v2H2c-0.6,0-1-0.4-1-1v-4h2V13z" />
@@ -968,8 +962,8 @@
                                             </div>
                                             <div class="product-card__image">
                                                 <div class="image image--type--product">
-                                                    <a href="product/{{$article->gbg_id}}" class="image__body">
-                                                        <img class="image__tag" src="{{$article->image}}" alt="">
+                                                    <a href="product/{{article.gbg_id}}" class="image__body">
+                                                        <img class="image__tag" src="{{article.image}}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
@@ -978,19 +972,19 @@
                                                                 <path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z" />
                                                             </svg>
                                                         </div>
-                                                        <div class="status-badge__text">Na stanju - {{$article->model}}</div>
-                                                        <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="Na stanju - {{$article->model}}"></div>
+                                                        <div class="status-badge__text">{%if article.stock == '1' %}Na stanju{%else%}Nema na stanju -{% endif %} {{article.model}}</div>
+                                                        <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="product-card__info">
-                                                <div class="product-card__meta"><span class="product-card__meta-title">SKU:</span> {{$article->genuine_code}}</div>
+                                                <div class="product-card__meta"><span class="product-card__meta-title">SKU:</span> {{article.genuine_code}}</div>
                                                 <div class="product-card__name">
                                                     <div>
                                                         <div class="product-card__badges">
                                                             <div class="tag-badge tag-badge--new">Novo</div>
                                                         </div>
-                                                        <a href="product/{{$article->gbg_id}}">{{$article->description}} - {{$article->model}}</a>
+                                                        <a href="product/{{article.gbg_id}}">{{article.description}} - {{article.model}}</a>
                                                     </div>
                                                 </div>
                                                 <div class="product-card__rating">
@@ -1009,7 +1003,7 @@
                                             </div>
                                             <div class="product-card__footer">
                                                 <div class="product-card__prices">
-                                                    <div class="product-card__price product-card__price--current">{{$article->price}} rsd</div>
+                                                    <div class="product-card__price product-card__price--current">{{article.price}} rsd</div>
                                                 </div>
                                                 <button class="product-card__addtocart-icon" type="button" aria-label="Dodaj u korpu">
                                                     <svg width="20" height="20">
@@ -1023,7 +1017,7 @@
                                                 <button class="product-card__addtocart-full"
                                                         type="button"
                                                         id="dodaj_korpa"
-                                                        podaci="{{$article}}"
+                                                        podaci="{{article}}"
                                                 >
                                                     Dodaj u korpu
                                                 </button>
@@ -1045,47 +1039,34 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="products-view__pagination">
-                                {{ $articles->links() }}
-{{--                                <nav aria-label="Page navigation example">--}}
-{{--                                    <ul class="pagination">--}}
-{{--                                        <li class="page-item disabled">--}}
-{{--                                            <a class="page-link page-link--with-arrow" href="" aria-label="Previous">--}}
-{{--                                                        <span class="page-link__arrow page-link__arrow--left" aria-hidden="true"><svg width="7" height="11">--}}
-{{--                                                                <path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z" />--}}
-{{--                                                            </svg>--}}
-{{--                                                        </span>--}}
-{{--                                            </a>--}}
-{{--                                        </li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-{{--                                        <li class="page-item active" aria-current="page">--}}
-{{--                                                    <span class="page-link">--}}
-{{--                                                        2--}}
-{{--                                                        <span class="sr-only">(current)</span>--}}
-{{--                                                    </span>--}}
-{{--                                        </li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#">4</a></li>--}}
-{{--                                        <li class="page-item page-item--dots">--}}
-{{--                                            <div class="pagination__dots"></div>--}}
-{{--                                        </li>--}}
-{{--                                        <li class="page-item"><a class="page-link" href="#">9</a></li>--}}
-{{--                                        <li class="page-item">--}}
-{{--                                            <a class="page-link page-link--with-arrow" href="" aria-label="Next">--}}
-{{--                                                        <span class="page-link__arrow page-link__arrow--right" aria-hidden="true"><svg width="7" height="11">--}}
-{{--                                                                <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9--}}
-{{--	C-0.1,9.8-0.1,10.4,0.3,10.7z" />--}}
-{{--                                                            </svg>--}}
-{{--                                                        </span>--}}
-{{--                                            </a>--}}
-{{--                                        </li>--}}
-{{--                                    </ul>--}}
-{{--                                </nav>--}}
+
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}&page={{page|add:'-1'}}" aria-label="Previous">
+                                                        <span class="page-link__arrow page-link__arrow--left" aria-hidden="true"><svg width="7" height="11">
+                                                                <path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z" />
+                                                            </svg>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}&page={{page|add:'1'}}" aria-label="Next">
+                                                        <span class="page-link__arrow page-link__arrow--right" aria-hidden="true"><svg width="7" height="11">
+                                                                <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9
+	C-0.1,9.8-0.1,10.4,0.3,10.7z" />
+                                                            </svg>
+                                                        </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                                 <div class="products-view__pagination-legend">
-                                    Prikaz {{$count}} proizvoda
+                                    Prikaz 10 proizvoda
                                 </div>
                             </div>
                         </div>
@@ -1096,4 +1077,4 @@
         </div>
     </div>
 </div>
-<!-- site__body / end -->
+{% endblock content %}

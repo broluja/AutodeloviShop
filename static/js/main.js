@@ -1448,6 +1448,7 @@
                 ddModels.empty();
                 ddModels.append($("<option />").val(0).text("Izaberi model"));
                 $.each(response, function( index, value ) {
+                console.log(value)
                     ddModels.append($("<option />").val(value.model).text(value.model));
                 });
             });
@@ -1458,7 +1459,12 @@
             const model = ddModels.find(":selected").text()
             console.log(model);
             $('#btnSearch').click(function(){
-                window.location.href='showModel?model='+ model;
+            console.log(model)
+                window.location.href='autodelovi?model='+ model;
+            });
+            $('#btnSearch1').click(function(){
+            console.log(model)
+                window.location.href='autodelovi?model='+ model;
             });
         })
     });
