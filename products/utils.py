@@ -1,10 +1,7 @@
 import elasticsearch
 import requests
 
-
 es = elasticsearch.Elasticsearch('http://localhost:9200')
-
-
 IMAGE_PATH = 'https://slike.digitalconstruct.rs'
 
 
@@ -35,11 +32,10 @@ def image_exists(image_url):
 
 
 def img(gbg_id):
-    id = str(gbg_id)[0:4]
+    model_id = str(gbg_id)[0:4]
     trd = get_image(gbg_id)
-    print(trd, 'AAAAAAAAAAAAAAAAAAA')
-    file1 = f"{IMAGE_PATH}/{id}/{gbg_id}.jpg"
-    file2 = f"{IMAGE_PATH}/{id}/{gbg_id}.JPG"
+    file1 = f"{IMAGE_PATH}/{model_id}/{gbg_id}.jpg"
+    file2 = f"{IMAGE_PATH}/{model_id}/{gbg_id}.JPG"
     first = image_exists(file1)
     second = image_exists(file2)
     third = None

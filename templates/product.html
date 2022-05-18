@@ -1,4 +1,8 @@
-<!-- site__body -->
+{% extends 'base.html' %}
+
+{% block title %}{{article.model}}{% endblock title %}
+{% block content %}
+
 <div class="site__body">
     <div class="block-header block-header--has-breadcrumb">
         <div class="container">
@@ -1036,4 +1040,5 @@
     </div>
     <div class="block-space block-space--layout--before-footer"></div>
 </div>
-<!-- site__body / end -->
+
+{% endblock content %}}

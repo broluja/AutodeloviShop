@@ -154,7 +154,7 @@ l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" 
                                                     <img class="image__tag" src="{{sijalica.image}}" alt="">
                                                 </a>
                                             </div>
-                                            <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
+                                            <div class="status-badge {% if sijalica.stock == '1' %}status-badge--style--success{% endif %} product-card__fit status-badge--has-icon status-badge--has-text">
                                                 <div class="status-badge__body">
                                                     {% if sijalica.stock == '1' %}
                                                         <div class="status-badge__icon"><svg width="13" height="13">
@@ -286,10 +286,15 @@ l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" 
                                             </div>
                                             <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
                                                 <div class="status-badge__body">
-                                                    <div class="status-badge__icon"><svg width="13" height="13">
-                                                            <path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z" />
-                                                        </svg>
-                                                    </div>
+                                                    {% if hladnjak.stock == '1' %}
+                                                        <div class="status-badge__icon"><svg width="13" height="13">
+                                                                <path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z" />
+                                                            </svg>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="tag-badge tag-badge--sale">X
+                                                        </div>
+                                                    {% endif %}
                                                     <div class="status-badge__text">{{hladnjak.description}}</div>
                                                     <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="Part&#x20;Fit&#x20;for&#x20;2011&#x20;Ford&#x20;Focus&#x20;S"></div>
                                                 </div>
@@ -307,7 +312,6 @@ l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" 
                                                     <a href="product/{{hladnjak.gbg_id}}">{{hladnjak.description}} - {{hladnjak.model}}</a>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="product-card__footer">
                                             <div class="product-card__prices">
@@ -333,11 +337,7 @@ C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,2
             </div>
         </div>
     </div>
-
-
-
     <div class="block-space block-space--layout--divider-nl d-xl-block d-none"></div>
-
     <div class="block-space block-space--layout--before-footer"></div>
 </div>
 
