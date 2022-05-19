@@ -37,5 +37,12 @@ def show_model(request):
 
 
 def details(request, product_id):
-    pass
+    article_dictionary = es.get_product(product_id)
+    context = {'article': article_dictionary}
+    return render(request, 'product.html', context)
+
+
+def check_out(request):
+    return render(request, 'checkout.html')
+
 

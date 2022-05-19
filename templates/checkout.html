@@ -1,4 +1,8 @@
-<!-- site__body -->
+{% extends 'base.html' %}
+
+{% block title %}Porudzbina{% endblock title %}
+{% block content %}
+
 <div class="site__body">
     <div class="block-header block-header--has-breadcrumb block-header--has-title">
         <div class="container">
@@ -24,9 +28,6 @@
         <div id="porudzbina-error"></div>
         <div class="container container--max--xl">
             <div class="row" id="porudzbina-forma">
-{{--                <div class="col-12 mb-3">--}}
-{{--                    <div class="alert alert-lg alert-primary">Returning customer? <a href="">Click here to login</a></div>--}}
-{{--                </div>--}}
                 <div class="col-12 col-lg-6 col-xl-7">
                     <div class="card mb-lg-0">
                         <div class="card-body card-body--padding--2">
@@ -134,73 +135,8 @@
                                             </div>
                                         </div>
                                     </li>
-{{--                                    <li class="payment-methods__item">--}}
-{{--                                        <label class="payment-methods__item-header">--}}
-{{--                                                    <span class="payment-methods__item-radio input-radio">--}}
-{{--                                                        <span class="input-radio__body">--}}
-{{--                                                            <input class="input-radio__input" name="checkout_payment_method" type="radio">--}}
-{{--                                                            <span class="input-radio__circle"></span>--}}
-{{--                                                        </span>--}}
-{{--                                                    </span>--}}
-{{--                                            <span class="payment-methods__item-title">Check payments</span>--}}
-{{--                                        </label>--}}
-{{--                                        <div class="payment-methods__item-container">--}}
-{{--                                            <div class="payment-methods__item-details text-muted">--}}
-{{--                                                Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="payment-methods__item">--}}
-{{--                                        <label class="payment-methods__item-header">--}}
-{{--                                                    <span class="payment-methods__item-radio input-radio">--}}
-{{--                                                        <span class="input-radio__body">--}}
-{{--                                                            <input class="input-radio__input" name="checkout_payment_method" type="radio">--}}
-{{--                                                            <span class="input-radio__circle"></span>--}}
-{{--                                                        </span>--}}
-{{--                                                    </span>--}}
-{{--                                            <span class="payment-methods__item-title">Cash on delivery</span>--}}
-{{--                                        </label>--}}
-{{--                                        <div class="payment-methods__item-container">--}}
-{{--                                            <div class="payment-methods__item-details text-muted">--}}
-{{--                                                Pay with cash upon delivery.--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="payment-methods__item">--}}
-{{--                                        <label class="payment-methods__item-header">--}}
-{{--                                                    <span class="payment-methods__item-radio input-radio">--}}
-{{--                                                        <span class="input-radio__body">--}}
-{{--                                                            <input class="input-radio__input" name="checkout_payment_method" type="radio">--}}
-{{--                                                            <span class="input-radio__circle"></span>--}}
-{{--                                                        </span>--}}
-{{--                                                    </span>--}}
-{{--                                            <span class="payment-methods__item-title">PayPal</span>--}}
-{{--                                        </label>--}}
-{{--                                        <div class="payment-methods__item-container">--}}
-{{--                                            <div class="payment-methods__item-details text-muted">--}}
-{{--                                                Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
                                 </ul>
                             </div>
-{{--                            <div class="checkout__agree form-group">--}}
-{{--                                <div class="form-check">--}}
-{{--                                            <span class="input-check form-check-input">--}}
-{{--                                                <span class="input-check__body">--}}
-{{--                                                    <input class="input-check__input" type="checkbox" id="checkout-terms">--}}
-{{--                                                    <span class="input-check__box"></span>--}}
-{{--                                                    <span class="input-check__icon"><svg width="9px" height="7px">--}}
-{{--                                                            <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />--}}
-{{--                                                        </svg>--}}
-{{--                                                    </span>--}}
-{{--                                                </span>--}}
-{{--                                            </span>--}}
-{{--                                    <label class="form-check-label" for="checkout-terms">--}}
-{{--                                        I have read and agree to the website <a target="_blank" href="terms.html">terms and conditions</a>--}}
-{{--                                    </label>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <button type="submit" id="posalji-porudzbinu" class="btn btn-primary btn-xl btn-block">Poručite</button>
                         </div>
                     </div>
@@ -210,4 +146,4 @@
     </div>
     <div class="block-space block-space--layout--before-footer"></div>
 </div>
-<!-- site__body / end -->
+{% endblock content %}

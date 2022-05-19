@@ -1,7 +1,7 @@
 import elasticsearch
 import requests
 
-es = elasticsearch.Elasticsearch('http://localhost:9200')
+e_search = elasticsearch.Elasticsearch('http://localhost:9200')
 IMAGE_PATH = 'https://slike.digitalconstruct.rs'
 
 
@@ -14,7 +14,7 @@ def get_image(gbg_id):
             }
         }
     }
-    r = es.search(
+    r = e_search.search(
         index="images",
         body=query
     )
