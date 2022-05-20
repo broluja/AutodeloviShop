@@ -178,9 +178,12 @@ class ElasticSearchAgent(object):
             index='test-index',
             body=product_query
         )
-        article_dictionary = p['hits']['hits'][0]
-        articles = article_dictionary['_source']
-        gbg_id = articles['gbg_id']
+        print('Product raw: ', p)
+        product_dictionary = p['hits']['hits'][0]
+        print('Product: ', product_dictionary)
+        product = product_dictionary['_source']
+        gbg_id = product['gbg_id']
         image = self.img(gbg_id)
-        articles['image'] = image
-        return articles
+        product['image'] = image
+        print('Product Updated: ', product)
+        return product

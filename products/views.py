@@ -37,9 +37,9 @@ def show_model(request):
     return render(request, 'model-parts-list.html', context)
 
 
-def details(request, product_id):
-    article_dictionary = es.get_product(product_id)
-    context = {'article': article_dictionary}
+def product_details(request, product_id):
+    article = es.get_product(product_id)
+    context = {'article': article}
     return render(request, 'product.html', context)
 
 
