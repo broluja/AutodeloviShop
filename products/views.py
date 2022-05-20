@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from .elastic_agent import ElasticSearchAgent
+from .utils import send_email
 
 es = ElasticSearchAgent()
 
@@ -46,3 +47,10 @@ def check_out(request):
     return render(request, 'checkout.html')
 
 
+def order(request):
+    if request.method == 'POST':
+        user = request.POST.get('user')
+        products = request.POST.get('products')
+        total = request.POST.get('total')
+        send_email(receiver='olujic.branko@gmail.com', template=products, user=user)
+    return HttpResponse('wtf')

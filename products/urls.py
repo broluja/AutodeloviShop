@@ -8,4 +8,5 @@ urlpatterns = [
     path('autodelovi', views.show_model, name='show_model'),
     path('product/<str:product_id>', views.details, name='details'),
     path('check-out', views.check_out, name='check_out'),
+    path('order', views.order, name='order'),
 ]
