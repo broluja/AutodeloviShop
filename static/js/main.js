@@ -329,7 +329,8 @@
     /*Dodavanje u korpu*/
     $(function() {
         $(document).on("click","#dodaj_korpa", function () {
-            var podaci = $(this).attr('podaci');
+            var str = $(this).attr('podaci');
+            var podaci = str.replace(/'/g, '"')
             const itemData =  JSON.parse(podaci);
             const localStorage = window.localStorage;
             var getItemData = localStorage.getItem(itemData.gbg_id);
@@ -460,7 +461,6 @@
             var user = {};
             user.name = document.getElementById("checkout-first-name").value;
             user.surname = document.getElementById("checkout-last-name").value;
-            user.country = document.getElementById("checkout-country").value;
             user.street = document.getElementById("checkout-street-address").value;
             user.number = document.getElementById("checkout-address").value;
             user.city = document.getElementById("checkout-city").value;
@@ -496,7 +496,7 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("POST", "/order");
             xmlhttp.setRequestHeader("Content-Type", "application/json");
-            xmlhttp.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
+            xmlhttp.setRequestHeader('X-CSRFToken', document.head.querySelector('meta[name="csrf-token"]').content);
             xmlhttp.send(JSON.stringify(data));
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
