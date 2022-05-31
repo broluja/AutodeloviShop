@@ -7,7 +7,7 @@ es.indices.delete(index='stock')
 es.index(index="stock", document={})
 
 lista = []
-file = '/home/branko/Documents/commands/ftp/OUTOFSTOCK_SRB.txt'
+file = '/data_disk_50/autodelovi/ftp/OUTOFSTOCK_SRB.txt'
 with csv23.open_csv(file, encoding='iso-8859-1') as reader:
     for row in reader:
         data = row[0].split(';')

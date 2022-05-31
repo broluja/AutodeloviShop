@@ -7,7 +7,7 @@ es = Elasticsearch('http://localhost:9200')
 es.index(index="images", document={})
 
 lista = []
-file = '/home/branko/Documents/commands/ftp/REFAR_02850.txt'
+file = '/data_disk_50/autodelovi/ftp/REFAR_02850.txt'
 with csv23.open_csv(file, encoding='iso-8859-1') as reader:
     for row in reader:
         data = row[0].split(';')
@@ -20,4 +20,3 @@ with csv23.open_csv(file, encoding='iso-8859-1') as reader:
         })
 
 bulk(es, lista)
-

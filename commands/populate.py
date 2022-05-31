@@ -8,7 +8,7 @@ from elasticsearch.helpers import bulk
 es = Elasticsearch('http://localhost:9200')
 
 # input = "/data_disk_50/autodelovi/ftp"
-output = "/home/branko/Documents/commands/ftp"
+output = "/data_disk_50/autodelovi/ftp"
 #
 #
 # with zipfile.ZipFile(f"{input}/OUTOFSTOCK_SRB.ZIP", 'r') as zip_ref:
@@ -20,7 +20,7 @@ output = "/home/branko/Documents/commands/ftp"
 # with zipfile.ZipFile(f"{input}/REFAR_02850.ZIP", 'r') as zip_ref:
 #     zip_ref.extractall(output)
 
-es.indices.delete(index='test-index')
+#es.indices.delete(index='test-index')
 es.index(index="test-index", document={})
 
 
