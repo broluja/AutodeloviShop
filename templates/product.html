@@ -1,3 +1,4 @@
+{% load mathfilters %}
 {% extends 'base.html' %}
 
 {% block title %}{{article.model}}{% endblock title %}
@@ -149,7 +150,7 @@
 
                                                 <tr>
                                                     <th>Težina</th>
-                                                    <td>{%int(article.weight)*1000%}kg</td>
+                                                    <td>{{article.weight|mul:0.5}} g</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Kataloški broj</th>
