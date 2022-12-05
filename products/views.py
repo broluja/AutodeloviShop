@@ -57,3 +57,7 @@ def order(request):
         r = send_email(body)
 
     return JsonResponse(r.json())
+
+
+def about(request):
+    return render(request, 'onama.html')
