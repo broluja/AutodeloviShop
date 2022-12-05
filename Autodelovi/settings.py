@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Custom Apps
-    'products.apps.ProductsConfig'
+    'products.apps.ProductsConfig',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [
