@@ -68,7 +68,7 @@ def update_price(price):
     final_pdv = new_price * 0.2
     final_price = new_price + final_pdv
 
-    return math.ceil(final_price)
+    return math.ceil(final_price / 10) * 10
 
 
 lista = []
