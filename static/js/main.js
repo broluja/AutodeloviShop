@@ -504,6 +504,7 @@
                     if (jsonResponse["Messages"][0]["Status"] == "success") {
                         document.getElementById("porudzbina-forma").innerHTML =
                             "Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!";
+                        localStorage.clear();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
                             "Doslo je do greske u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";
