@@ -4,15 +4,9 @@ from elasticsearch import Elasticsearch
 IMAGE_PATH = 'https://slike.digitalconstruct.rs'
 
 
-class ElasticSearchAgent(object):
-
-    def __new__(cls):
-        print('Creating...')
-        obj = super().__new__(cls)
-        return obj
+class ElasticSearchAgent:
 
     def __init__(self):
-        print('Instantiating...')
         self.port = 'http://localhost:9200'
         self.agent = Elasticsearch(self.port)
 
@@ -20,38 +14,29 @@ class ElasticSearchAgent(object):
         query = {
             "size": 1000,
             "query": {
-                "match": {
-                    "_id": gbg_id
-                }
+                "match": {"_id": gbg_id}
             }
         }
         r = self.agent.search(
             index="images",
             body=query
         )
-        if not len(r['hits']['hits']):
-            return None
-        return r['hits']['hits']
+        return r['hits']['hits'] if len(r['hits']['hits']) else None
 
     @staticmethod
     def image_exists(image_url):
         image_formats = ("image/png", "image/jpeg", "image/jpg")
         r = requests.head(image_url)
-        if r.headers["content-type"] in image_formats:
-            return True
-        return False
+        return r.headers["content-type"] in image_formats
 
     def img(self, gbg_id):
-        model_id = str(gbg_id)[0:4]
+        model_id = str(gbg_id)[:4]
         trd = self.get_image(gbg_id)
         file1 = f"{IMAGE_PATH}/{model_id}/{gbg_id}.jpg"
         file2 = f"{IMAGE_PATH}/{model_id}/{gbg_id}.JPG"
         first = self.image_exists(file1)
         second = self.image_exists(file2)
-        third = None
-        if trd is not None:
-            third = str(trd[0])[0:4]
-
+        third = str(trd[0])[:4] if trd is not None else None
         if first:
             image = file1
         elif second:
@@ -96,8 +81,7 @@ class ElasticSearchAgent(object):
             body=query
         )
         results = r['aggregations']['models']['buckets']
-        models = [model['key'] for model in results]
-        return models
+        return [model['key'] for model in results]
 
     def show_model(self, model, _from, per_page=10):
         parts = {
@@ -118,8 +102,7 @@ class ElasticSearchAgent(object):
             gbg_id = jsn.get('gbg_id')
             image = self.img(gbg_id)
             jsn['image'] = image
-        articles = [item['_source'] for item in items]
-        return articles
+        return [item['_source'] for item in items]
 
     def sijalice_query(self):
         sijalice_query = {
@@ -140,8 +123,7 @@ class ElasticSearchAgent(object):
             gbg_id = item.get('gbg_id')
             image = self.img(gbg_id)
             item['image'] = image
-        sijalice = [item['_source'] for item in sijalice_raw]
-        return sijalice
+        return [item['_source'] for item in sijalice_raw]
 
     def hladnjaci_query(self):
         hladnjaci_query = {
@@ -163,8 +145,7 @@ class ElasticSearchAgent(object):
             gbg_id = item.get('gbg_id')
             image = self.img(gbg_id)
             item['image'] = image
-        hladnjaci = [item['_source'] for item in hladnjaci_raw]
-        return hladnjaci
+        return [item['_source'] for item in hladnjaci_raw]
 
     def get_product(self, product_id):
         product_query = {
@@ -178,12 +159,9 @@ class ElasticSearchAgent(object):
             index='test-index',
             body=product_query
         )
-        print('Product raw: ', p)
         product_dictionary = p['hits']['hits'][0]
-        print('Product: ', product_dictionary)
         product = product_dictionary['_source']
         gbg_id = product['gbg_id']
         image = self.img(gbg_id)
         product['image'] = image
-        print('Product Updated: ', product)
         return product

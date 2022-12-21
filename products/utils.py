@@ -1,8 +1,8 @@
 import json
-
-from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY, HOST_EMAIL
 from mailjet_rest import Client
 from tabulate import tabulate
+
+from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY
 
 
 def send_email(data):
@@ -37,5 +37,4 @@ def send_email(data):
             }
         ]
     }
-    r = mailjet.send.create(data=email)
-    return r
+    return mailjet.send.create(data=email)

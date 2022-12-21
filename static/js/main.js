@@ -1522,4 +1522,10 @@
             item.find('~ .vehicle-form__item--select select').trigger('change.select2');
         });
     });
+    $(function () {
+        $('#isprazni').click(function(){
+           localStorage.clear();
+           location.reload();
+        });
+    });
 })(jQuery);

@@ -24,42 +24,39 @@ es.indices.delete(index='test-index')
 es.index(index="test-index", document={})
 
 
-def update_price(price):
-    price = float(price)
-    pdv = price * 0.2
-    wholesale_cost = price + pdv
+def update_price(item_price):
+    item_price = float(item_price)
+    pdv = item_price * 0.2
+    wholesale_cost = item_price + pdv
 
-    if (0 <= wholesale_cost) and (wholesale_cost <= 500):
+    if 0 <= wholesale_cost <= 500:
         new_price = wholesale_cost * 2
 
-    elif (500 <= wholesale_cost) and (wholesale_cost <= 1000):
+    elif 500 <= wholesale_cost <= 1000:
         new_price = wholesale_cost * 1.9
 
-    elif (1000 <= wholesale_cost) and (wholesale_cost <= 2000):
+    elif 1000 <= wholesale_cost <= 2000:
         new_price = wholesale_cost * 1.6
 
-    elif (2000 <= wholesale_cost) and (wholesale_cost <= 3000):
+    elif 2000 <= wholesale_cost <= 3000:
         new_price = wholesale_cost * 1.4
 
-    elif (3000 <= wholesale_cost) and (wholesale_cost <= 4000):
+    elif 3000 <= wholesale_cost <= 4000:
         new_price = wholesale_cost * 1.3
 
-    elif (4000 <= wholesale_cost) and (wholesale_cost <= 5000):
+    elif 4000 <= wholesale_cost <= 5000:
         new_price = wholesale_cost * 1.25
 
-    elif (5000 <= wholesale_cost) and (wholesale_cost <= 7000):
+    elif 5000 <= wholesale_cost <= 7000:
         new_price = wholesale_cost * 1.2
 
-    elif (7000 <= wholesale_cost) and (wholesale_cost <= 10000):
+    elif 7000 <= wholesale_cost <= 10000:
         new_price = wholesale_cost * 1.15
 
-    elif (10000 <= wholesale_cost) and (wholesale_cost <= 13000):
+    elif 10000 <= wholesale_cost <= 13000:
         new_price = wholesale_cost * 1.12
 
-    elif (10000 <= wholesale_cost) and (wholesale_cost <= 13000):
-        new_price = wholesale_cost * 1.12
-
-    elif (13000 <= wholesale_cost) and (wholesale_cost <= 15000):
+    elif 13000 <= wholesale_cost <= 15000:
         new_price = wholesale_cost * 1.11
 
     else:
