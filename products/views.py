@@ -1,8 +1,8 @@
 import json
-from Autodelovi.settings import CSRF_TRUSTED_ORIGINS
+from math import ceil
 
 from django.shortcuts import render, redirect, reverse
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email
@@ -19,6 +19,7 @@ def index(request):
 def get_models(request):
     brand = request.GET.get('brand', None)
     models = es.get_models(brand)
+    models.sort()
     jason = [{'model': model} for model in models]
     return JsonResponse(jason, safe=False)
 
@@ -26,17 +27,15 @@ def get_models(request):
 def show_model(request):
     query_param = request.GET.get('model')
     model = query_param.removesuffix('Izaberi model')
-    page = request.GET.get('page')
-    if not page:
-        page = 1
-        _from = 0
-    else:
-        page = int(page)
-        per_page = 10
-        _from = page * per_page
-
-    articles = es.show_model(model, _from)
-    context = {'model': model, 'articles': articles, 'page': page}
+    page = int(request.GET.get('page', 1))
+    page_num = page - 1
+    per_page = 10
+    _from = page_num * per_page
+    articles, total = es.show_model(model, _from)
+    total_num_pages = ceil(total / 10)
+    context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
+    if page > total_num_pages:
+        raise Http404()
     return render(request, 'model-parts-list.html', context)
 
 
