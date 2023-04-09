@@ -3,6 +3,7 @@ from math import ceil
 
 from django.shortcuts import render
 from django.http import JsonResponse, Http404, HttpResponse
+import urllib.parse
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part
@@ -11,9 +12,6 @@ es = ElasticSearchAgent()
 
 
 def index(request):
-    # sijalice = es.sijalice_query()
-    # hladnjaci = es.hladnjaci_query()
-    # context = {'sijalice': sijalice, 'hladnjaci': hladnjaci}
     return render(request, 'home.html')
 
 
@@ -28,7 +26,6 @@ def order_parts(request, item, part):
     text = request.POST.get("text")
     ask_for_part(model, part_id, phone, email, text)
     return HttpResponse(status=204)
-
 
 
 def get_models(request):
@@ -51,6 +48,16 @@ def show_model(request):
     context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
     if page > total_num_pages:
         raise Http404()
+    return render(request, 'model-parts-list.html', context)
+
+
+def show_model_parts(request):
+    item = request.GET.get("model")
+    model = urllib.parse.unquote(item)
+    page = 1
+    articles, total = es.show_model(model, 0)
+    total_num_pages = ceil(total / 10)
+    context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
     return render(request, 'model-parts-list.html', context)
 
 
@@ -80,4 +87,5 @@ def about(request):
 
 def open_model(request, model):
     models = es.get_models(model)
+    models.sort()
     return render(request, "models.html", context={"models": models, "brand": model})

@@ -209,10 +209,10 @@
 
                                         {% if page > 1 %}
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}"><<</a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'show_model' %}?model={{model}}"><<</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}&page={{page|add:'-1'}}"><</a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'show_model' %}?model={{model}}&page={{page|add:'-1'}}"><</a>
                                             </li>
                                         {% endif %}
 
@@ -221,17 +221,17 @@
                                                 {% if forloop.counter == page %}
                                                     <li class="page-item page-link--with-arrow" style="font-weight:bold; font-size:120%;">{{page}}</li>
                                                 {% elif forloop.counter > page|add:'-3' and forloop.counter < page|add:'3' %}
-                                                    <li class="page-item"><a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}&page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                                                    <li class="page-item"><a class="page-link page-link--with-arrow" href="{% url 'show_model' %}?model={{model}}&page={{forloop.counter}}">{{forloop.counter}}</a></li>
                                                 {% endif %}
                                             {% endfor %}
                                         {% endwith %}
 
                                         {% if page < total %}
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}&page={{page|add:'1'}}">></a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'show_model' %}?model={{model}}&page={{page|add:'1'}}">></a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="autodelovi?model={{model}}&page={{total}}">>></a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'show_model' %}?model={{model}}&page={{total}}">>></a>
                                             </li>
                                         {% endif %}
 

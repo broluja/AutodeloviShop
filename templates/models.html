@@ -15,7 +15,9 @@
           {% for model in models %}
             <tr>
               <td scope="col">{{ forloop.counter }}</td>
-              <td scope="col">{{ model }}</td>
+              <td scope="col">
+                <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
+              </td>
             </tr>
           {% endfor %}
         </table>
@@ -24,7 +26,7 @@
   {% else %}
 
     <div class="container text-center">
-      <h3>Nema dostupnih modela za brend: {{brand}}</h3>
+      <h3>Nema dostupnih modela za brend: {{ brand|upper }}</h3>
     </div>
   {% endif %}
 

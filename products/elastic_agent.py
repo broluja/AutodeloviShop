@@ -84,7 +84,9 @@ class ElasticSearchAgent:
         results = r['aggregations']['models']['buckets']
         return [model['key'] for model in results]
 
-    def show_model(self, model, _from, per_page=10):
+    def show_model(self, model, _from, per_page=10, strict=True):
+        if not strict:
+            model += ".*"
         parts = {
             "from": _from,
             "size": per_page,
