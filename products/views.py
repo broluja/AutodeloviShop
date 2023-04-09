@@ -1,11 +1,11 @@
 import json
 from math import ceil
 
-from django.shortcuts import render, redirect, reverse
-from django.http import JsonResponse, Http404
+from django.shortcuts import render
+from django.http import JsonResponse, Http404, HttpResponse
 
 from .elastic_agent import ElasticSearchAgent
-from .utils import send_email
+from .utils import send_email, ask_for_part
 
 es = ElasticSearchAgent()
 
@@ -14,6 +14,20 @@ def index(request):
     sijalice = es.sijalice_query()
     hladnjaci = es.hladnjaci_query()
     return render(request, 'home.html', context={'sijalice': sijalice, 'hladnjaci': hladnjaci})
+
+
+def order_parts(request, item, part):
+    if request.method != "POST":
+        return render(request, "inquiry-form.html", context={"item": item, "part": part})
+    model = request.POST.get("model-part")
+    part_id = model.split("|")[1].strip()
+    model = model.split("|")[0].strip()
+    email = request.POST.get("email")
+    phone = request.POST.get("phone")
+    text = request.POST.get("text")
+    ask_for_part(model, part_id, phone, email, text)
+    return HttpResponse(status=204)
+
 
 
 def get_models(request):
@@ -56,19 +70,13 @@ def order(request):
         r = send_email(body)
         return JsonResponse(r.json())
 
-    return JsonResponse(r.json())
+    # return JsonResponse(r.json())
 
 
 def about(request):
     return render(request, 'onama.html')
 
 
-def check_availability(request, product_id):
-    if request.method == 'POST':
-        telephone = request.POST.get("telephone")
-        link = request.build_absolute_uri(reverse("product_details", args=[product_id]))
-        # Ubaci slanje mejla.
-        return redirect('index')
-    return render(request, 'check-availability.html')
-
-
+def open_model(request, model):
+    print(model)
+    return HttpResponse(f"{model}", status=200)

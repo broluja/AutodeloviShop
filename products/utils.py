@@ -38,3 +38,33 @@ def send_email(data):
         ]
     }
     return mailjet.send.create(data=email)
+
+
+def ask_for_part(model, part_id, phone, email_address=None, text=None):
+    html = f"<p>Molim Vas, proverite mi ovaj deo na stanju</p><br><p>Model: {model} | ID: {part_id}</p><br><br>"
+    if text:
+        html += f"<p>{text}</p><br><br>"
+    html += f"<p>Moj kontakt telefon: {phone}"
+    if email_address:
+        html += f"<p>Moja email adresa: {email_address}"
+    mailjet = Client(auth=(MAIL_API_KEY, MAIL_SECRET_KEY), version='v3.1')
+    email = {
+        'Messages': [
+            {
+                'From': {
+                    'Email': "office@digitalconstruct.rs",
+                    'Name': 'WebShop'
+                },
+                'To': [
+                    {
+                        'Email': 'stevan.meandzija@gmail.com',
+                        'Name': "User"
+                    }
+                ],
+                'Subject': "Porudzbina sa sajta",
+                'HTMLPart': html
+            }
+        ]
+    }
+    # return mailjet.send.create(data=email)
+    print(html)

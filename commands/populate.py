@@ -1,25 +1,12 @@
 import math
 import csv23
-import zipfile
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 
 
 es = Elasticsearch('http://localhost:9200')
 
-# input = "/data_disk_50/autodelovi/ftp"
 output = "/home/autodelovi/ftp"
-#
-#
-# with zipfile.ZipFile(f"{input}/OUTOFSTOCK_SRB.ZIP", 'r') as zip_ref:
-#     zip_ref.extractall(output)
-#
-# with zipfile.ZipFile(f"{input}/PRICELIST_02850.ZIP", 'r') as zip_ref:
-#     zip_ref.extractall(output)
-#
-# with zipfile.ZipFile(f"{input}/REFAR_02850.ZIP", 'r') as zip_ref:
-#     zip_ref.extractall(output)
-
 es.indices.delete(index='test-index')
 es.index(index="test-index", document={})
 
@@ -85,10 +72,11 @@ with csv23.open_csv(file, encoding='iso-8859-1') as reader:
         try:
             resp = es.get(index="stock", id=data[0])
             stock = resp['_source']['stock']
-        except Exception:
+        except Exception as exc:
+            print(exc)
             stock = 0
 
-        for i, field in enumerate(data):
+        for i, field in enumerate (data):
             field = field.strip()
             if i == 0:
                 gbg_id = field

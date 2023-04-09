@@ -1,0 +1,32 @@
+
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Pošaljite upit</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form hx-post="{{request.path}}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="model-part" class="col-form-label">Model i serijski broj</label>
+        <input type="text" class="form-control" id="model-part" value="{{item}} | {{part}}" name="model-part" readonly>
+      </div>
+      <div class="mb-3">
+        <label for="customer-email" class="col-form-label">Email adresa</label>
+        <input type="email" class="form-control" id="customer-email" placeholder="Unesite svoju email adresu (opciono)" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="customer-phone" class="col-form-label">Kontakt telefon</label>
+        <input type="tel" class="form-control" id="customer-phone" placeholder="Unesite svoj kontakt telefon" name="phone" required>
+      </div>
+      <div class="mb-3">
+        <label for="message-text" class="col-form-label">Poruka:</label>
+        <textarea class="form-control" id="message-text" name="text"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+        <input type="submit" value="Pošalji" class="btn btn-primary" hx-target="#dialog">
+      </div>
+    </form>
+  </div>
+</div>
