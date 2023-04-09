@@ -21,7 +21,8 @@ class ElasticSearchAgent:
             index="images",
             body=query
         )
-        return r['hits']['hits'] if len(r['hits']['hits']) else None
+        image = r['hits']['hits']
+        return image if len(image) else None
 
     @staticmethod
     def image_exists(image_url):

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{brand}}{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    {% for model in models %}
+      <p>{{model}}</p>
+    {% endfor %}
+  </div>
+{% endblock content %}

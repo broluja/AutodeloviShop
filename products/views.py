@@ -11,9 +11,10 @@ es = ElasticSearchAgent()
 
 
 def index(request):
-    sijalice = es.sijalice_query()
-    hladnjaci = es.hladnjaci_query()
-    return render(request, 'home.html', context={'sijalice': sijalice, 'hladnjaci': hladnjaci})
+    # sijalice = es.sijalice_query()
+    # hladnjaci = es.hladnjaci_query()
+    # context = {'sijalice': sijalice, 'hladnjaci': hladnjaci}
+    return render(request, 'home.html')
 
 
 def order_parts(request, item, part):
@@ -78,5 +79,5 @@ def about(request):
 
 
 def open_model(request, model):
-    print(model)
-    return HttpResponse(f"{model}", status=200)
+    models = es.get_models(model)
+    return render(request, "models.html", context={"models": models, "brand": model})
