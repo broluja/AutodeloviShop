@@ -4,6 +4,7 @@
 {% block title%}{{model}}{% endblock title %}
 {% block content %}
 
+
 <div class="site__body">
     <div class="block-header block-header--has-breadcrumb block-header--has-title">
         <div class="container">
@@ -83,7 +84,7 @@
                                 </div>
                                 <div class="products-list__content">
                                     {% for article in articles %}
-                                    <div id="{{article.gbg_id}}" hidden>
+                                    <div id="{{ article.gbg_id }}" hidden>
                                         <div id="desctiption">{{article.description}}</div>
                                     </div>
                                     <div class="products-list__item">
@@ -247,7 +248,5 @@
         </div>
     </div>
 </div>
-
-
 
 {% endblock content %}

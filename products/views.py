@@ -3,7 +3,6 @@ from math import ceil
 
 from django.shortcuts import render
 from django.http import JsonResponse, Http404, HttpResponse
-import urllib.parse
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part
@@ -15,7 +14,7 @@ def index(request):
     return render(request, 'home.html')
 
 
-def order_parts(request, item, part):
+def check_for_part(request, item, part):
     if request.method != "POST":
         return render(request, "inquiry-form.html", context={"item": item, "part": part})
     model = request.POST.get("model-part")
@@ -48,16 +47,6 @@ def show_model(request):
     context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
     if page > total_num_pages:
         raise Http404()
-    return render(request, 'model-parts-list.html', context)
-
-
-def show_model_parts(request):
-    item = request.GET.get("model")
-    model = urllib.parse.unquote(item)
-    page = 1
-    articles, total = es.show_model(model, 0)
-    total_num_pages = ceil(total / 10)
-    context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
     return render(request, 'model-parts-list.html', context)
 
 

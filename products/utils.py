@@ -66,5 +66,5 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
             }
         ]
     }
+    print(email)
     # return mailjet.send.create(data=email)
-    print(html)
