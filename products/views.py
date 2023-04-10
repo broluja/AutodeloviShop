@@ -14,7 +14,9 @@ def index(request):
     return render(request, 'home.html')
 
 
-def check_for_part(request, item, part):
+def check_for_part(request):
+    item = request.GET.get("item")
+    part = request.GET.get("part")
     if request.method != "POST":
         return render(request, "inquiry-form.html", context={"item": item, "part": part})
     model = request.POST.get("model-part")
@@ -62,12 +64,13 @@ def check_out(request):
 
 def order(request):
     if request.method == 'POST':
+        print(request.POST)
         payload = request.body.decode('utf-8')
         body = json.loads(payload)
         r = send_email(body)
         return JsonResponse(r.json())
 
-    # return JsonResponse(r.json())
+    return JsonResponse(r.json())
 
 
 def about(request):

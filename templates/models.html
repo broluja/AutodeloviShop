@@ -4,6 +4,7 @@
 
 {% block content %}
   <br><br><hr>
+
   {% if models %}
 
       <div class="container text-center">
@@ -13,12 +14,14 @@
             <th scope="col">{{ brand|upper }}</th>
           </tr>
           {% for model in models %}
-            <tr>
-              <td scope="col">{{ forloop.counter }}</td>
-              <td scope="col">
-                <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
-              </td>
-            </tr>
+
+              <tr>
+                <td scope="col">{{ forloop.counter }}</td>
+                <td scope="col">
+                  <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
+                </td>
+              </tr>
+
           {% endfor %}
         </table>
       </div>
@@ -28,6 +31,7 @@
     <div class="container text-center">
       <h3>Nema dostupnih modela za brend: {{ brand|upper }}</h3>
     </div>
+
   {% endif %}
 
   <br><br>

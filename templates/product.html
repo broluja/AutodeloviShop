@@ -69,11 +69,7 @@
                                                 </div>
                                             </div>
                                         </div>
-<<<<<<< Updated upstream
                                         <div class="product__rating-label"><a href="">3.5 on 7 reviews {{article.stock}} </a></div>
-=======
-                                        <div class="product__rating-label"><a href="">3.5 on 7 reviews </a></div>
->>>>>>> Stashed changes
                                     </div>
                                         {% if article.stock == "1" %}
                                             <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
@@ -89,15 +85,10 @@
                                         {% else %}
                                             <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
                                                 <div class="status-badge__body" style="background-color:white">
-
-<<<<<<< Updated upstream
-                                                        <a href="" style="text-decoration: underline;">Pošaljite upit za proveru stanja</a>
-                                                        <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
-                                                    </div>
-=======
-                                                    <div class="status-badge__text">Nema na stanju - {{article.model}}</div>
                                                     <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
->>>>>>> Stashed changes
+                                                    <br><br>
+                                                    <button hx-target="#modal-dialog" hx-get="{% url 'ask_for_parts' %}?item={{article.model}}&part={{article.gbg_id}}" type="button" class="btn btn-primary" style="width: 270px;">Pošaljite upit za proveru stanja</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         {% endif %}
@@ -125,7 +116,7 @@
                                             <div class="product__prices">
                                                 <div class="product__price product__price--current">{{article.price}} rsd</div>
                                             </div>
- {%if article.stock == '1' %}
+                                                {%if article.stock == '1' %}
                                                 <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
                                                     <div class="status-badge__body">
                                                         <div class="status-badge__icon"><svg width="13" height="13">
@@ -139,14 +130,13 @@
                                                 {% else %}
                                                 <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
                                                     <div class="status-badge__body" style="background-color:white">
-
-                                                        <a href="" style="text-decoration: underline;">Pošaljite upit za proveru stanja</a>
                                                         <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
+                                                        <br><br>
+                                                        <button hx-target="#modal-dialog" hx-get="{% url 'ask_for_parts' %}?item={{article.model}}&part={{article.gbg_id}}" type="button" class="btn btn-primary" style="width: 270px;">Pošaljite upit za proveru stanja</button>
                                                     </div>
                                                 </div>
                                                 {% endif %}
                                         </div>
-
                                         <div class="product__meta">
                                             <table>
                                                 <tr>
@@ -228,7 +218,7 @@
                                                 <path d="M13.9,8.4l-5.4,5.4c-0.3,0.3-0.7,0.3-1,0L2.1,8.4c-1.5-1.5-1.5-3.8,0-5.3C2.8,2.4,3.8,2,4.8,2s1.9,0.4,2.6,1.1L8,3.7
 	l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" />
                                             </svg>
-                                            <span>Na listu zelja</span>
+                                            <span>Na listu želja</span>
                                         </button>
                                         <button class="product__actions-item product__actions-item--compare" type="button">
                                             <svg width="16" height="16">
