@@ -57,7 +57,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
                 },
                 'To': [
                     {
-                        'Email': 'stevan.meandzija@gmail.com',
+                        'Email': 'olujic.branko@gmail.com',
                         'Name': "User"
                     }
                 ],
@@ -66,5 +66,4 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
             }
         ]
     }
-    print(email)
-    # return mailjet.send.create(data=email)
+    return mailjet.send.create(data=email)

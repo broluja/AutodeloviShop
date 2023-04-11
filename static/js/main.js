@@ -326,7 +326,7 @@
         });
     });
 
-    /*Dodavanje u korpu*/
+    /* Dodavanje u korpu */
     $(function() {
         $(document).on("click","#dodaj_korpa", function () {
             var str = $(this).attr('podaci');
@@ -348,13 +348,13 @@
 
                 let cartItem = '<li class="dropcart__item">\n' +
                     '                                <div class="dropcart__item-image image image--type--product">\n' +
-                    '                                    <a class="image__body" href="product/'+itemData.gbg_id+'">\n' +
+                    '                                    <a class="image__body" href="/product/'+itemData.gbg_id+'">\n' +
                     '                                        <img class="image__tag" src="'+itemData.image+'" alt="">\n' +
                     '                                    </a>\n' +
                     '                                </div>\n' +
                     '                                <div class="dropcart__item-info">\n' +
                     '                                    <div class="dropcart__item-name">\n' +
-                    '                                        <a href="product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
+                    '                                        <a href="/product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
                     '                                    </div>\n' +
                     '                                    <ul class="dropcart__item-features">\n' +
                     '                                        <li>Marka '+itemData.brand+'</li>\n' +
@@ -378,7 +378,7 @@
         });
     });
 
-    /*Dohvati korpu*/
+    /* Dohvati korpu */
     $(function() {
         const localStorage = window.localStorage;
         var values = [],
@@ -402,7 +402,7 @@
                 '                                </div>\n' +
                 '                                <div class="dropcart__item-info">\n' +
                 '                                    <div class="dropcart__item-name">\n' +
-                '                                        <a href="product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
+                '                                        <a href="/product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
                 '                                    </div>\n' +
                 '                                    <ul class="dropcart__item-features">\n' +
                 '                                        <li>Marka '+itemData.brand+'</li>\n' +
@@ -429,7 +429,7 @@
     });
 
 
-    /*Porudzbina*/
+    /* Porudžbina */
     $(function() {
         const localStorage = window.localStorage;
         var values = [],
@@ -454,7 +454,7 @@
         $('#ukupno').text(price)
     });
 
-    /*Zavrsi porudzbinu*/
+    /* Završi porudžbinu */
     $(function() {
         const localStorage = window.localStorage;
         $(document).on("click","#posalji-porudzbinu", function () {
@@ -501,13 +501,14 @@
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     var jsonResponse = JSON.parse(this.responseText);
+                    console.log(this.responseText)
                     if (jsonResponse["Messages"][0]["Status"] == "success") {
                         document.getElementById("porudzbina-forma").innerHTML =
                             "Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!";
                         localStorage.clear();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
-                            "Doslo je do greske u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";
+                            "Došlo je do greške u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";
                     }
 
                 }

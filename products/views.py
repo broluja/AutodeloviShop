@@ -64,7 +64,6 @@ def check_out(request):
 
 def order(request):
     if request.method == 'POST':
-        print(request.POST)
         payload = request.body.decode('utf-8')
         body = json.loads(payload)
         r = send_email(body)
