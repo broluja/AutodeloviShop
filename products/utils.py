@@ -27,7 +27,7 @@ def send_email(data):
                 },
                 'To': [
                     {
-                        'Email': 'stevan.meandzija@gmail.com',
+                        'Email': 'autodelovi011@gmail.com',
                         'Name': "User"
                     }
                 ],
@@ -57,7 +57,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
                 },
                 'To': [
                     {
-                        'Email': 'olujic.branko@gmail.com',
+                        'Email': 'autodelovi011@gmail.com',
                         'Name': "User"
                     }
                 ],
