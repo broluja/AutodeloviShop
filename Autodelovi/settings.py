@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['https://autodelovishop.rs']
+ALLOWED_HOSTS = ['autodelovishop.rs']
 CSRF_TRUSTED_ORIGINS = ['https://autodelovishop.rs']
 
 
