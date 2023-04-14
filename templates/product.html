@@ -49,27 +49,17 @@
                                                 <img class="image__tag" src="{{article.image}}" alt="">
                                             </div>
                                         </a>
-
                                     </div>
                                 </div>
-
                             </div>
                             <div class="product__header">
-                                <h1 class="product__title">{{article.description}}</h1>
+                                <h1 class="product__title">{{article.description}}</h1><hr>
                                 <div class="product__subtitle">
                                     <div class="product__rating">
-                                        <div class="product__rating-stars">
-                                            <div class="rating">
-                                                <div class="rating__body">
-                                                    <div class="rating__star rating__star--active"></div>
-                                                    <div class="rating__star rating__star--active"></div>
-                                                    <div class="rating__star rating__star--active"></div>
-                                                    <div class="rating__star rating__star--active"></div>
-                                                    <div class="rating__star"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product__rating-label"><a href="">3.5 on 7 reviews {{article.stock}} </a></div>
+                                        <p style=" font-size: 15px; font-weight: bold;">Broj pregleda: {{item.views}}</p>
+                                    </div>
+                                    <div class="product__rating">
+                                        <p style="font-size: 15px; font-weight: bold;">Broj porudžbina: {{item.orders}}</p>
                                     </div>
                                         {% if article.stock == "1" %}
                                             <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
@@ -226,24 +216,20 @@
                                                 <path d="M1,9h2c0.6,0,1,0.4,1,1v4c0,0.6-0.4,1-1,1H1c-0.6,0-1-0.4-1-1v-4C0,9.4,0.4,9,1,9z" />
                                                 <path d="M15,5h-2c-0.6,0-1,0.4-1,1v8c0,0.6,0.4,1,1,1h2c0.6,0,1-0.4,1-1V6C16,5.4,15.6,5,15,5z" />
                                             </svg>
-                                            <span>Uporedi</span>
+                                            <span>Broj pregleda: {{item.views}}</span>
                                         </button>
                                     </div>
                                     <div class="product__tags-and-share-links">
-
                                         <div class="product__share-links share-links">
                                             <ul class="share-links__list">
                                                 <li class="share-links__item share-links__item--type--like"><a href="">Like</a></li>
                                                 <li class="share-links__item share-links__item--type--tweet"><a href="">Tweet</a></li>
-                                                <li class="share-links__item share-links__item--type--pin"><a href="">Pin It</a></li>
                                                 <li class="share-links__item share-links__item--type--counter"><a href="">4K</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                     <div class="block-space block-space--layout--divider-nl"></div>

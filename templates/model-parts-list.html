@@ -111,7 +111,7 @@
                                             </div>
                                             <div class="product-card__image">
                                                 <div class="image image--type--product">
-                                                    <a href="product/{{article.gbg_id}}" class="image__body">
+                                                    <a href="{% url 'item:product_details' article.gbg_id %}" class="image__body">
                                                         <img class="image__tag" src="{{article.image}}" alt="">
                                                     </a>
                                                 </div>

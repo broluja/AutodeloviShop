@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom Apps
     'products.apps.ProductsConfig',
+    'items.apps.ItemsConfig',
     'mathfilters'
 ]
 

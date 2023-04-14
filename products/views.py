@@ -52,12 +52,6 @@ def show_model(request):
     return render(request, 'model-parts-list.html', context)
 
 
-def product_details(request, product_id):
-    article = es.get_product(product_id)
-    context = {'article': article}
-    return render(request, 'product.html', context)
-
-
 def check_out(request):
     return render(request, 'checkout.html')
 
