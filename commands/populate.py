@@ -76,7 +76,7 @@ with csv23.open_csv(file, encoding='iso-8859-1') as reader:
             print(exc)
             stock = 0
 
-        for i, field in enumerate (data):
+        for i, field in enumerate(data):
             field = field.strip()
             if i == 0:
                 gbg_id = field
