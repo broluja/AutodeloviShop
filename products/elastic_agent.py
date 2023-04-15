@@ -17,10 +17,7 @@ class ElasticSearchAgent:
                 "match": {"_id": gbg_id}
             }
         }
-        r = self.agent.search(
-            index="images",
-            body=query
-        )
+        r = self.agent.search(index="images", body=query)
         image = r['hits']['hits']
         return image if len(image) else None
 
@@ -77,10 +74,7 @@ class ElasticSearchAgent:
                 }
             }
         }
-        r = self.agent.search(
-            index="test-index",
-            body=query
-        )
+        r = self.agent.search(index="test-index", body=query)
         results = r['aggregations']['models']['buckets']
         return [model['key'] for model in results]
 
@@ -98,8 +92,7 @@ class ElasticSearchAgent:
                 }
             }
         }
-        s = self.agent.search(index='test-index',
-                              body=parts)
+        s = self.agent.search(index='test-index', body=parts)
         items = s['hits']['hits']
         total = s['hits']['total']['value']
 
@@ -109,26 +102,6 @@ class ElasticSearchAgent:
             image = self.img(gbg_id)
             jsn['image'] = image
         return [item['_source'] for item in items], total
-
-
-    def get_product(self, product_id):
-        product_query = {
-            "query": {
-                "match": {
-                    "gbg_id": product_id
-                }
-            }
-        }
-        p = self.agent.search(
-            index='test-index',
-            body=product_query
-        )
-        product_dictionary = p['hits']['hits'][0]
-        product = product_dictionary['_source']
-        gbg_id = product['gbg_id']
-        image = self.img(gbg_id)
-        product['image'] = image
-        return product
 
     def search_part_query(self, part, from_=0):
         query = {
@@ -140,10 +113,7 @@ class ElasticSearchAgent:
                 }
             }
         }
-        s = self.agent.search(
-            index='test-index',
-            body=query
-        )
+        s = self.agent.search(index='test-index', body=query)
         parts = s['hits']['hits']
         total = s['hits']['total']['value']
         # for item in parts:
@@ -152,3 +122,20 @@ class ElasticSearchAgent:
         #     image = self.img(gbg_id)
         #     item['image'] = image
         return [item['_source'] for item in parts], total
+
+
+    def get_product(self, product_id):
+        product_query = {
+            "query": {
+                "match": {
+                    "gbg_id": product_id
+                }
+            }
+        }
+        p = self.agent.search(index='test-index', body=product_query)
+        product_dictionary = p['hits']['hits'][0]
+        product = product_dictionary['_source']
+        gbg_id = product['gbg_id']
+        image = self.img(gbg_id)
+        product['image'] = image
+        return product
