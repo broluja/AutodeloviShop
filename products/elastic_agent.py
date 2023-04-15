@@ -110,48 +110,6 @@ class ElasticSearchAgent:
             jsn['image'] = image
         return [item['_source'] for item in items], total
 
-    def sijalice_query(self):
-        sijalice_query = {
-            "size": 10,
-            "query": {
-                "match": {
-                    "description": "sijalica"
-                }
-            }
-        }
-        s = self.agent.search(
-            index='test-index',
-            body=sijalice_query
-        )
-        sijalice_raw = s['hits']['hits']
-        for item in sijalice_raw:
-            item = item['_source']
-            gbg_id = item.get('gbg_id')
-            image = self.img(gbg_id)
-            item['image'] = image
-        return [item['_source'] for item in sijalice_raw]
-
-    def hladnjaci_query(self):
-        hladnjaci_query = {
-            "size": 10,
-            "query": {
-                "match": {
-                    "description": "hladnjak"
-                }
-            }
-        }
-        h = self.agent.search(
-            index='test-index',
-            body=hladnjaci_query
-        )
-
-        hladnjaci_raw = h['hits']['hits']
-        for item in hladnjaci_raw:
-            item = item['_source']
-            gbg_id = item.get('gbg_id')
-            image = self.img(gbg_id)
-            item['image'] = image
-        return [item['_source'] for item in hladnjaci_raw]
 
     def get_product(self, product_id):
         product_query = {
@@ -171,3 +129,26 @@ class ElasticSearchAgent:
         image = self.img(gbg_id)
         product['image'] = image
         return product
+
+    def search_part_query(self, part, from_=0):
+        query = {
+            "size": 10,
+            "from": from_,
+            "query": {
+                "match": {
+                    "description": part
+                }
+            }
+        }
+        s = self.agent.search(
+            index='test-index',
+            body=query
+        )
+        parts = s['hits']['hits']
+        total = s['hits']['total']['value']
+        # for item in parts:
+        #     item = item['_source']
+        #     gbg_id = item.get('gbg_id')
+        #     image = self.img(gbg_id)
+        #     item['image'] = image
+        return [item['_source'] for item in parts], total

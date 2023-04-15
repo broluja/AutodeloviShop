@@ -13,20 +13,16 @@
                     <!-- mobile-logo / end -->
                 </a>
                 <div class="mobile-header__search mobile-search">
-                    <form class="mobile-search__body">
-                        <input type="text" class="mobile-search__input" placeholder="Pretraga">
+                    <form class="mobile-search__body" action="{% url 'search_parts' %}">
+                        <input type="text" class="mobile-search__input" placeholder="Pretraga" name="search">
                         <button type="submit" class="mobile-search__button mobile-search__button--search">
                             <svg width="20" height="20">
-                                <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15
-	c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8
-	c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
+                                <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15 c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8 c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
                             </svg>
                         </button>
                         <button type="button" class="mobile-search__button mobile-search__button--close">
                             <svg width="20" height="20">
-                                <path d="M16.7,16.7L16.7,16.7c-0.4,0.4-1,0.4-1.4,0L10,11.4l-5.3,5.3c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L8.6,10L3.3,4.7
-	c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L10,8.6l5.3-5.3c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L11.4,10l5.3,5.3
-	C17.1,15.7,17.1,16.3,16.7,16.7z" />
+                                <path d="M16.7,16.7L16.7,16.7c-0.4,0.4-1,0.4-1.4,0L10,11.4l-5.3,5.3c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L8.6,10L3.3,4.7 c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L10,8.6l5.3-5.3c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L11.4,10l5.3,5.3 C17.1,15.7,17.1,16.3,16.7,16.7z" />
                             </svg>
                         </button>
                         <div class="mobile-search__field"></div>
@@ -36,9 +32,7 @@
                     <div class="mobile-indicator mobile-indicator--search d-md-none">
                         <button type="button" class="mobile-indicator__button">
                                     <span class="mobile-indicator__icon"><svg width="20" height="20">
-                                            <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15
-	c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8
-	c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
+                                            <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15 c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8 c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
                                     </svg></span>
                         </button>
                     </div>
@@ -48,9 +42,7 @@
                                 <svg width="20" height="20">
                                     <circle cx="7" cy="17" r="2" />
                                     <circle cx="15" cy="17" r="2" />
-                                    <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6
-	V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4
-	C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />
+                                    <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6 V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4 C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />
                                 </svg>
                                 <span class="indicator__counter">0</span>
                             </span>
@@ -78,19 +70,13 @@
                 <div class="main-menu">
                     <ul class="main-menu__list">
                         <li class="main-menu__item">
-                            <a href="{% url 'index' %}" class="main-menu__link">
-                                Naslovna
-                            </a>
+                            <a href="{% url 'index' %}" class="main-menu__link">Naslovna</a>
                         </li>
                         <li class="main-menu__item">
-                            <a href="{% url 'about' %}" class="main-menu__link">
-                                O nama
-                            </a>
+                            <a href="{% url 'about' %}" class="main-menu__link">O nama</a>
                         </li>
                         <li class="main-menu__item">
-                            <a href="#contact" class="main-menu__link">
-                                Kontakt
-                            </a>
+                            <a href="#contact" class="main-menu__link">Kontakt</a>
                         </li>
                     </ul>
                 </div>
@@ -98,9 +84,7 @@
         </div>
         <div class="header__logo">
             <a href="/" class="logo">
-                <div class="logo__slogan">
-                    Auto delovi za sve tipove i marke automobila
-                </div>
+                <div class="logo__slogan">Auto delovi za sve tipove i marke automobila</div>
                 <div class="logo__image">
                     <div style="color: #e52727;font-size: 41px;font-weight: 600;">Auto</div>
                     <div style="color: #404040;font-size: 41px;font-weight: 600;">Delovi</div>
@@ -109,9 +93,9 @@
         </div>
         <div class="header__search">
             <div class="search">
-                <form action="" class="search__body">
+                <form action="{% url 'search_parts' %}" class="search__body">
                     <div class="search__shadow"></div>
-                    <input class="search__input" type="text" placeholder="Pretražite delove">
+                    <input hx-get="{% url 'dynamic_search' %}" hx-target="#dynamic-search" hx-trigger="keyup delay:250ms" hx-swap="innerHtml" class="search__input" type="text" placeholder="Pretražite delove" name="search" autocomplete="off">
                     <button class="search__button search__button--start" type="button">
                                 <span class="search__button-icon"><svg width="20" height="20">
                                         <path d="M6.6,2c2,0,4.8,0,6.8,0c1,0,2.9,0.8,3.6,2.2C17.7,5.7,17.9,7,18.4,7C20,7,20,8,20,8v1h-1v7.5c0,0.8-0.7,1.5-1.5,1.5h-1
@@ -139,92 +123,19 @@
                     </div>
                     <div class="search__dropdown search__dropdown--suggestions suggestions">
                         <div class="suggestions__group">
-                            <div class="suggestions__group-title">Products</div>
-                            <div class="suggestions__group-content">
-                                <a class="suggestions__item suggestions__product" href="">
-                                    <div class="suggestions__product-image image image--type--product">
-                                        <div class="image__body">
-                                            <img class="image__tag" src="images/products/product-2-40x40.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="suggestions__product-info">
-                                        <div class="suggestions__product-name">Brandix Brake Kit BDX-750Z370-S</div>
-                                        <div class="suggestions__product-rating">
-                                            <div class="suggestions__product-rating-stars">
-                                                <div class="rating">
-                                                    <div class="rating__body">
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="suggestions__product-rating-label">5 on 22 reviews</div>
-                                        </div>
-                                    </div>
-                                    <div class="suggestions__product-price">$224.00</div>
-                                </a>
-                                <a class="suggestions__item suggestions__product" href="">
-                                    <div class="suggestions__product-image image image--type--product">
-                                        <div class="image__body">
-                                            <img class="image__tag" src="images/products/product-3-40x40.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="suggestions__product-info">
-                                        <div class="suggestions__product-name">Left Headlight Of Brandix Z54</div>
-                                        <div class="suggestions__product-rating">
-                                            <div class="suggestions__product-rating-stars">
-                                                <div class="rating">
-                                                    <div class="rating__body">
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star"></div>
-                                                        <div class="rating__star"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="suggestions__product-rating-label">3 on 14 reviews</div>
-                                        </div>
-                                    </div>
-                                    <div class="suggestions__product-price">$349.00</div>
-                                </a>
-                                <a class="suggestions__item suggestions__product" href="">
-                                    <div class="suggestions__product-image image image--type--product">
-                                        <div class="image__body">
-                                            <img class="image__tag" src="images/products/product-4-40x40.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="suggestions__product-info">
-                                        <div class="suggestions__product-name">Glossy Gray 19" Aluminium Wheel AR-19</div>
-                                        <div class="suggestions__product-rating">
-                                            <div class="suggestions__product-rating-stars">
-                                                <div class="rating">
-                                                    <div class="rating__body">
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star rating__star--active"></div>
-                                                        <div class="rating__star"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="suggestions__product-rating-label">4 on 26 reviews</div>
-                                        </div>
-                                    </div>
-                                    <div class="suggestions__product-price">$589.00</div>
-                                </a>
+                            <div class="suggestions__group-title">Delovi</div>
+                            <div class="suggestions__group-content" id="dynamic-search">
+
+                                <!-- insert dynamic search here -->
+
                             </div>
                         </div>
                         <div class="suggestions__group">
-                            <div class="suggestions__group-title">Categories</div>
+                            <div class="suggestions__group-title">Kategorije</div>
                             <div class="suggestions__group-content">
-                                <a class="suggestions__item suggestions__category" href="">Headlights & Lighting</a>
-                                <a class="suggestions__item suggestions__category" href="">Fuel System & Filters</a>
-                                <a class="suggestions__item suggestions__category" href="">Body Parts & Mirrors</a>
-                                <a class="suggestions__item suggestions__category" href="">Interior Accessories</a>
+                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=sijalica">Sijalice</a>
+                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=hladnjak">Hladnjaci</a>
+                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=branik">Branici</a>
                             </div>
                         </div>
                     </div>
@@ -344,6 +255,7 @@
                 </form>
             </div>
         </div>
+        <!-- Korpa -->
         <div class="header__indicators">
             <div class="indicator indicator--trigger--click">
                 <a href="checkout" class="indicator__button">

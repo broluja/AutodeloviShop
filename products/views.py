@@ -74,3 +74,23 @@ def open_model(request, model):
     models = es.get_models(model)
     models.sort()
     return render(request, "models.html", context={"models": models, "brand": model})
+
+
+def dynamic_search(request):
+    searched_item = request.GET.get("search")
+    parts, total = es.search_part_query(searched_item)
+    return render(request, "dynamic-search.html", context={"products": parts})
+
+
+def search_parts(request):
+    part = request.GET.get("search")
+    page = int(request.GET.get('page', 1))
+    page_num = page - 1
+    per_page = 10
+    _from = page_num * per_page
+    parts, total = es.search_part_query(part, _from)
+    total_num_pages = ceil(total / 10)
+    if not parts or page > total_num_pages:
+        return HttpResponse('')
+    context = {'articles': parts, 'page': page, 'total': total_num_pages, "part": part}
+    return render(request, "search-parts-list.html", context)
