@@ -86,9 +86,9 @@ class ElasticSearchAgent:
             "size": per_page,
             "query": {
                 "match_phrase_prefix": {
-                  "model": {
-                    "query": model
-                  }
+                    "model": {
+                        "query": model
+                    }
                 }
             }
         }
@@ -114,24 +114,20 @@ class ElasticSearchAgent:
             }
         }
         if model:
-            query = {
-                "size": 10,
-                "from": from_,
-                "query": {
-                    "bool": {
-                      "should": [{"bool": {"must": [
-                                {
-                                "match": {
-                                  "description": part
-                                }
-                              },
-                                {
-                                "match_phrase_prefix": {
-                                    "model": model
-                                }}]
+            query["query"] = {
+                "bool": {
+                    "should": [{"bool": {"must": [
+                        {
+                            "match": {
+                                "description": part
                             }
-                        }]
+                        },
+                        {
+                            "match_phrase_prefix": {
+                                "model": model
+                            }}]
                     }
+                    }]
                 }
             }
         s = self.agent.search(index='test-index', body=query)
@@ -143,7 +139,6 @@ class ElasticSearchAgent:
         #     image = self.img(gbg_id)
         #     item['image'] = image
         return [item['_source'] for item in parts], total
-
 
     def get_product(self, product_id):
         product_query = {

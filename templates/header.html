@@ -159,6 +159,9 @@
                                         <div class="vehicle-picker__actions">
                                             <button type="button" class="btn btn-primary btn-sm" data-to-panel="form">Dodaj/Zameni vozilo</button>
                                         </div>
+                                        <div class="vehicle-picker__actions" style="margin-left: 2px;">
+                                            <button type="button" class="btn btn-primary btn-sm" data-to-panel="close">Zatvori</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +188,7 @@
                                     </div>
                                     <div class="vehicle-picker__actions">
                                         <div class="search__car-selector-link"><a href="" data-to-panel="list">Nazad</a></div>
-                                        <button hx-post="{% url 'add_car' %}" hx-target="#carIcon" hx-swap="innerHtml" type="button" class="btn btn-primary btn-sm">Sačuvaj vozilo</button>
+                                        <button hx-post="{% url 'add_car' %}" hx-target="#carIcon" hx-swap="afterbegin" type="button" class="btn btn-primary btn-sm" data-to-panel="list">Sačuvaj vozilo</button>
                                     </div>
                                 </form>
                             </div>

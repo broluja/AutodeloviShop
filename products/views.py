@@ -106,6 +106,8 @@ def get_options(request):
 def add_car(request):
     brand = request.POST.get("make")
     model = request.POST.get("model")
+    if brand == "Izaberi marku" or model == "Izaberi model" :
+        return HttpResponse("")
     slug = slugify(model)
     response = render(request, "car-icon-scratch.html", context={"model": model, "brand": brand, "slug": slug})
     set_cookie(response, "my_brand", brand, days_expire=365)
