@@ -3,8 +3,12 @@ import datetime
 from mailjet_rest import Client
 from tabulate import tabulate
 
+from django.http import Http404
+
 from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY
 from django.conf import settings
+
+from items.models import Item
 
 
 def send_email(data):
@@ -88,3 +92,19 @@ def set_cookie(response, key, value, days_expire=7):
         domain=settings.SESSION_COOKIE_DOMAIN,
         secure=settings.SESSION_COOKIE_SECURE or None
     )
+
+
+def save_orders(products: list) -> None:
+    try:
+        for product in products:
+            product_id = product["gbg_id"]
+            quantity = product["cart_count"]
+            item = Item.objects.filter(gbg_id=product_id).first()
+            if not item:
+                item = Item.objects.create(gbg_id=product_id)
+                item.orders += int(quantity)
+            else:
+                item.orders += int(quantity)
+            item.save()
+    except Exception as exc:
+        print(exc)

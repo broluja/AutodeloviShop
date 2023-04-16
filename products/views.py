@@ -1,12 +1,12 @@
 import json
 from math import ceil
 
-from django.shortcuts import render
-from django.http import JsonResponse, Http404, HttpResponse
+from django.shortcuts import render, redirect, reverse
+from django.http import JsonResponse, HttpResponse
 from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
-from .utils import send_email, ask_for_part, set_cookie
+from .utils import send_email, ask_for_part, set_cookie, save_orders
 
 es = ElasticSearchAgent()
 
@@ -48,7 +48,7 @@ def show_model(request):
     total_num_pages = ceil(total / 10)
     context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
     if page > total_num_pages:
-        raise Http404()
+        return redirect(reverse('show_model') + f'?model={model}')
     return render(request, 'model-parts-list.html', context)
 
 
@@ -60,10 +60,11 @@ def order(request):
     if request.method == 'POST':
         payload = request.body.decode('utf-8')
         body = json.loads(payload)
+        products = body["products"]
+        save_orders(products)
         r = send_email(body)
         return JsonResponse(r.json())
-
-    return JsonResponse(r.json())
+    return redirect(reverse('index'))
 
 
 def about(request):
