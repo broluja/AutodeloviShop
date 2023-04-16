@@ -7,7 +7,7 @@ from elasticsearch.helpers import bulk
 es = Elasticsearch('http://localhost:9200')
 
 output = "/home/autodelovi/ftp"
-es.indices.delete(index='test-index')
+# es.indices.delete(index='test-index')
 es.index(index="test-index", document={})
 
 
