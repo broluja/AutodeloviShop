@@ -1458,15 +1458,16 @@
 
         $('[name="model"]').change(function(){
             const ddModels = $('[name="model"]');
-            const model = ddModels.find(":selected").text()
+            let model = ddModels.find(":selected").text()
+            model = model.replace(/Izaberi model/g, "")
             console.log(model);
             $('#btnSearch').click(function(){
             console.log(model)
-                window.location.href='autodelovi?model='+ model;
+                window.location.href='/autodelovi?model='+ model;
             });
             $('#btnSearch1').click(function(){
             console.log(model)
-                window.location.href='autodelovi?model='+ model;
+                window.location.href='/autodelovi?model='+ model;
             });
         })
     });

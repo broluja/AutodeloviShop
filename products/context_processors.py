@@ -27,3 +27,11 @@ def brands(request):
     brands_raw = r['aggregations']['models']['buckets'][6:]
     b = [brand['key'] for brand in brands_raw]
     return {'brands': b}
+
+
+def my_car(request):
+    my_model = request.COOKIES.get("my_model")
+    my_brand = request.COOKIES.get("my_brand")
+    if all([my_model, my_brand]):
+        return {"my_car": {"my_brand": my_brand, "my_model": my_model}}
+    return {"my_car": None}

@@ -3,9 +3,10 @@ from math import ceil
 
 from django.shortcuts import render
 from django.http import JsonResponse, Http404, HttpResponse
+from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
-from .utils import send_email, ask_for_part
+from .utils import send_email, ask_for_part, set_cookie
 
 es = ElasticSearchAgent()
 
@@ -15,9 +16,9 @@ def index(request):
 
 
 def check_for_part(request):
-    item = request.GET.get("item")
-    part = request.GET.get("part")
     if request.method != "POST":
+        item = request.GET.get("item")
+        part = request.GET.get("part")
         return render(request, "inquiry-form.html", context={"item": item, "part": part})
     model = request.POST.get("model-part")
     part_id = model.split("|")[1].strip()
@@ -38,8 +39,7 @@ def get_models(request):
 
 
 def show_model(request):
-    query_param = request.GET.get('model')
-    model = query_param.removesuffix('Izaberi model')
+    model = request.GET.get('model')
     page = int(request.GET.get('page', 1))
     page_num = page - 1
     per_page = 10
@@ -83,14 +83,37 @@ def dynamic_search(request):
 
 
 def search_parts(request):
+    model = request.GET.get("myModel") if request.GET.get("checkbox") else None
     part = request.GET.get("search")
     page = int(request.GET.get('page', 1))
     page_num = page - 1
     per_page = 10
     _from = page_num * per_page
-    parts, total = es.search_part_query(part, _from)
+    parts, total = es.search_part_query(part, _from, model)
     total_num_pages = ceil(total / 10)
-    if not parts or page > total_num_pages:
-        return HttpResponse('')
-    context = {'articles': parts, 'page': page, 'total': total_num_pages, "part": part}
+    context = {'articles': parts, 'page': page, 'total': total_num_pages, "part": part, "model": model}
     return render(request, "search-parts-list.html", context)
+
+
+def get_options(request):
+    brand = request.GET.get("make", None)
+    models = es.get_models(brand)
+    models.sort()
+    return render(request, "options-scratch.html", context={"models": models})
+
+
+def add_car(request):
+    brand = request.POST.get("make")
+    model = request.POST.get("model")
+    slug = slugify(model)
+    response = render(request, "car-icon-scratch.html", context={"model": model, "brand": brand, "slug": slug})
+    set_cookie(response, "my_brand", brand, days_expire=365)
+    set_cookie(response, "my_model", model, days_expire=365)
+    return response
+
+
+def clear(request):
+    response = HttpResponse("")
+    response.delete_cookie("my_brand")
+    response.delete_cookie("my_model")
+    return response

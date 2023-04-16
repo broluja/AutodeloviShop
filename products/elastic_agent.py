@@ -103,7 +103,7 @@ class ElasticSearchAgent:
             jsn['image'] = image
         return [item['_source'] for item in items], total
 
-    def search_part_query(self, part, from_=0):
+    def search_part_query(self, part, from_=0, model=None):
         query = {
             "size": 10,
             "from": from_,
@@ -113,6 +113,27 @@ class ElasticSearchAgent:
                 }
             }
         }
+        if model:
+            query = {
+                "size": 10,
+                "from": from_,
+                "query": {
+                    "bool": {
+                      "should": [{"bool": {"must": [
+                                {
+                                "match": {
+                                  "description": part
+                                }
+                              },
+                                {
+                                "match_phrase_prefix": {
+                                    "model": model
+                                }}]
+                            }
+                        }]
+                    }
+                }
+            }
         s = self.agent.search(index='test-index', body=query)
         parts = s['hits']['hits']
         total = s['hits']['total']['value']
