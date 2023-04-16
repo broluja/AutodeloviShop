@@ -3,10 +3,9 @@
 <div class="mobile-menu">
     <div class="mobile-menu__backdrop"></div>
     <div class="mobile-menu__body">
-        <button class="mobile-menu__close" type="button"><svg width="12" height="12">
-                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
-	c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
-	C11.2,9.8,11.2,10.4,10.8,10.8z" />
+        <button class="mobile-menu__close" type="button">
+            <svg width="12" height="12">
+                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6 c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4 C11.2,9.8,11.2,10.4,10.8,10.8z" />
             </svg>
         </button>
         <div class="mobile-menu__panel">
@@ -15,57 +14,58 @@
             </div>
             <div class="mobile-menu__panel-body">
                 <div class="mobile-menu__settings-list">
-
                     <div class="mobile-menu__setting" data-mobile-menu-item>
                         <button class="mobile-menu__setting-button" title="Currency" data-mobile-menu-trigger>
                                 <span class="mobile-menu__setting-icon mobile-menu__setting-icon--currency">
                                     din
                                 </span>
                             <span class="mobile-menu__setting-title">Valuta: Dinar</span>
-                            <span class="mobile-menu__setting-arrow"><svg width="6px" height="9px">
-                                        <path d="M0.3,7.4l3-2.9l-3-2.9c-0.4-0.3-0.4-0.9,0-1.3l0,0c0.4-0.3,0.9-0.4,1.3,0L6,4.5L1.6,8.7c-0.4,0.4-0.9,0.4-1.3,0l0,0C-0.1,8.4-0.1,7.8,0.3,7.4z" />
-                                    </svg>
-                                </span>
+                            <span class="mobile-menu__setting-arrow">
+                                <svg width="6px" height="9px">
+                                    <path d="M0.3,7.4l3-2.9l-3-2.9c-0.4-0.3-0.4-0.9,0-1.3l0,0c0.4-0.3,0.9-0.4,1.3,0L6,4.5L1.6,8.7c-0.4,0.4-0.9,0.4-1.3,0l0,0C-0.1,8.4-0.1,7.8,0.3,7.4z" />
+                                </svg>
+                            </span>
                         </button>
 
                     </div>
                 </div>
                 <div class="mobile-menu__divider"></div>
-
                 <div class="mobile-menu__divider"></div>
                 <ul class="mobile-menu__links">
                     <li data-mobile-menu-item>
-                        <a href="/" class="">
-                            Naslovna
-
-                        </a>
-
+                        <a href="{% url 'index' %}" class="">Naslovna</a>
                     </li>
-                    <form class="block-finder__form">
-                        <div class="block-finder__form-control block-finder__form-control--select">
-
-                            <select name="brand" aria-label="Marka">
-                                <option value="none">Izaberi marku</option>
-                                {% for brand in brands %}
-                                    <option value="{{ brand }}">{{ brand }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="block-finder__form-control block-finder__form-control--select">
-                            <select name="model" aria-label="Model" disabled>
-                                <option value="none">Izaberi model</option>
-                            </select>
-                        </div>
-                        <button class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch">
-                            Pretraga
-                        </button>
-                    </form>
+                    <li data-mobile-menu-item>
+                        <a href="{% url 'about' %}" class="">O nama</a>
+                    </li>
+                    <li data-mobile-menu-item>
+                        <a href="#contact" class="">Kontakt</a>
+                    </li>
                 </ul>
+                <form class="block-finder__form">
+                    <div class="block-finder__form-control block-finder__form-control--select">
+                        <select name="brand" aria-label="Marka">
+                            <option value="none">Izaberi marku</option>
+                            {% for brand in brands %}
+                                <option value="{{ brand }}">{{ brand }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="block-finder__form-control block-finder__form-control--select">
+                        <select name="model" aria-label="Model" disabled>
+                            <option value="none">Izaberi model</option>
+                        </select>
+                    </div>
+                    <button class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch">
+                        Pretraga
+                    </button>
+                </form>
+
                 <div class="mobile-menu__spring"></div>
                 <div class="mobile-menu__divider"></div>
-                <a class="mobile-menu__contacts" href="">
+                <a class="mobile-menu__contacts" href="{% url 'index' %}">
                     <div class="mobile-menu__contacts-subtitle">Pozovite nas</div>
-                    <div class="mobile-menu__contacts-title">060 1234567</div>
+                    <div class="mobile-menu__contacts-title">+381 60 3033 754</div>
                 </a>
             </div>
         </div>
@@ -79,10 +79,9 @@
 <div id="add-vehicle-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="vehicle-picker-modal modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <button type="button" class="vehicle-picker-modal__close"><svg width="12" height="12">
-                    <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
-	c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
-	C11.2,9.8,11.2,10.4,10.8,10.8z" />
+            <button type="button" class="vehicle-picker-modal__close">
+                <svg width="12" height="12">
+                    <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6 c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4 C11.2,9.8,11.2,10.4,10.8,10.8z" />
                 </svg>
             </button>
             <div class="vehicle-picker-modal__panel vehicle-picker-modal__panel--active">
@@ -152,10 +151,9 @@
 <div id="vehicle-picker-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="vehicle-picker-modal modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <button type="button" class="vehicle-picker-modal__close"><svg width="12" height="12">
-                    <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
-	c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
-	C11.2,9.8,11.2,10.4,10.8,10.8z" />
+            <button type="button" class="vehicle-picker-modal__close">
+                <svg width="12" height="12">
+                    <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6 c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4 C11.2,9.8,11.2,10.4,10.8,10.8z" />
                 </svg>
             </button>
             <div class="vehicle-picker-modal__panel vehicle-picker-modal__panel--active" data-panel="list">

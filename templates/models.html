@@ -8,22 +8,24 @@
   {% if models %}
 
       <div class="container text-center">
-        <table class="table table-striped table-hover">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col" style="font-size: 20px;">{{ brand|upper }}</th>
-          </tr>
-          {% for model in models %}
+        <div class="row">
+          <table class="table table-striped table-hover">
+            <tr>
+              <th class="col-1" scope="col">image</th>
+              <th class="col-11" scope="col" style="font-size: 20px;">Marka: {{ brand|upper }}</th>
+            </tr>
+            {% for model in models %}
 
-              <tr>
-                <td scope="col">{{ forloop.counter }}</td>
-                <td scope="col">
-                  <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
-                </td>
-              </tr>
+                <tr>
+                  <td scope="col">{{ model.image }}</td>
+                  <td scope="col">
+                    <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
+                  </td>
+                </tr>
 
-          {% endfor %}
-        </table>
+            {% endfor %}
+          </table>
+        </div>
       </div>
 
   {% else %}
