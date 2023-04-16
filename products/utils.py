@@ -68,8 +68,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
             }
         ]
     }
-    print(html)
-    # return mailjet.send.create(data=email)
+    return mailjet.send.create(data=email)
 
 
 def set_cookie(response, key, value, days_expire=7):
