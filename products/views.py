@@ -46,7 +46,7 @@ def show_model(request):
     _from = page_num * per_page
     articles, total = es.show_model(model, _from)
     total_num_pages = ceil(total / 10)
-    context = {'model': model, 'articles': articles, 'page': page, 'total': total_num_pages}
+    context = {"model": model, "articles": articles, "page": page, "total": total_num_pages, "total_parts": total}
     if page > total_num_pages:
         return redirect(reverse('show_model') + f'?model={model}')
     return render(request, 'model-parts-list.html', context)
@@ -91,8 +91,16 @@ def search_parts(request):
     per_page = 10
     _from = page_num * per_page
     parts, total = es.search_part_query(part, _from, model)
+    on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
-    context = {'articles': parts, 'page': page, 'total': total_num_pages, "part": part, "model": model}
+    context = {
+        "articles": parts,
+        "page": page,
+        "total_parts": total,
+        "total": total_num_pages,
+        "on_page": on_page,
+        "part": part, "model": model
+    }
     return render(request, "search-parts-list.html", context)
 
 
@@ -106,7 +114,7 @@ def get_options(request):
 def add_car(request):
     brand = request.POST.get("make")
     model = request.POST.get("model")
-    if brand == "Izaberi marku" or model == "Izaberi model" :
+    if brand == "Izaberi marku" or model == "Izaberi model":
         return HttpResponse("")
     slug = slugify(model)
     response = render(request, "car-icon-scratch.html", context={"model": model, "brand": brand, "slug": slug})
