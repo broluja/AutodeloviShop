@@ -1,13 +1,15 @@
 alembic==1.7.7
 anyio==3.5.0
-asgiref==3.5.1
+asgiref==3.6.0
 attrs==21.4.0
+beautifulsoup4==4.12.2
 certifi==2021.10.8
 chardet==4.0.0
 charset-normalizer==2.0.12
 click==8.1.0
 csv23==0.3.3
-Django==4.0.4
+Django==4.2
+django-mathfilters==1.0.0
 elastic-transport==8.1.2
 elasticsearch==8.2.0
 fastapi-versioning==0.10.0
@@ -35,6 +37,7 @@ PyYAML==6.0
 requests==2.25.1
 six==1.16.0
 sniffio==1.2.0
+soupsieve==2.4
 sqlparse==0.4.2
 starlette==0.17.1
 tabulate==0.8.9

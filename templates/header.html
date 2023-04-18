@@ -150,17 +150,17 @@
                                                 <span class="vehicles-list__item-name">{{ my_car.my_brand }}</span>
                                                 <span class="vehicles-list__item-details">{{ my_car.my_model }}</span>
                                             </span>
-                                            <button type="button" class="vehicles-list__item-remove" hx-swap="delete" hx-target="#myCar" hx-get="{% url 'clear' %}">
+                                            <button style="border-radius:5px;" type="button" class="vehicles-list__item-remove" hx-swap="delete" hx-target="#myCar" hx-get="{% url 'clear' %}">
                                                 <svg width="16" height="16"><path d="M2,4V2h3V1h6v1h3v2H2z M13,13c0,1.1-0.9,2-2,2H5c-1.1,0-2-0.9-2-2V5h10V13z" /></svg>
                                             </button>
                                         </label>
                                         {% endif %}
                                         <!-- here goes car-icon-scratch.html -->
                                         <div class="vehicle-picker__actions">
-                                            <button type="button" class="btn btn-primary btn-sm" data-to-panel="form">Dodaj/Zameni vozilo</button>
+                                            <button style="border-radius:5px;" type="button" class="btn btn-primary btn-sm" data-to-panel="form">Dodaj/Zameni vozilo</button>
                                         </div>
                                         <div class="vehicle-picker__actions" style="margin-left: 2px;">
-                                            <button type="button" class="btn btn-primary btn-sm" data-to-panel="close">Zatvori</button>
+                                            <button style="border-radius:5px;" type="button" class="btn btn-primary btn-sm" data-to-panel="close">Zatvori</button>
                                         </div>
                                     </div>
                                 </div>
@@ -188,7 +188,7 @@
                                     </div>
                                     <div class="vehicle-picker__actions">
                                         <div class="search__car-selector-link"><a href="" data-to-panel="list">Nazad</a></div>
-                                        <button hx-post="{% url 'add_car' %}" hx-target="#carIcon" hx-swap="afterbegin" type="button" class="btn btn-primary btn-sm" data-to-panel="close">Sačuvaj vozilo</button>
+                                        <button hx-post="{% url 'add_car' %}" hx-target="#carIcon" hx-swap="afterbegin" type="button" class="btn btn-primary btn-sm" data-to-panel="close" style="border-radius:5px;">Sačuvaj vozilo</button>
                                     </div>
                                 </form>
                             </div>
@@ -199,7 +199,7 @@
         <!-- Korpa -->
         <div class="header__indicators">
             <div class="indicator indicator--trigger--click">
-                <a href="checkout" class="indicator__button">
+                <a href="checkout" class="indicator__button" style="border-radius:5px;">
                             <span class="indicator__icon">
                                 <svg width="32" height="32">
                                     <circle cx="10.5" cy="27.5" r="2.5" />
@@ -227,7 +227,7 @@
                             </table>
                         </div>
                         <div class="dropcart__actions">
-                            <a href="{% url 'check_out' %}" class="btn btn-primary">Poručite</a>
+                            <a href="{% url 'check_out' %}" class="btn btn-primary" style="border-radius:5px;">Poručite</a>
                         </div>
                     </div>
                 </div>

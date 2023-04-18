@@ -96,7 +96,7 @@
                                                 <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
                                                     <div class="status-badge__body" style="background-color:white;width:246px;">
                                                         <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
-                                                        <button hx-target="#modal-dialog" hx-get="{% url 'ask_for_parts' %}?item={{article.model}}&part={{article.gbg_id}}" type="button" class="btn btn-primary" style="width: 270px;">Pošaljite upit za proveru stanja</button>
+                                                        <button hx-target="#modal-dialog" hx-get="{% url 'ask_for_parts' %}?item={{article.model}}&part={{article.gbg_id}}" type="button" class="btn btn-primary" style="width: 270px; border-radius:5px;">Pošaljite upit za proveru stanja</button>
                                                     </div>
 
                                                 </div>
@@ -117,10 +117,17 @@
                                                         <small>Marka: {{ article.model }}</small>
                                                     </div>
                                                 </div>
+                                                <div class="product-card__rating">
+                                                    <div class="rating product-card__rating-stars">
+                                                        <div class="rating__body">
+                                                            <a href="{% url 'item:product_details' article.gbg_id %}" class="btn btn-info" style="border-radius:5px;" role="button">Detalji</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="product-card__footer">
                                                 <div class="product-card__prices">
-                                                    <div class="product-card__price product-card__price--current">{{article.price}} rsd</div>
+                                                    <div class="product-card__price product-card__price--current">{{ article.price|floatformat:"2g" }} rsd</div>
                                                 </div>
                                                 <button class="product-card__addtocart-icon" type="button" aria-label="Dodaj u korpu">
                                                     <svg width="20" height="20">
@@ -131,6 +138,7 @@
                                                 </button>
                                                 {% if article.stock == '1' %}
                                                 <button class="product-card__addtocart-full"
+                                                        style="border-radius:5px;"
                                                         type="button"
                                                         id="dodaj_korpa"
                                                         podaci="{{article}}"
