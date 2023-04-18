@@ -84,7 +84,12 @@ def dynamic_search(request):
 
 
 def search_parts(request):
-    model = request.GET.get("myModel") if request.GET.get("checkbox") else None
+    if request.GET.get("checkbox"):
+        model = request.GET.get("myModel")
+    elif request.GET.get("modelSearch"):
+        model = request.GET.get("modelSearch")
+    else:
+        model = None
     part = request.GET.get("search")
     page = int(request.GET.get('page', 1))
     page_num = page - 1
@@ -99,7 +104,8 @@ def search_parts(request):
         "total_parts": total,
         "total": total_num_pages,
         "on_page": on_page,
-        "part": part, "model": model
+        "part": part,
+        "model": model
     }
     return render(request, "search-parts-list.html", context)
 

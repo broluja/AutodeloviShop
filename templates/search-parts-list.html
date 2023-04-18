@@ -166,10 +166,10 @@
 
                                         {% if page > 1 %}
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}"><<</a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}"><<</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'-1'}}"><</a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'-1'}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}"><</a>
                                             </li>
                                         {% endif %}
 
@@ -178,18 +178,17 @@
                                                 {% if forloop.counter == page %}
                                                     <li class="page-item page-link--with-arrow" style="font-weight:bold; font-size:120%;">{{page}}</li>
                                                 {% elif forloop.counter > page|add:'-3' and forloop.counter < page|add:'3' %}
-                                                    <li class="page-item"><a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{forloop.counter}}">{{forloop.counter}}</a></li>
+                                                    <li class="page-item"><a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{forloop.counter}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">{{forloop.counter}}</a></li>
                                                 {% endif %}
                                             {% endfor %}
                                         {% endwith %}
 
                                         {% if page < total %}
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrgit status
-                                                ow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'1'}}">></a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'1'}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">></a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{total}}">>></a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{total}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">>></a>
                                             </li>
                                         {% endif %}
 
