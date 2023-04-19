@@ -45,8 +45,16 @@ def show_model(request):
     per_page = 10
     _from = page_num * per_page
     articles, total = es.show_model(model, _from)
+    on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
-    context = {"model": model, "articles": articles, "page": page, "total": total_num_pages, "total_parts": total}
+    context = {
+        "model": model,
+        "articles": articles,
+        "page": page,
+        "total": total_num_pages,
+        "total_parts": total,
+        "on_page": on_page
+    }
     if page > total_num_pages:
         return redirect(reverse('show_model') + f'?model={model}')
     return render(request, 'model-parts-list.html', context)
