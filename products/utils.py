@@ -87,7 +87,7 @@ def send_questions(first_name, last_name, brand, model, part_description, part_i
                 },
                 "To": [
                     {
-                        "Email": "olujic.branko@gmail.com",
+                        "Email": "autodelovi011@gmail.com",
                         "Name": "User"
                     }
                 ],
