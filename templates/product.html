@@ -37,16 +37,13 @@
                                 <div class="product-gallery__featured">
                                     <button type="button" class="product-gallery__zoom">
                                         <svg width="24" height="24">
-                                            <path d="M15,18c-2,0-3.8-0.6-5.2-1.7c-1,1.3-2.1,2.8-3.5,4.6c-2.2,2.8-3.4,1.9-3.4,1.9s-0.6-0.3-1.1-0.7
-	c-0.4-0.4-0.7-1-0.7-1s-0.9-1.2,1.9-3.3c1.8-1.4,3.3-2.5,4.6-3.5C6.6,12.8,6,11,6,9c0-5,4-9,9-9s9,4,9,9S20,18,15,18z M15,2
-	c-3.9,0-7,3.1-7,7s3.1,7,7,7s7-3.1,7-7S18.9,2,15,2z M16,13h-2v-3h-3V8h3V5h2v3h3v2h-3V13z" />
+                                            <path d="M15,18c-2,0-3.8-0.6-5.2-1.7c-1,1.3-2.1,2.8-3.5,4.6c-2.2,2.8-3.4,1.9-3.4,1.9s-0.6-0.3-1.1-0.7 c-0.4-0.4-0.7-1-0.7-1s-0.9-1.2,1.9-3.3c1.8-1.4,3.3-2.5,4.6-3.5C6.6,12.8,6,11,6,9c0-5,4-9,9-9s9,4,9,9S20,18,15,18z M15,2 c-3.9,0-7,3.1-7,7s3.1,7,7,7s7-3.1,7-7S18.9,2,15,2z M16,13h-2v-3h-3V8h3V5h2v3h3v2h-3V13z" />
                                         </svg>
                                     </button>
-
                                     <div class="owl-carousel">
                                         <a class="image image--type--product" href="{{article.image}}" target="_blank" >
                                             <div class="image__body">
-                                                <img class="image__tag" src="{{article.image}}" alt="">
+                                                <img class="image__tag" src="{{article.image}}" alt="Slika">
                                             </div>
                                         </a>
                                     </div>
@@ -61,32 +58,30 @@
                                     <div class="product__rating">
                                         <p style="font-size: 15px; font-weight: bold;">Broj porudžbina: {{item.orders}}</p>
                                     </div>
-                                        {% if article.stock == "1" %}
-                                            <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
-                                                <div class="status-badge__body">
-                                                    <div class="status-badge__icon">
-                                                        <svg width="13" height="13"><path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z" /></svg>
-                                                    </div>
-                                                    <div class="status-badge__text">Na stanju - {{article.model}}</div>
-                                                    <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
+                                    {% if article.stock == "1" %}
+                                        <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
+                                            <div class="status-badge__body">
+                                                <div class="status-badge__icon">
+                                                    <svg width="13" height="13"><path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z" /></svg>
                                                 </div>
+                                                <div class="status-badge__text">Na stanju - {{article.model}}</div>
+                                                <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
                                             </div>
-                                        {% else %}
-                                            <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
-                                                <div class="status-badge__body" style="background-color:white">
-                                                    <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
-                                                    <button hx-target="#modal-dialog" hx-get="{% url 'ask_for_parts' %}?item={{article.model}}&part={{article.gbg_id}}" type="button" class="btn btn-primary" style="border-radius:5px;">
-                                                        Pošaljite upit za proveru stanja
-                                                    </button>
-                                                </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
+                                            <div class="status-badge__body" style="background-color:white">
+                                                <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.model}}"></div>
+                                                <button hx-target="#modal-dialog" hx-get="{% url 'ask_for_parts' %}?item={{article.model}}&part={{article.gbg_id}}" type="button" class="btn btn-primary" style="border-radius:5px;">
+                                                    Pošaljite upit za proveru stanja
+                                                </button>
                                             </div>
-
-                                        {% endif %}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="product__main">
                                 <div class="product__excerpt">
-
                                 </div>
                                 <div class="product__features">
                                     <div class="product__features-title">Detalji proizvoda:</div>
@@ -95,7 +90,6 @@
                                         <li>Marka: <span>{{article.brand}}</span></li>
                                         <li>Model: <span>{{article.model}}</span></li>
                                     </ul>
-
                                 </div>
                             </div>
                             <div class="product__info">
@@ -115,7 +109,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Marka</th>
-                                                    <td><a href="{% url 'show_model' %}?model={{article.model}}">{{article.model}}</a></td>
+                                                    <td><a data-bs-toggle="tooltip" data-bs-title="Svi delovi za model" href="{% url 'show_model' %}?model={{article.model}}">{{article.model}}</a></td>
                                                 </tr>
 
                                                 <tr>
@@ -123,7 +117,7 @@
                                                     <td>{{article.weight|mul:0.5}} g</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Kataloški broj</th>
+                                                    <th>OEM broj</th>
                                                     <td>{{article.gbg_id}}</td>
                                                 </tr>
                                             </table>
@@ -151,7 +145,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="product__actions">
@@ -187,8 +180,7 @@
                                         <div class="product__actions-divider"></div>
                                         <button class="product__actions-item product__actions-item--wishlist" style="border-radius:5px;" type="button">
                                             <svg width="16" height="16">
-                                                <path d="M13.9,8.4l-5.4,5.4c-0.3,0.3-0.7,0.3-1,0L2.1,8.4c-1.5-1.5-1.5-3.8,0-5.3C2.8,2.4,3.8,2,4.8,2s1.9,0.4,2.6,1.1L8,3.7
-	l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" />
+                                                <path d="M13.9,8.4l-5.4,5.4c-0.3,0.3-0.7,0.3-1,0L2.1,8.4c-1.5-1.5-1.5-3.8,0-5.3C2.8,2.4,3.8,2,4.8,2s1.9,0.4,2.6,1.1L8,3.7 l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" />
                                             </svg>
                                             <span>Na listu želja</span>
                                         </button>
@@ -216,11 +208,177 @@
                     </div>
                     <div class="block-space block-space--layout--divider-nl"></div>
                     <div class="block block-products-carousel" data-layout="grid-5">
-                        <div class="container">
+                        <div class="container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- forma -->
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Imate pitanje u vezi ovog dela?</h4>
+            <hr>
+            <h5>Lični Podaci</h5>
+            <hr style="width:50%;text-align:left;margin-left:0;">
+            <form hx-post="{{request.path}}" hx-target="#emailModal">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="first_name" id="firstName" placeholder="Ime" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Prezime" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" placeholder="Email" name="user_email" class="form-control" id="emailInput" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">Vaša email adresa je sigurna sa nama.</div>
+                </div>
+                <div class="row" style="margin-bottom:5px;">
+                    <div class="col">
+                        <label class="form-check-label" for="selectCountry">Broj telefona</label>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:20px;">
+                    <div class="col">
+                        <select required name="phone_country" class="form-select" aria-label="Default select example" id="selectCountry">
+                          <option selected value="(+381)">(+381) Srbija</option>
+                          <option value="(+382)">(+382) Crna Gora</option>
+                          <option value="(+387)">(+387) BIH</option>
+                          <option value="(+385)">(+385) Hrvatska</option>
+                        </select>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" name="phone_body" placeholder="111 222 33" class="form-control" id="numberInput" required>
+                    </div>
+                </div>
+                <hr>
+                <h5>Podaci o proizvodu</h5>
+                <hr style="width:50%;text-align:left;margin-left:0;">
+                <div class="row">
+                    <div class="col" style="text-align:right">
+                        <label class="form-check-label" for="markaInput" style="margin-top: 6px;">Marka</label>
+                    </div>
+                    <div class="mb-3 col-10">
+                        <input readonly name="brand" type="text" class="form-control" id="markaInput" placeholder="{{article.brand}}" value="{{article.brand}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="text-align:right">
+                        <label class="form-check-label" for="modelInput" style="margin-top: 6px;" >Model</label>
+                    </div>
+                    <div class="mb-3 col-10">
+                        <input readonly name="model" type="text" class="form-control" id="modelInput" placeholder="{{article.model}}" value="{{article.model}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="text-align:right">
+                        <label class="form-check-label" for="catalog" style="margin-top: 6px;">Proizvod</label>
+                    </div>
+                    <div class="mb-3 col-10">
+                        <input readonly name="part_description" type="text" class="form-control" id="catalog" placeholder="{{article.description}}" value="{{article.description}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="text-align:right">
+                        <label class="form-check-label" for="productID" style="margin-top: 6px;">Kat. broj</label>
+                    </div>
+                    <div class="mb-3 col-10">
+                        <input readonly name="genuine_code" type="text" class="form-control" id="productID" placeholder="{{article.genuine_code}}" value="{{article.genuine_code}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="text-align:right">
+                        <label class="form-check-label" for="gbgID" style="margin-top: 6px;">OEM broj</label>
+                    </div>
+                    <div class="mb-3 col-10">
+                        <input readonly type="text" class="form-control" name="gbg_id" id="gbgID" placeholder="{{article.gbg_id}}" value="{{article.gbg_id}}">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="text-align:right">
+                        <label class="form-check-label" for="gbgID" style="margin-top: 6px;">Poruka</label>
+                    </div>
+                    <div class="mb-3 col-10">
+                        <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-md-auto" style="margin-bottom:20px;">
+                        <input id="question_sent" type="submit" class="btn btn-primary" value="Pošalji"><hr><div id="emailModal"></div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </form>
+        </div>
+
+        {% if article.model %}
+        <!-- Right side -->
+        <div class="col-md-4">
+            <h4>Proizvodi za {{article.model}}</h4>
+            <hr style="width:50%;text-align:left;margin-left:0;">
+            {% for article in articles %}
+            <div class="product__info">
+                <div class="product__info-card">
+                    <div class="product__info-body">
+                        <div class="product__badge tag-badge tag-badge--sale">
+                            <a style="color:white;" href="{% url 'item:product_details' article.gbg_id %}"><strong>{{article.description}}</strong></a>
+                        </div>
+                        <div class="product__prices-stock">
+                            <div class="product__prices">
+                                <div class="product__price product__price--current">{{ article.price|floatformat:"2g" }} rsd</div>
+                            </div>
+                        </div>
+                        <div class="product__meta">
+                            <table>
+                                <tr>
+                                    <th>OEM broj</th>
+                                    <td>{{article.genuine_code}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Težina</th>
+                                    <td>{{article.weight|mul:0.5}} g</td>
+                                </tr>
+                                <tr>
+                                    <th>Kataloški broj</th>
+                                    <td>{{article.gbg_id}}</td>
+                                </tr>
+                            </table>
+                        </div></div>
+                    <div class="product-form product__form">
+                        <div class="product-form__body">
+                            <div class="product-form__row">
+                                <div class="product-form__control">
+                                    <div class="input-radio-label">
+                                        <div class="input-radio-label__list">
+                                            {% if article.side == "R" %}
+                                                <label class="input-radio-label__item">
+                                                    <input type="radio" name="material" class="input-radio-label__input">
+                                                    <span class="input-radio-label__title">Strana: Desna</span>
+                                                </label>
+                                            {% else %}
+                                                <label class="input-radio-label__item">
+                                                    <input type="radio" name="material" class="input-radio-label__input">
+                                                    <span class="input-radio-label__title">Strana: Leva</span>
+                                                </label>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="suggestions__product-info">
-            <div class="suggestions__product-name">{{product.description|truncatechars:60 }}</div>
+            <div class="suggestions__product-name">{{ product.description|truncatechars:60 }}</div>
             {% if product.stock == '1' %}
                 <div class="suggestions__product-rating">
                     <div class="suggestions__product-rating-stars">
@@ -27,6 +27,6 @@
                 <div class="suggestions__product-rating-label">Potreban upit</div>
             {% endif %}
         </div>
-        <div class="suggestions__product-price">{{product.price}} RSD</div>
+        <div class="suggestions__product-price">{{ product.price|floatformat:"2g" }} RSD</div>
     </a>
 {% endfor %}
