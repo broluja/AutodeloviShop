@@ -123,12 +123,8 @@ def save_orders(products: list) -> None:
         for product in products:
             product_id = product["gbg_id"]
             quantity = product["cart_count"]
-            item = Item.objects.filter(gbg_id=product_id).first()
-            if not item:
-                item = Item.objects.create(gbg_id=product_id)
-                item.orders += int(quantity)
-            else:
-                item.orders += int(quantity)
+            item, created = Item.objects.get_or_create(gbg_id=product_id)
+            item.orders += int(quantity)
             item.save()
     except Exception as exc:
         print(exc)

@@ -7,6 +7,7 @@ from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
+from items.models import Item
 
 es = ElasticSearchAgent()
 
@@ -65,14 +66,14 @@ def check_out(request):
 
 
 def order(request):
-    if request.method == 'POST':
-        payload = request.body.decode('utf-8')
-        body = json.loads(payload)
-        products = body["products"]
-        save_orders(products)
-        r = send_email(body)
-        return JsonResponse(r.json())
-    return redirect(reverse('index'))
+    if request.method != 'POST':
+        return redirect(reverse('index'))
+    payload = request.body.decode('utf-8')
+    body = json.loads(payload)
+    products = body["products"]
+    save_orders(products)
+    r = send_email(body)
+    return JsonResponse(r.json())
 
 
 def about(request):

@@ -345,7 +345,7 @@
                 var obj = JSON.parse(localStorage.getItem(itemData.gbg_id));
                 obj['cart_count'] = 1;
                 localStorage.setItem(itemData.gbg_id, JSON.stringify(obj));
-
+                console.log(itemData)
                 let cartItem = '<li class="dropcart__item">\n' +
                     '                                <div class="dropcart__item-image image image--type--product">\n' +
                     '                                    <a class="image__body" href="/product/'+itemData.gbg_id+'">\n' +
@@ -365,7 +365,7 @@
                     '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' rsd</div>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
-                    '                                <button type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
+                    '                                <button onclick="remove_item('+itemData.gbg_id+')" id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
                     '                                        <path d="M8.8,8.8L8.8,8.8c-0.4,0.4-1,0.4-1.4,0L5,6.4L2.6,8.8c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L3.6,5L1.2,2.6\n' +
                     '\tc-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L5,3.6l2.4-2.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L6.4,5l2.4,2.4\n' +
                     '\tC9.2,7.8,9.2,8.4,8.8,8.8z" />\n' +
@@ -413,7 +413,7 @@
                 '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' rsd</div>\n' +
                 '                                    </div>\n' +
                 '                                </div>\n' +
-                '                                <button type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
+                '                                <button id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
                 '                                      <path d="M8.8,8.8L8.8,8.8c-0.4,0.4-1,0.4-1.4,0L5,6.4L2.6,8.8c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L3.6,5L1.2,2.6\n' +
                 '\tc-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L5,3.6l2.4-2.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L6.4,5l2.4,2.4\n' +
                 '\tC9.2,7.8,9.2,8.4,8.8,8.8z" />\n' +
@@ -427,6 +427,14 @@
         $('#ukupno').text(price)
 
     });
+    $(function() {
+        const localStorage = window.localStorage;
+        $(document).on("click",".dropcart__item-remove", function () {
+            localStorage.removeItem(this.getAttribute("id"))
+            location.reload()
+        })
+    });
+
 
 
     /* Porudžbina */
@@ -501,11 +509,13 @@
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     var jsonResponse = JSON.parse(this.responseText);
+                    console.log(jsonResponse)
                     console.log(this.responseText)
                     if (jsonResponse["Messages"][0]["Status"] == "success") {
                         document.getElementById("porudzbina-forma").innerHTML =
                             "Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!";
                         localStorage.clear();
+                        location.reload();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
                             "Došlo je do greške u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";
@@ -515,16 +525,6 @@
             };
         });
     });
-
-    // $(function () {
-    //     setInterval(function()
-    //     {
-    //         var x = $(".dropcart__item-price").text();
-    //         console.log(parseInt(x))
-    //
-    //     }, 1000);
-    // });
-
 
     /*
     // .indicator (dropcart, account-menu)
