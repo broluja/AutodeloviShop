@@ -347,12 +347,13 @@
                 localStorage.setItem(itemData.gbg_id, JSON.stringify(obj));
                 console.log(itemData)
                 let cartItem = '<li class="dropcart__item">\n' +
-                    '                                <div class="dropcart__item-image image image--type--product">\n' +
+                    '                               <div class="row">\n' +
+                    '                                <div class="col-5 dropcart__item-image image image--type--product">\n' +
                     '                                    <a class="image__body" href="/product/'+itemData.gbg_id+'">\n' +
                     '                                        <img class="image__tag" src="'+itemData.image+'" alt="">\n' +
                     '                                    </a>\n' +
                     '                                </div>\n' +
-                    '                                <div class="dropcart__item-info">\n' +
+                    '                                <div class="col-5 dropcart__item-info">\n' +
                     '                                    <div class="dropcart__item-name">\n' +
                     '                                        <a href="/product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
                     '                                    </div>\n' +
@@ -365,12 +366,14 @@
                     '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' rsd</div>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
-                    '                                <button onclick="remove_item('+itemData.gbg_id+')" id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
+                    '                               <div class="col-2">\n' +
+                    '                                <button id="'+itemData.gbg_id+'" id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
                     '                                        <path d="M8.8,8.8L8.8,8.8c-0.4,0.4-1,0.4-1.4,0L5,6.4L2.6,8.8c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L3.6,5L1.2,2.6\n' +
                     '\tc-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L5,3.6l2.4-2.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L6.4,5l2.4,2.4\n' +
                     '\tC9.2,7.8,9.2,8.4,8.8,8.8z" />\n' +
                     '                                    </svg>\n' +
                     '                                </button>\n' +
+                    '                               </div></div>\n' +
                     '                            </li><li class="dropcart__divider" role="presentation"></li>';
                 $('.dropcart__list').append(cartItem);
             }
@@ -395,12 +398,13 @@
             const itemData =  JSON.parse(values[i]);
             price += parseFloat(itemData.price * itemData.cart_count);
             let cartItem = '<li class="dropcart__item">\n' +
-                '                                <div class="dropcart__item-image image image--type--product">\n' +
+                '                                <div class="row">\n' +
+                '                                <div class="col dropcart__item-image image image--type--product">\n' +
                 '                                    <a class="image__body" href="/product/'+itemData.gbg_id+'">\n' +
                 '                                        <img class="image__tag" src="'+itemData.image+'" alt="">\n' +
                 '                                    </a>\n' +
                 '                                </div>\n' +
-                '                                <div class="dropcart__item-info">\n' +
+                '                                <div class="col dropcart__item-info">\n' +
                 '                                    <div class="dropcart__item-name">\n' +
                 '                                        <a href="/product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
                 '                                    </div>\n' +
@@ -413,12 +417,14 @@
                 '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' rsd</div>\n' +
                 '                                    </div>\n' +
                 '                                </div>\n' +
+                '                               <div class="col-2">\n' +
                 '                                <button id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
                 '                                      <path d="M8.8,8.8L8.8,8.8c-0.4,0.4-1,0.4-1.4,0L5,6.4L2.6,8.8c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L3.6,5L1.2,2.6\n' +
                 '\tc-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L5,3.6l2.4-2.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L6.4,5l2.4,2.4\n' +
                 '\tC9.2,7.8,9.2,8.4,8.8,8.8z" />\n' +
                 '                                    </svg>\n' +
                 '                                </button>\n' +
+                '                               </div></div>\n' +
                 '                            </li><li class="dropcart__divider" role="presentation"></li>';
             $('.dropcart__list').append(cartItem);
         }
@@ -430,8 +436,8 @@
     $(function() {
         const localStorage = window.localStorage;
         $(document).on("click",".dropcart__item-remove", function () {
-            localStorage.removeItem(this.getAttribute("id"))
-            location.reload()
+            localStorage.removeItem(this.getAttribute("id"));
+            location.reload();
         })
     });
 

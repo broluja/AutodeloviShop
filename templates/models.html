@@ -17,7 +17,7 @@
             {% for model in models %}
 
                 <tr>
-                  <td scope="col"><img src="{{ model.image }}"></td>
+                  <td scope="col"><img src="https://autodelovishop.rs/EFAR/{{ model.gbg_id|slice:':4' }}.jpg"></td>
                   <td scope="col">
                     <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
                   </td>

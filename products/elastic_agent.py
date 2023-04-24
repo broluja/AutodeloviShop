@@ -1,7 +1,7 @@
 import requests
 from elasticsearch import Elasticsearch
 
-IMAGE_PATH = 'https://slike.autodelovishop.rs'
+IMAGE_PATH = 'https://slike.autodelovishop.rs/PARTS'
 
 
 class ElasticSearchAgent:
