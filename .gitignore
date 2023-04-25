@@ -119,3 +119,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# Pycache
+Autodelovi/__pycache__
+products/__pycache__
