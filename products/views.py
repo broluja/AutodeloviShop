@@ -7,7 +7,6 @@ from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
-from items.models import Item
 
 es = ElasticSearchAgent()
 
@@ -88,7 +87,7 @@ def open_model(request, model):
 
 def dynamic_search(request):
     searched_item = request.GET.get("search")
-    parts, total = es.search_part_query(searched_item)
+    parts, total = es.search_part_query(searched_item, images=False)
     return render(request, "dynamic-search.html", context={"products": parts})
 
 
@@ -139,6 +138,7 @@ def add_car(request):
 
 
 def clear(request):
+    print(request)
     response = HttpResponse("")
     response.delete_cookie("my_brand")
     response.delete_cookie("my_model")

@@ -1,13 +1,13 @@
 
 {% for product in products %}
     <a class="suggestions__item suggestions__product" href="{% url 'item:product_details' product.gbg_id %}">
-        <div class="suggestions__product-image image image--type--product">
-            <div class="image__body">
-                <img class="image__tag" src="{{product.image}}" alt="Slika">
-            </div>
-        </div>
+<!--        <div class="suggestions__product-image image image&#45;&#45;type&#45;&#45;product">-->
+<!--            <div class="image__body">-->
+<!--                <img class="image__tag" src="{{product.image}}" alt="Slika">-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="suggestions__product-info">
-            <div class="suggestions__product-name">{{ product.description|truncatechars:60 }}</div>
+            <div class="suggestions__product-name">{{ product.description|truncatechars:60 }} - {{product.model}}</div>
             {% if product.stock == '1' %}
                 <div class="suggestions__product-rating">
                     <div class="suggestions__product-rating-stars">
