@@ -5,137 +5,137 @@
 
 {% block content %}
     <br><br><hr>
-    <div class="container text-center">
-      <div class="row">
-          <div class="col-8">
-              {% if models %}
-                <div class="container text-center">
-                  <div class="row">
-                    <table class="table table-bordered border-primary table-hover">
-                      <tr>
-                        <th class="col-1" scope="col"></th>
-                        <th class="col-7" scope="col">Marka: {{ brand|upper }}</th>
-                        <th class="col-4" scope="col"></th>
-                      </tr>
-                      {% for model in models %}
-                          <tr>
-                            <td scope="col" style="height: 100px;">
-                              {% for brand_model in brand_models %}
-                                {% if brand_model.name == model %}
-                                  <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" style="width:100px;" type="image/jpg" class="rounded float-start img-thumbnail">
-                                    <img src="{% static 'images/default.jpg' %}" class="rounded float-start img-thumbnail">
-                                  </object>
-                                {% endif %}
-                              {% endfor %}
+    <div class="container">
+        <div class="row">
+            {% if models %}
+            <div class="col">
+                <div style="height: 700px; overflow: scroll;">
+                    <div class="row">
+                        <table class="table table-bordered border-primary table-hover">
+                        <tr>
+                            <th class="col-md-2" scope="col"></th>
+                            <th class="col-6 text-center" scope="col">Marka: {{ brand|upper }}</th>
+                            <th class="col-4" scope="col"></th>
+                        </tr>
+                        {% for model in models %}
+                        <tr>
+                            <td scope="col">
+                                {% for brand_model in brand_models %}
+                                    {% if brand_model.name == model %}
+                                <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
+                                    <img src="{% static 'images/default.jpg' %}" class="rounded float-start img-thumbnail" style="width:100%;">
+                                </object>
+                                    {% endif %}
+                                {% endfor %}
                             </td>
                             <td scope="col">
-                              <p class="text-center" style="margin-top: 5px;">MODEL</p>
-                              <p class="text-center" style="margin-top: 5px;">{{ model }}</p>
+                                <p class="text-center" style="margin-top: 5px;">MODEL</p>
+                                <p class="text-center">{{ model }}</p>
                             </td>
                             <td scope="col-4">
-                              <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-secondary" style="width: 100%; height:100px;">Delovi</button></a>
+                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-secondary" style="width: 80%; height: 100%">Delovi</button></a>
+                                <button style="width: 80%; height: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">
+                                  Detalji
+                                </button>
                             </td>
-                          </tr>
+                        </tr>
                       {% endfor %}
                     </table>
-                  </div>
+                    </div>
                 </div>
+            </div>
+            <div class="col-md-4">
+            <h4 style="margin-top:5px;">Brzi meni</h4><hr>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Otvori pretraživač
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <form class="">
+                        <div class="block-finder__form-control block-finder__form-control--select">
+                            <select name="brand" aria-label="Marka">
+                              <option value="none">Izaberi marku</option>
+                              {% for brand in brands %}
+                              <option value="{{brand}}">{{brand}}</option>
+                              {% endfor %}
+                            </select>
+                        </div>
+                        <div class="block-finder__form-control block-finder__form-control--select">
+                            <select name="model" aria-label="Model" disabled>
+                              <option value="none">Izaberi model</option>
+                            </select>
+                        </div>
+                        <button style="border-radius:5px;" class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch1">
+                            Pretraga
+                        </button>
+                    </form>
+                </div>
+            </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Najpopularnije marke
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                      <a href="{% url 'open_model' 'audi' %}">Audi</a><hr>
+                      <a href="{% url 'open_model' 'bmw' %}">BMW</a><hr>
+                      <a href="{% url 'open_model' 'vw' %}">Volkswagen</a><hr>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Najpopularniji modeli
+                  </button>
+                </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <a href="{% url 'show_model' %}?model=BMW SERIES 5 (E28) 81-88">BMW SERIES 5 (E28) 81-88</a><hr>
+                    <a href="{% url 'show_model' %}?model=VW GOLF IV 98-04">VW GOLF IV 98-04</a><hr>
+                </div>
+            </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                        Ko smo mi?
+                    </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>Mi smo tim zaljubljenika u auto industriju koji se već više od 15 godina bavi prodajom auto delova. Već deceniju i po ulažemo i gradimo dugoročne odnose sa kupcima. Svesni smo potrebe za brzom, transparentnom i online kupovinom i tu smo da profesionalno kordiniramo celim procesom poručivanja auto delova, od dodavanja proizvoda u korpu do što brže dostave na kućnu adresu. Cilj nam je zadovoljstvo klijenta i efikasna saradnja.</p>
+                    </div>
+                </div>
+              </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                        Kontakt
+                    </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>TELEFON: +381 60 3033 754</p>
+                        <p>EMAIL: office@autodelovishop.rs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
             {% else %}
-              <div class="container text-center">
+            <div class="container text-center">
                 <h3>Trenutno nema dostupnih modela za brend</h3><h2>{{ brand|upper }}</h2><hr>
-              </div>
-            {% endif %}
-          </div>
-          <div class="col-md-4 ">
-              <div class="container " style="margin-top: 25px;">
-                <h4>Brzi meni</h4><hr>
-              </div>
-              <ul class="list-group">
-                <li class="list-group-item" style="text-align:left;">
-                  <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                      Otvori pretraživač
-                    </button>
-                  </p>
-                  <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                      <form class="">
-                            <div class="block-finder__form-control block-finder__form-control--select">
-                                <select name="brand" aria-label="Marka">
-                                    <option value="none">Izaberi marku</option>
-                                    {% for brand in brands %}
-                                        <option value="{{brand}}">{{brand}}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="block-finder__form-control block-finder__form-control--select">
-                                <select name="model" aria-label="Model" disabled>
-                                    <option value="none">Izaberi model</option>
-                                </select>
-                            </div>
-                            <button style="border-radius:5px;" class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch1">
-                                Pretraga
-                            </button>
-                        </form>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item" style="text-align:left;">
-                    <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseModels" aria-expanded="false" aria-controls="collapseModels">
-                      Najpopularnije marke
-                    </button>
-                    </p>
-                    <div class="collapse" id="collapseModels">
-                        <div class="card card-body">
-                            <a href="{% url 'open_model' 'audi' %}">Audi</a>
-                            <a href="{% url 'open_model' 'bmw' %}">BMW</a>
-                            <a href="{% url 'open_model' 'vw' %}">Volkswagen</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item" style="text-align:left;">
-                    <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseParts" aria-expanded="false" aria-controls="collapseParts">
-                      Najpopularniji modeli
-                    </button>
-                    </p>
-                    <div class="collapse" id="collapseParts">
-                        <div class="card card-body">
-                            <a href="{% url 'show_model' %}?model=Audi A6 10-14">Audi A6 10-14</a>
-                            <a href="{% url 'show_model' %}?model=BMW SERIES 5 (E28) 81-88">BMW SERIES 5 (E28) 81-88</a>
-                            <a href="{% url 'show_model' %}?model=VW GOLF IV 98-04">VW GOLF IV 98-04</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item" style="text-align:left;">
-                    <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout">
-                      Ko smo mi?
-                    </button>
-                    </p>
-                    <div class="collapse" id="collapseAbout">
-                        <div class="card card-body">
-                            <p>Mi smo tim zaljubljenika u auto industriju koji se već više od 15 godina bavi prodajom auto delova. Već deceniju i po ulažemo i gradimo dugoročne odnose sa kupcima. Svesni smo potrebe za brzom, transparentnom i online kupovinom i tu smo da profesionalno kordiniramo celim procesom poručivanja auto delova, od dodavanja proizvoda u korpu do što brže dostave na kućnu adresu. Cilj nam je zadovoljstvo klijenta i efikasna saradnja.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item" style="text-align:left;">
-                    <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
-                      Kontakt
-                    </button>
-                    </p>
-                    <div class="collapse" id="collapseContact">
-                        <div class="card card-body">
-                            <p>TELEFON: +381 60 3033 754</p>
-                            <p>EMAIL: office@autodelovishop.rs</p>
-                        </div>
-                    </div>
-                </li>
-              </ul>
-          </div>
-      </div>
+            </div>
+        </div>
+    {% endif %}
     </div>
 
     <br><br>

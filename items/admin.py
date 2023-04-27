@@ -12,5 +12,5 @@ class ItemAdmin(admin.ModelAdmin):
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
     list_display = ["name", "brand_id"]
-    list_per_page = 50
+    list_per_page = 200
     list_display_links = ["name", ]
