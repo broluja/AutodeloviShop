@@ -7,6 +7,7 @@ from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
+from items.models import Brand
 
 es = ElasticSearchAgent()
 
@@ -81,8 +82,9 @@ def about(request):
 
 def open_model(request, model):
     models = es.get_models(model)
+    brand_models = [Brand.objects.filter(name=model).first() for model in models]
     models.sort()
-    return render(request, "models.html", context={"models": models, "brand": model})
+    return render(request, "models.html", context={"models": models, "brand": model, "brand_models": brand_models})
 
 
 def dynamic_search(request):

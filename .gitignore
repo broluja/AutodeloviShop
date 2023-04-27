@@ -122,5 +122,5 @@ dmypy.json
 
 
 # Pycache
-Autodelovi/__pycache__
-products/__pycache__
+Autodelovi/__pycache__/*.pyc
+products/__pycache__/*.pyc
