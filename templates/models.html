@@ -9,13 +9,14 @@
         <div class="row">
             {% if models %}
             <div class="col">
-                <div style="height: 650px; overflow: scroll;">
-                    <div class="row">
+                <div style="height: 650px; overflow: scroll;" class="container">
+
+                    <div class="row container">
                         <table class="table table-bordered border-primary table-hover">
                         <tr>
                             <th class="col-md-2" scope="col"></th>
-                            <th class="col-6 text-center" scope="col">Marka: {{ brand|upper }}</th>
-                            <th class="col-4" scope="col"></th>
+                            <th class="col-5 text-center" scope="col">Marka: {{ brand|upper }}</th>
+                            <th class="col-5" scope="col"></th>
                         </tr>
                         {% for model in models %}
                         <tr>
@@ -23,7 +24,9 @@
                                 {% for brand_model in brand_models %}
                                     {% if brand_model.name == model %}
                                 <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
-                                    <img src="{% static 'images/default.jpg' %}" class="rounded float-start img-thumbnail" style="width:100%;">
+                                    <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.JPG" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
+                                        <img src="{% static 'images/default.jpg' %}" class="rounded float-start img-thumbnail" style="width:100%;">
+                                    </object>
                                 </object>
                                     {% endif %}
                                 {% endfor %}
@@ -44,13 +47,16 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
-                <h4 style="margin-top:5px;">Brzi meni</h4><hr>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="margin-top:5px;">
+                    <h4 style="margin:5px;" class="text-center">Brzi meni</h4>
+                </div>
+                <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top:0px;">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Otvori pretraživač
+                            <h5>Otvori pretraživač</h5>
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -79,7 +85,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Najpopularnije marke
+                                <h5>Najpopularnije marke</h5>
                             </button>
                         </h2>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -93,7 +99,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                            Najpopularniji modeli
+                              <h5>Najpopularniji modeli</h5>
                           </button>
                         </h2>
                     <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -106,7 +112,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                Ko smo mi?
+                                <h5>Ko smo mi?</h5>
                             </button>
                         </h2>
                         <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -118,7 +124,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                                Kontakt
+                                <h5>Kontakt</h5>
                             </button>
                         </h2>
                         <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
