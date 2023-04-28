@@ -80,11 +80,11 @@ def about(request):
     return render(request, 'onama.html')
 
 
-def open_model(request, model):
-    models = es.get_models(model)
-    brand_models = [Brand.objects.filter(name=model).first() for model in models]
+def open_model(request, brand):
+    models = es.get_models(brand)
+    brand_models_ids = [Brand.objects.filter(name=model).first() for model in models]
     models.sort()
-    return render(request, "models.html", context={"models": models, "brand": model, "brand_models": brand_models})
+    return render(request, "models.html", context={"models": models, "brand": brand, "brand_models": brand_models_ids})
 
 
 def dynamic_search(request):
