@@ -7,6 +7,7 @@ from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
+from items.models import Brand
 
 es = ElasticSearchAgent()
 
@@ -45,8 +46,16 @@ def show_model(request):
     per_page = 10
     _from = page_num * per_page
     articles, total = es.show_model(model, _from)
+    on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
-    context = {"model": model, "articles": articles, "page": page, "total": total_num_pages, "total_parts": total}
+    context = {
+        "model": model,
+        "articles": articles,
+        "page": page,
+        "total": total_num_pages,
+        "total_parts": total,
+        "on_page": on_page
+    }
     if page > total_num_pages:
         return redirect(reverse('show_model') + f'?model={model}')
     return render(request, 'model-parts-list.html', context)
@@ -57,29 +66,30 @@ def check_out(request):
 
 
 def order(request):
-    if request.method == 'POST':
-        payload = request.body.decode('utf-8')
-        body = json.loads(payload)
-        products = body["products"]
-        save_orders(products)
-        r = send_email(body)
-        return JsonResponse(r.json())
-    return redirect(reverse('index'))
+    if request.method != 'POST':
+        return redirect(reverse('index'))
+    payload = request.body.decode('utf-8')
+    body = json.loads(payload)
+    products = body["products"]
+    save_orders(products)
+    r = send_email(body)
+    return JsonResponse(r.json())
 
 
 def about(request):
     return render(request, 'onama.html')
 
 
-def open_model(request, model):
-    models = es.get_models(model)
+def open_model(request, brand):
+    models = es.get_models(brand)
+    brand_models_ids = [Brand.objects.filter(name=model).first() for model in models]
     models.sort()
-    return render(request, "models.html", context={"models": models, "brand": model})
+    return render(request, "models.html", context={"models": models, "brand": brand, "brand_models": brand_models_ids})
 
 
 def dynamic_search(request):
     searched_item = request.GET.get("search")
-    parts, total = es.search_part_query(searched_item)
+    parts, total = es.search_part_query(searched_item, images=False)
     return render(request, "dynamic-search.html", context={"products": parts})
 
 
@@ -130,6 +140,7 @@ def add_car(request):
 
 
 def clear(request):
+    print(request)
     response = HttpResponse("")
     response.delete_cookie("my_brand")
     response.delete_cookie("my_model")

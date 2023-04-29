@@ -427,6 +427,14 @@
         $('#ukupno').text(price)
 
     });
+    $(function() {
+        const localStorage = window.localStorage;
+        $(document).on("click",".dropcart__item-remove", function () {
+            localStorage.removeItem(this.getAttribute("id"));
+            location.reload();
+        })
+    });
+
 
 
     /* Porudžbina */
@@ -506,6 +514,7 @@
                         document.getElementById("porudzbina-forma").innerHTML =
                             "Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!";
                         localStorage.clear();
+                        location.reload();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
                             "Došlo je do greške u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";

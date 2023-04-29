@@ -1,40 +1,152 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{brand}}{% endblock title %}
 
 {% block content %}
-  <br><br><hr>
-
-  {% if models %}
-
-      <div class="container text-center">
+    <br><br><hr>
+    <div class="container">
         <div class="row">
-          <table class="table table-striped table-hover">
-            <tr>
-              <th class="col-1" scope="col">image</th>
-              <th class="col-11" scope="col" style="font-size: 20px;">Marka: {{ brand|upper }}</th>
-            </tr>
-            {% for model in models %}
+            {% if models %}
+            <div class="col">
+                <div style="height: 650px; overflow: scroll;" class="container">
 
-                <tr>
-                  <td scope="col">{{ model.image }}</td>
-                  <td scope="col">
-                    <a href="{% url 'show_model' %}?model={{ model }}" style="color: black;">{{ model }}</a>
-                  </td>
-                </tr>
+                    <div class="row container">
+                        <table class="table table-bordered border-primary table-hover" style="margin-left:15px;">
+                        <tr>
+                            <th class="col-md-2" scope="col"></th>
+                            <th class="col-5 text-center" scope="col">Marka: {{ brand|upper }}</th>
+                            <th class="col-5" scope="col"></th>
+                        </tr>
+                        {% for model in models %}
+                        <tr>
+                            <td scope="col">
+                                {% for brand_model in brand_models %}
+                                    {% if brand_model.name == model %}
+                                <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
+                                    <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.JPG" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
+                                        <img src="{% static 'images/default.jpg' %}" class="rounded float-start img-thumbnail" style="width:100%;">
+                                    </object>
+                                </object>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td scope="col">
+                                <p class="text-center" style="margin-top: 5px;">MODEL</p>
+                                <p class="text-center">{{ model }}</p>
+                            </td>
+                            <td scope="col-4">
+                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-secondary" style="width: 100%;">Delovi</button></a>
+                                <button style="width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">
+                                  Detalji
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+            </div>
 
-            {% endfor %}
-          </table>
+            <div class="col-md-4">
+                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="margin-top:5px;">
+                    <h4 style="margin:5px;" class="text-center">Brzi meni</h4>
+                </div>
+                <div class="accordion accordion-flush" id="accordionFlushExample" style="margin-top:0px;">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <h5>Otvori pretraživač</h5>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <form class="">
+                            <div class="block-finder__form-control block-finder__form-control--select">
+                                <select name="brand" aria-label="Marka">
+                                  <option value="none">Izaberi marku</option>
+                                  {% for brand in brands %}
+                                  <option value="{{brand}}">{{brand}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+                            <div class="block-finder__form-control block-finder__form-control--select">
+                                <select name="model" aria-label="Model" disabled>
+                                  <option value="none">Izaberi model</option>
+                                </select>
+                            </div>
+                            <button style="border-radius:5px;" class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch1">
+                                Pretraga
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                <h5>Najpopularnije marke</h5>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                              <a href="{% url 'open_model' 'audi' %}">Audi</a><hr>
+                              <a href="{% url 'open_model' 'bmw' %}">BMW</a><hr>
+                              <a href="{% url 'open_model' 'vw' %}">Volkswagen</a><hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                              <h5>Najpopularniji modeli</h5>
+                          </button>
+                        </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <a href="{% url 'show_model' %}?model=BMW SERIES 5 (E28) 81-88">BMW SERIES 5 (E28) 81-88</a><hr>
+                            <a href="{% url 'show_model' %}?model=VW GOLF IV 98-04">VW GOLF IV 98-04</a><hr>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                <h5>Ko smo mi?</h5>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>Mi smo tim zaljubljenika u auto industriju koji se već više od 15 godina bavi prodajom auto delova. Već deceniju i po ulažemo i gradimo dugoročne odnose sa kupcima. Svesni smo potrebe za brzom, transparentnom i online kupovinom i tu smo da profesionalno kordiniramo celim procesom poručivanja auto delova, od dodavanja proizvoda u korpu do što brže dostave na kućnu adresu. Cilj nam je zadovoljstvo klijenta i efikasna saradnja.</p>
+                            </div>
+                        </div>
+                      </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                <h5>Kontakt</h5>
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>TELEFON: +381 60 3033 754</p>
+                                <p>EMAIL: office@autodelovishop.rs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="container text-center">
+                <h3>Trenutno nema dostupnih modela za brend</h3><h2>{{ brand|upper }}</h2><hr>
+            </div>
+            {% endif %}
         </div>
-      </div>
-
-  {% else %}
-
-    <div class="container text-center">
-      <h3>Nema dostupnih modela za brend: {{ brand|upper }}</h3>
     </div>
+    <br><br>
 
-  {% endif %}
-
-  <br><br>
 {% endblock content %}
+
+
+
+
