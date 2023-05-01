@@ -105,11 +105,14 @@ class ElasticSearchAgent:
 
     def search_part_query(self, part, from_=0, model=None, images=True):
         query = {
-            "size": 10,
             "from": from_,
             "query": {
-                "match": {
-                    "description": part
+                "multi_match": {
+                    "query": part,
+                    "fields": [
+                        "model^2",
+                        "description"
+                    ]
                 }
             }
         }
@@ -141,7 +144,6 @@ class ElasticSearchAgent:
                 item['image'] = image
         return [item['_source'] for item in parts], total
 
-
     def get_product(self, product_id):
         product_query = {
             "query": {
@@ -150,10 +152,27 @@ class ElasticSearchAgent:
                 }
             }
         }
-        p = self.agent.search(index='test-index', body=product_query)
+        p = self.agent.search(index="test-index", body=product_query)
         product_dictionary = p['hits']['hits'][0]
         product = product_dictionary['_source']
         gbg_id = product['gbg_id']
         image = self.img(gbg_id)
         product['image'] = image
         return product
+
+    def fine_tune_search(self, term: str):
+        query = {
+            "query": {
+                "multi_match": {
+                    "query": term,
+                    "fields": [
+                        "model^2",
+                        "description"
+                    ]
+                }
+            }
+        }
+        results = self.agent.search(index="test-index", body=query)
+        total = results["hits"]["total"]["value"]
+        parts = results['hits']['hits']
+        return [item['_source'] for item in parts], total

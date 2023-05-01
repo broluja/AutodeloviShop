@@ -80,7 +80,7 @@ def about(request):
     return render(request, 'onama.html')
 
 
-def open_model(request, brand):
+def show_models(request, brand):
     models = es.get_models(brand)
     brand_models_ids = [Brand.objects.filter(name=model).first() for model in models]
     models.sort()
@@ -89,7 +89,8 @@ def open_model(request, brand):
 
 def dynamic_search(request):
     searched_item = request.GET.get("search")
-    parts, total = es.search_part_query(searched_item, images=False)
+    # parts, total = es.search_part_query(searched_item, images=False)
+    parts, total = es.fine_tune_search(searched_item)
     return render(request, "dynamic-search.html", context={"products": parts})
 
 

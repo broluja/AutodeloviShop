@@ -11,7 +11,7 @@ urlpatterns = [
     path('checkout/', views.check_out, name='check_out'),
     path('order', views.order, name='order'),
     path('about/', views.about, name='about'),
-    path('brand/<str:brand>/', views.open_model, name="open_model"),
+    path('brand/<str:brand>/', views.show_models, name="open_model"),
     path('part-search/', views.search_parts, name="search_parts"),
 ]
 
