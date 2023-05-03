@@ -107,12 +107,9 @@ class ElasticSearchAgent:
         query = {
             "from": from_,
             "query": {
-                "multi_match": {
+                "combined_fields": {
                     "query": part,
-                    "fields": [
-                        "model^2",
-                        "description"
-                    ]
+                    "fields": ["model^2", "description"]
                 }
             }
         }
@@ -161,16 +158,27 @@ class ElasticSearchAgent:
         return product
 
     def fine_tune_search(self, term: str):
+        # query = {
+        #     "sort": [
+        #         {"_score": "desc",},
+        #     ],
+        #     "query": {
+        #         "multi_match": {
+        #             "query": term,
+        #             "fields": [
+        #                 "model^2",
+        #                 "description"
+        #             ]
+        #         }
+        #     }
+        # }
         query = {
-            "query": {
-                "multi_match": {
-                    "query": term,
-                    "fields": [
-                        "model^2",
-                        "description"
-                    ]
-                }
+          "query": {
+            "combined_fields" : {
+              "query" : term,
+              "fields" : [ "model^2", "description" ]
             }
+          }
         }
         results = self.agent.search(index="test-index", body=query)
         total = results["hits"]["total"]["value"]

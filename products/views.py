@@ -89,7 +89,6 @@ def show_models(request, brand):
 
 def dynamic_search(request):
     searched_item = request.GET.get("search")
-    # parts, total = es.search_part_query(searched_item, images=False)
     parts, total = es.fine_tune_search(searched_item)
     return render(request, "dynamic-search.html", context={"products": parts})
 
