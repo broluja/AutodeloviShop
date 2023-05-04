@@ -1,12 +1,14 @@
+{% load static %}
+
 <div class="quickview modal-dialog modal-dialog-centered">
     <div class="modal-content">
-        <button type="button" class="quickview__close">
-            <svg width="12" height="12">
-                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
-	c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
-	C11.2,9.8,11.2,10.4,10.8,10.8z" />
-            </svg>
-        </button>
+<!--        <button type="button" class="quickview__close">-->
+<!--            <svg width="12" height="12">-->
+<!--                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6-->
+<!--	c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4-->
+<!--	C11.2,9.8,11.2,10.4,10.8,10.8z" />-->
+<!--            </svg>-->
+<!--        </button>-->
         <div class="quickview__body">
             <div class="product-gallery product-gallery--layout--quickview quickview__gallery" data-layout="quickview">
                 <div class="product-gallery__featured">
@@ -19,9 +21,9 @@
                     </button>
                     <div class="owl-carousel">
 
-                        <a class="image image--type--product" href="{{$image}}" target="_blank" >
+                        <a class="image image--type--product" href="{{article.image}}" target="_blank" >
                             <div class="image__body">
-                                <img class="image__tag" src="{{$image}}" alt="">
+                                <img class="image__tag" src="{{article.image}}" alt="">
                             </div>
                         </a>
 
@@ -31,7 +33,7 @@
                     <div class="owl-carousel">
                         <div class="product-gallery__thumbnails-item image image--type--product">
                             <div class="image__body">
-                                <img class="image__tag" src="{{$image}}" alt="">
+                                <img class="image__tag" src="{{article.image}}" alt="">
                             </div>
                         </div>
                     </div>
@@ -39,7 +41,7 @@
             </div>
             <div class="quickview__product">
                 <div class="quickview__product-name">
-                   {{$article->description}}
+                   {{article.description}}
                 </div>
                 <div class="quickview__product-rating">
                     <div class="quickview__product-rating-stars">
@@ -59,28 +61,28 @@
                     <table>
                         <tr>
                             <th>OEM</th>
-                            <td>{{$article->genuine_code}}</td>
+                            <td>{{article.genuine_code}}</td>
                         </tr>
                         <tr>
                             <th>Brand</th>
-                            <td><a href="/autodelovi?model={{$article->model}}">{{$article->model}}</a></td>
+                            <td><a href="/autodelovi?model={{article.model}}">{{article.model}}</a></td>
                         </tr>
                         <tr>
                             <th>Kataloški br.</th>
-                            <td>{{$article->gbg_id}}</td>
+                            <td>{{article.gbg_id}}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="quickview__product-description">
                     <ul>
-                        <li>Pun naziv: <span>{{$article->description}}</span></li>
-                        <li>Marka: <span>{{$article->brand}}</span></li>
-                        <li>Model: <span>{{$article->model}}</span></li>
+                        <li>Pun naziv: <span>{{article.description}}</span></li>
+                        <li>Marka: <span>{{article.brand}}</span></li>
+                        <li>Model: <span>{{article.model}}</span></li>
                     </ul>
                 </div>
                 <div class="quickview__product-prices-stock">
                     <div class="quickview__product-prices">
-                        <div class="quickview__product-price">{{$article->price}} rsd</div>
+                        <div class="quickview__product-price">{{article.price}} rsd</div>
                     </div>
                     <div class="status-badge status-badge--style--success quickview__product-stock status-badge--has-text">
                         <div class="status-badge__body">
@@ -97,11 +99,11 @@
                                     <div class="input-radio-label__list">
                                         <label class="input-radio-label__item">
                                             <input type="radio" name="material" class="input-radio-label__input">
-                                            @if(trim($article->side) == "R")
+                                            {% if article.side == "R" %}
                                                 <span class="input-radio-label__title">Desna</span>
-                                            @else
+                                            {% else %}
                                                 <span class="input-radio-label__title">Leva</span>
-                                            @endif
+                                            {% endif %}
                                         </label>
                                     </div>
                                 </div>
@@ -141,6 +143,6 @@
                 </div>
             </div>
         </div>
-        <a href="/product/{{$article->gbg_id}}" class="quickview__see-details">Pogledaj detaljno proizvod</a>
+        <a href="/product/{{article.gbg_id}}" class="quickview__see-details">Pogledaj detaljno proizvod</a>
     </div>
 </div>

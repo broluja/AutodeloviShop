@@ -12,13 +12,13 @@
             <h6>Marka i model: {{ article.brand }} | {{article.model}}</h6>
         </div>
         <div class="col-md-6">
-            <h6>Cena: {{article.price|floatformat:"2g" }} RSD</h6>
+            <h6>Deo: {{article.description}}</h6>
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col">
-            <h6>Deo: {{article.description}}</h6>
+            <h6>Cena: {{article.price|floatformat:"2g" }} RSD</h6>
         </div>
         <div class="col-md-6">
             <h6>Težina: {{article.weight|mul:0.5}} kg</h6>
@@ -43,6 +43,10 @@
     <div class="row">
         <div class="col">
             <h6>Broj porudžbina: {{ item.orders }}</h6>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+            <button type="button" class="btn btn-secondary"><a href="{% url 'item:product_details' article.gbg_id %}">Pregledaj</a></button>
         </div>
     </div>
     <hr>
