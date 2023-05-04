@@ -162,6 +162,7 @@
                                                     id="dodaj_korpa"
                                                     podaci="{{article}}"
                                                     style="border-radius:5px;"
+                                                    hx-get="{% url 'add_to_cart' %}" hx-target="#productForCart" hx-swap="innerHtml"
                                             >
                                                 Dodaj u korpu
                                             </button>
@@ -172,6 +173,7 @@
                                                     id="dodaj_korpa"
                                                     podaci="{{article}}"
                                                     style="border-radius:5px;"
+                                                    hx-get="{% url 'add_to_cart' %}" hx-target="#productForCart" hx-swap="innerHtml"
                                             >
                                                 Dodaj u korpu
                                             </button>

@@ -145,3 +145,11 @@ def clear(request):
     response.delete_cookie("my_brand")
     response.delete_cookie("my_model")
     return response
+
+
+def add_to_cart(request):
+    return render(request, "cart-scratch.html", context={"adding": True})
+
+
+def remove_from_cart(request):
+    return render(request, "cart-scratch.html")

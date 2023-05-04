@@ -418,7 +418,7 @@
                 '                                    </div>\n' +
                 '                                </div>\n' +
                 '                               <div class="col-2">\n' +
-                '                                <button id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove"><svg width="10" height="10">\n' +
+                '                                <button id="'+itemData.gbg_id+'" type="button" class="dropcart__item-remove" hx-get="/cart-removal/" hx-target="#productForCart"><svg width="10" height="10">\n' +
                 '                                      <path d="M8.8,8.8L8.8,8.8c-0.4,0.4-1,0.4-1.4,0L5,6.4L2.6,8.8c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L3.6,5L1.2,2.6\n' +
                 '\tc-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L5,3.6l2.4-2.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L6.4,5l2.4,2.4\n' +
                 '\tC9.2,7.8,9.2,8.4,8.8,8.8z" />\n' +
@@ -431,6 +431,7 @@
 
         $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
         $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
+        htmx.process(htmx.find('.dropcart__list'))
 
     });
     $(function() {
@@ -914,67 +915,67 @@
     /*
     // Quickview
     */
-    const quickview = {
-        cancelPreviousModal: function() {},
-        clickHandler: function() {
-            const modal = $('#quickview-modal');
-            const button = $(this);
-            const doubleClick = button.is('.product-card__action--loading');
-
-            quickview.cancelPreviousModal();
-
-            if (doubleClick) {
-                return;
-            }
-
-            button.addClass('product-card__action--loading');
-
-            let xhr = null;
-            // timeout ONLY_FOR_DEMO!
-            const timeout = setTimeout(function() {
-                xhr = $.ajax({
-                    url: 'https://autodelovishop.rs/quickview/'+button.attr('id'),
-                    success: function(data) {
-                        quickview.cancelPreviousModal = function() {};
-                        button.removeClass('product-card__action--loading');
-
-                        modal.html(data);
-                        modal.find('.quickview__close').on('click', function() {
-                            modal.modal('hide');
-                        });
-                        modal.modal('show');
-                    }
-                });
-            }, 1000);
-
-            quickview.cancelPreviousModal = function() {
-                button.removeClass('product-card__action--loading');
-
-                if (xhr) {
-                    xhr.abort();
-                }
-
-                // timeout ONLY_FOR_DEMO!
-                clearTimeout(timeout);
-            };
-        }
-    };
-
-    $(function () {
-        const modal = $('#quickview-modal');
-
-        modal.on('shown.bs.modal', function() {
-            modal.find('.product-gallery').each(function(i, gallery) {
-                initProductGallery(gallery, $(this).data('layout'));
-            });
-
-            $('.input-number', modal).customNumber();
-        });
-
-        $('.product-card__action--quickview').on('click', function() {
-            quickview.clickHandler.apply(this, arguments);
-        });
-    });
+//    const quickview = {
+//        cancelPreviousModal: function() {},
+//        clickHandler: function() {
+//            const modal = $('#quickview-modal');
+//            const button = $(this);
+//            const doubleClick = button.is('.product-card__action--loading');
+//
+//            quickview.cancelPreviousModal();
+//
+//            if (doubleClick) {
+//                return;
+//            }
+//
+//            button.addClass('product-card__action--loading');
+//
+//            let xhr = null;
+//            // timeout ONLY_FOR_DEMO!
+//            const timeout = setTimeout(function() {
+//                xhr = $.ajax({
+//                    url: 'https://autodelovishop.rs/quickview/'+button.attr('id'),
+//                    success: function(data) {
+//                        quickview.cancelPreviousModal = function() {};
+//                        button.removeClass('product-card__action--loading');
+//
+//                        modal.html(data);
+//                        modal.find('.quickview__close').on('click', function() {
+//                            modal.modal('hide');
+//                        });
+//                        modal.modal('show');
+//                    }
+//                });
+//            }, 1000);
+//
+//            quickview.cancelPreviousModal = function() {
+//                button.removeClass('product-card__action--loading');
+//
+//                if (xhr) {
+//                    xhr.abort();
+//                }
+//
+//                // timeout ONLY_FOR_DEMO!
+//                clearTimeout(timeout);
+//            };
+//        }
+//    };
+//
+//    $(function () {
+//        const modal = $('#quickview-modal');
+//
+//        modal.on('shown.bs.modal', function() {
+//            modal.find('.product-gallery').each(function(i, gallery) {
+//                initProductGallery(gallery, $(this).data('layout'));
+//            });
+//
+//            $('.input-number', modal).customNumber();
+//        });
+//
+//        $('.product-card__action--quickview').on('click', function() {
+//            quickview.clickHandler.apply(this, arguments);
+//        });
+//    });
 
 
     /*

@@ -2,6 +2,7 @@
     const modal = new bootstrap.Modal(document.getElementById('exampleModal'))
     const secondModal = new bootstrap.Modal(document.getElementById('afterModal'))
     const thirdModal = new bootstrap.Modal(document.getElementById('email-modal'))
+    const fourthModal = new bootstrap.Modal(document.getElementById('cart-modal'))
 
     htmx.on('htmx:afterSwap', (e) => {
         if (e.detail.target.id === "modal-dialog")
@@ -22,6 +23,12 @@
         if (e.detail.target.id === "carIcon")
             location.reload();
     })
+
+    htmx.on('htmx:afterSwap', (e) => {
+        if (e.detail.target.id === "productForCart")
+            fourthModal.show();
+    })
+
 })()
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
