@@ -23,6 +23,7 @@ htmx_urlpatterns = [
     path("dynamic-search/", views.dynamic_search, name="dynamic_search"),
     path("cart-addition/<str:product_id>/", views.add_to_cart, name="add_to_cart"),
     path("cart-removal/", views.remove_from_cart, name="remove_from_cart"),
+    path("quick-view/<str:product_id>/", views.quick_view, name="quick_view")
 ]
 
 urlpatterns += htmx_urlpatterns

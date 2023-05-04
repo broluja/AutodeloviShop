@@ -3,6 +3,7 @@
     const secondModal = new bootstrap.Modal(document.getElementById('afterModal'))
     const thirdModal = new bootstrap.Modal(document.getElementById('email-modal'))
     const fourthModal = new bootstrap.Modal(document.getElementById('cart-modal'))
+    const fifthModal = new bootstrap.Modal(document.getElementById('quick-view-modal'))
 
     htmx.on('htmx:afterSwap', (e) => {
         if (e.detail.target.id === "modal-dialog")
@@ -27,6 +28,11 @@
     htmx.on('htmx:afterSwap', (e) => {
         if (e.detail.target.id === "productForCart")
             fourthModal.show();
+    })
+
+    htmx.on('htmx:afterSwap', (e) => {
+        if (e.detail.target.id === "quickViewModal")
+            fifthModal.show();
     })
 
 })()

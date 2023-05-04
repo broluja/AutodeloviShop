@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
-from items.models import Brand
+from items.models import Brand, Item
 
 es = ElasticSearchAgent()
 
@@ -149,9 +149,20 @@ def clear(request):
 
 def add_to_cart(request, product_id):
     article = es.get_product(product_id)
-    model = article.get("model")
-    return render(request, "cart-scratch.html", context={"adding": True, "article": article, "model": model})
+    return render(request, "cart-scratch.html", context={"adding": True, "article": article})
 
 
 def remove_from_cart(request):
     return render(request, "cart-scratch.html")
+
+
+def quick_view(request, product_id):
+    article = es.get_product(product_id)
+    item = Item.objects.filter(gbg_id=product_id).first()
+    if not item:
+        item = Item.objects.create(gbg_id=product_id)
+    else:
+        item.views += 1
+        item.save()
+    return render(request, "product-scratch.html", context={"item": item, "article": article})
+
