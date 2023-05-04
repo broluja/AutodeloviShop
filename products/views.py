@@ -147,8 +147,10 @@ def clear(request):
     return response
 
 
-def add_to_cart(request):
-    return render(request, "cart-scratch.html", context={"adding": True})
+def add_to_cart(request, product_id):
+    article = es.get_product(product_id)
+    model = article.get("model")
+    return render(request, "cart-scratch.html", context={"adding": True, "article": article, "model": model})
 
 
 def remove_from_cart(request):

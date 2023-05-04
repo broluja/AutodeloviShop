@@ -129,7 +129,7 @@
                                                 <div class="product-card__prices">
                                                     <div class="product-card__price product-card__price--current">{{ article.price|floatformat:"2g" }} RSD</div>
                                                 </div>
-                                                <button class="product-card__addtocart-icon" type="button" aria-label="Dodaj u korpu" id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' %}" hx-target="#productForCart" hx-swap="innerHtml">
+                                                <button class="product-card__addtocart-icon" type="button" aria-label="Dodaj u korpu" id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' article.gbg_id %}" hx-target="#productForCart" hx-swap="innerHtml">
                                                     <svg width="20" height="20">
                                                         <circle cx="7" cy="17" r="2" />
                                                         <circle cx="15" cy="17" r="2" />
@@ -137,7 +137,7 @@
                                                     </svg>
                                                 </button>
                                                 {% if article.stock == '1' %}
-                                                <button class="product-card__addtocart-full" style="border-radius:5px;" type="button" id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' %}" hx-target="#productForCart" hx-swap="innerHtml">
+                                                <button class="product-card__addtocart-full" style="border-radius:5px;" type="button" id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' article.gbg_id %}" hx-target="#productForCart" hx-swap="innerHtml">
                                                     Dodaj u korpu
                                                 </button>
                                                 {% endif %}

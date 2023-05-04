@@ -1,10 +1,17 @@
 
-{% if adding %}
-<div class="modal-body">
-    <h2 style="color: green;">Dodato u korpu</h2>
+<div class="modal-header">
+    <h5 class="modal-title">{% if adding %}{{ article.description }}{% else %}Info{% endif %}</h5>
 </div>
-{% else %}
-<div class="modal-body">
-    <h2 style="color: red;">Izbačeno iz korpe</h2>
+<div class="modal-body container text-center" >
+    {% if adding %}
+    <div class="modal-body">
+        <h2 style="color: green;">Dodato u korpu</h2>
+    </div>
+    {% else %}
+    <div class="modal-body">
+        <h2 style="color: red;">Uklonjeno iz korpe</h2>
+    </div>
+    {% endif %}
 </div>
-{% endif %}
+
+

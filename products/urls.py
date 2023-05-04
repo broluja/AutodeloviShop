@@ -21,7 +21,7 @@ htmx_urlpatterns = [
     path("add-car/", views.add_car, name="add_car"),
     path("clear/", views.clear, name="clear"),
     path("dynamic-search/", views.dynamic_search, name="dynamic_search"),
-    path("cart-addition/", views.add_to_cart, name="add_to_cart"),
+    path("cart-addition/<str:product_id>/", views.add_to_cart, name="add_to_cart"),
     path("cart-removal/", views.remove_from_cart, name="remove_from_cart"),
 ]
 

@@ -162,19 +162,12 @@
                                                     id="dodaj_korpa"
                                                     podaci="{{article}}"
                                                     style="border-radius:5px;"
-                                                    hx-get="{% url 'add_to_cart' %}" hx-target="#productForCart" hx-swap="innerHtml"
+                                                    hx-get="{% url 'add_to_cart' article.gbg_id %}" hx-target="#productForCart" hx-swap="innerHtml"
                                             >
                                                 Dodaj u korpu
                                             </button>
                                             {% else %}
-                                            <button class="btn btn-primary btn-lg btn-block"
-                                                    disabled
-                                                    type="button"
-                                                    id="dodaj_korpa"
-                                                    podaci="{{article}}"
-                                                    style="border-radius:5px;"
-                                                    hx-get="{% url 'add_to_cart' %}" hx-target="#productForCart" hx-swap="innerHtml"
-                                            >
+                                            <button class="btn btn-primary btn-lg btn-block" disabled type="button" style="border-radius:5px;">
                                                 Dodaj u korpu
                                             </button>
                                             {% endif %}
