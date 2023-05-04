@@ -31,7 +31,6 @@ class Command(BaseCommand):
         brands = [brand['key'] for brand in brands_raw]
         for brand in brands:
             models = agent.get_models(brand)
-            if brand.startswith("A"):
             for model in models:
                 part = agent.show_model(model, _from=0, per_page=1)
                 Brand.objects.create(brand_id=part[0][0]["gbg_id"][:4], name=part[0][0]["model"])
