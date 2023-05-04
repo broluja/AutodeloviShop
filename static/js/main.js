@@ -363,7 +363,7 @@
                     '                                    </ul>\n' +
                     '                                    <div class="dropcart__item-meta">\n' +
                     '                                        <div class="dropcart__item-quantity" id="cart_item_quantity'+itemData.gbg_id+'">1</div>\n' +
-                    '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' rsd</div>\n' +
+                    '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' RSD</div>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
                     '                               <div class="col-2">\n' +
@@ -414,7 +414,7 @@
                 '                                    </ul>\n' +
                 '                                    <div class="dropcart__item-meta">\n' +
                 '                                        <div class="dropcart__item-quantity" id="cart_item_quantity'+itemData.gbg_id+'">'+itemData.cart_count+'</div>\n' +
-                '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price+' rsd</div>\n' +
+                '                                        <div class="dropcart__item-price" id="cena_'+itemData.gbg_id+'">'+itemData.price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+'</div>\n' +
                 '                                    </div>\n' +
                 '                                </div>\n' +
                 '                               <div class="col-2">\n' +
@@ -429,8 +429,8 @@
             $('.dropcart__list').append(cartItem);
         }
 
-        $('#cena').text(price)
-        $('#ukupno').text(price)
+        $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
+        $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
 
     });
     $(function() {
@@ -459,13 +459,13 @@
             const itemData =  JSON.parse(values[i]);
             price += parseFloat(itemData.price * itemData.cart_count);
             const side = itemData.side.trim() === "R" ? 'Desna' : 'Leva';
-            let cartItem = '<tr><td>'+itemData.description+itemData.model+side+'</td><td>'+itemData.price+' rsd</td></tr>';
+            let cartItem = '<tr><td>'+itemData.description+itemData.model+side+'</td><td>'+itemData.price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+' RSD</td></tr>';
             $('.checkout__totals-products').append(cartItem);
 
         }
-        $('.checkout__totals-footer').append('<tr><td>Ukupno</td><td>'+price+' rsd</td></tr>');
-        $('#cena').text(price);
-        $('#ukupno').text(price)
+        $('.checkout__totals-footer').append('<tr><td style="width: 150px;">Ukupno</td><td>'+price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+' RSD</td></tr>');
+        $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD");
+        $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
     });
 
     /* Završi porudžbinu */
@@ -498,7 +498,7 @@
             let products = [];
             for (let i = 0; i < values.length; i++) {
                 const itemData = JSON.parse(values[i]);
-                price += parseFloat(itemData.price * itemData.cart_count);
+                price += parseFloat(itemData.price * itemData.cart_count).toFixed(2);
                 products.push(itemData)
             }
             const data = {
