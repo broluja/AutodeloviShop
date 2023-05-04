@@ -27,14 +27,12 @@ class Command(BaseCommand):
             }
         }
         r = es.search(index="test-index", body=body)
-        brands_raw = r['aggregations']['models']['buckets'][6:]
+        brands_raw = r['aggregations']['models']['buckets'][4:]
         brands = [brand['key'] for brand in brands_raw]
-        print(brands)
         for brand in brands:
             models = agent.get_models(brand)
             if brand.startswith("A"):
-                print(models)
-        #     for model in models:
-        #         part = agent.show_model(model, _from=0, per_page=1)
-        #         Brand.objects.create(brand_id=part[0][0]["gbg_id"][:4], name=part[0][0]["model"])
-        # print("Brands are populated")
+            for model in models:
+                part = agent.show_model(model, _from=0, per_page=1)
+                Brand.objects.create(brand_id=part[0][0]["gbg_id"][:4], name=part[0][0]["model"])
+        print("Brands are populated")
