@@ -377,7 +377,7 @@
                     '                            </li><li class="dropcart__divider" role="presentation"></li>';
                 $('.dropcart__list').append(cartItem);
             }
-            location.reload();
+//            location.reload();
         });
     });
 
@@ -434,14 +434,24 @@
         htmx.process(htmx.find('.dropcart__list'))
 
     });
+
+
+    /* Remove Item from Cart */
     $(function() {
         const localStorage = window.localStorage;
         $(document).on("click",".dropcart__item-remove", function () {
             localStorage.removeItem(this.getAttribute("id"));
-            location.reload();
         })
     });
 
+
+    /* Refresh after adding or removing item from Cart */
+    $(function() {
+        $(document).on("click","#closeModalButton", function () {
+            location.reload();
+            $('#cart-modal').delay(500).fadeOut(400);
+        })
+    });
 
 
     /* Porudžbina */
