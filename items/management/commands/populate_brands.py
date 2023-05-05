@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        es = Elasticsearch('http://localhost:9200')
+        es = Elasticsearch("http://localhost:9200")
         agent = ElasticSearchAgent()
 
         body = {
@@ -27,8 +27,8 @@ class Command(BaseCommand):
             }
         }
         r = es.search(index="test-index", body=body)
-        brands_raw = r['aggregations']['models']['buckets'][4:]
-        brands = [brand['key'] for brand in brands_raw]
+        brands_raw = r["aggregations"]["models"]["buckets"][4:]
+        brands = [brand["key"] for brand in brands_raw]
         for brand in brands:
             models = agent.get_models(brand)
             for model in models:

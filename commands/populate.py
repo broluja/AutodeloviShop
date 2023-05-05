@@ -4,7 +4,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 
 
-es = Elasticsearch('http://localhost:9200')
+es = Elasticsearch("http://localhost:9200")
 
 output = "/home/autodelovi/ftp"
 # es.indices.delete(index='test-index')
@@ -56,7 +56,7 @@ def update_price(item_price):
 
 
 lista = []
-file = f'{output}/PRICELIST_02850.txt'
+file = f"{output}/PRICELIST_02850.txt"
 with csv23.open_csv(file, encoding='iso-8859-1') as reader:
     for row in reader:
         data = row[0].split(';')
@@ -71,7 +71,7 @@ with csv23.open_csv(file, encoding='iso-8859-1') as reader:
 
         try:
             resp = es.get(index="stock", id=data[0])
-            stock = resp['_source']['stock']
+            stock = resp["_source"]["stock"]
         except Exception as exc:
             print(exc)
             stock = 0
@@ -101,15 +101,15 @@ with csv23.open_csv(file, encoding='iso-8859-1') as reader:
             "_index": "test-index",
             "_id": gbg_id,
             "_source": {
-                'gbg_id': gbg_id,
-                'genuine_code': genuine_code,
-                'description': description,
-                'side': side,
-                'model': model,
-                'price': price,
-                'weight': weight,
-                'brand': brand,
-                'stock': stock
+                "gbg_id": gbg_id,
+                "genuine_code": genuine_code,
+                "description": description,
+                "side": side,
+                "model": model,
+                "price": price,
+                "weight": weight,
+                "brand": brand,
+                "stock": stock
             }
         })
 

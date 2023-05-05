@@ -1,13 +1,13 @@
 import requests
 from elasticsearch import Elasticsearch
 
-IMAGE_PATH = 'https://slike.autodelovishop.rs/PARTS'
+IMAGE_PATH = "https://slike.autodelovishop.rs/PARTS"
 
 
 class ElasticSearchAgent:
 
     def __init__(self):
-        self.port = 'http://localhost:9200'
+        self.port = "http://localhost:9200"
         self.agent = Elasticsearch(self.port)
 
     def get_image(self, gbg_id):
@@ -18,7 +18,7 @@ class ElasticSearchAgent:
             }
         }
         r = self.agent.search(index="images", body=query)
-        image = r['hits']['hits']
+        image = r["hits"]["hits"]
         return image if len(image) else None
 
     @staticmethod
@@ -75,8 +75,8 @@ class ElasticSearchAgent:
             }
         }
         r = self.agent.search(index="test-index", body=query)
-        results = r['aggregations']['models']['buckets']
-        return [model['key'] for model in results]
+        results = r["aggregations"]["models"]["buckets"]
+        return [model["key"] for model in results]
 
     def show_model(self, model, _from, per_page=10, strict=True):
         if not strict:
@@ -92,16 +92,16 @@ class ElasticSearchAgent:
                 }
             }
         }
-        s = self.agent.search(index='test-index', body=parts)
-        items = s['hits']['hits']
-        total = s['hits']['total']['value']
+        s = self.agent.search(index="test-index", body=parts)
+        items = s["hits"]["hits"]
+        total = s["hits"]["total"]["value"]
 
         for x in items:
-            jsn = x['_source']
-            gbg_id = jsn.get('gbg_id')
+            jsn = x["_source"]
+            gbg_id = jsn.get("gbg_id")
             image = self.img(gbg_id)
-            jsn['image'] = image
-        return [item['_source'] for item in items], total
+            jsn["image"] = image
+        return [item["_source"] for item in items], total
 
     def search_part_query(self, part, from_=0, model=None, images=True):
         query = {
@@ -131,15 +131,15 @@ class ElasticSearchAgent:
                 }
             }
         s = self.agent.search(index='test-index', body=query)
-        parts = s['hits']['hits']
-        total = s['hits']['total']['value']
+        parts = s["hits"]["hits"]
+        total = s["hits"]["total"]["value"]
         if images:
             for item in parts:
-                item = item['_source']
-                gbg_id = item.get('gbg_id')
+                item = item["_source"]
+                gbg_id = item.get("gbg_id")
                 image = self.img(gbg_id)
-                item['image'] = image
-        return [item['_source'] for item in parts], total
+                item["image"] = image
+        return [item["_source"] for item in parts], total
 
     def get_product(self, product_id):
         product_query = {
@@ -150,28 +150,14 @@ class ElasticSearchAgent:
             }
         }
         p = self.agent.search(index="test-index", body=product_query)
-        product_dictionary = p['hits']['hits'][0]
-        product = product_dictionary['_source']
-        gbg_id = product['gbg_id']
+        product_dictionary = p["hits"]["hits"][0]
+        product = product_dictionary["_source"]
+        gbg_id = product["gbg_id"]
         image = self.img(gbg_id)
         product['image'] = image
         return product
 
     def fine_tune_search(self, term: str):
-        # query = {
-        #     "sort": [
-        #         {"_score": "desc",},
-        #     ],
-        #     "query": {
-        #         "multi_match": {
-        #             "query": term,
-        #             "fields": [
-        #                 "model^2",
-        #                 "description"
-        #             ]
-        #         }
-        #     }
-        # }
         query = {
           "query": {
             "combined_fields" : {
@@ -182,5 +168,5 @@ class ElasticSearchAgent:
         }
         results = self.agent.search(index="test-index", body=query)
         total = results["hits"]["total"]["value"]
-        parts = results['hits']['hits']
-        return [item['_source'] for item in parts], total
+        parts = results["hits"]["hits"]
+        return [item["_source"] for item in parts], total

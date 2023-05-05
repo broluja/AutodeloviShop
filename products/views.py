@@ -13,7 +13,7 @@ es = ElasticSearchAgent()
 
 
 def index(request):
-    return render(request, 'home.html')
+    return render(request, "home.html")
 
 
 def check_for_part(request):
@@ -32,16 +32,16 @@ def check_for_part(request):
 
 
 def get_models(request):
-    brand = request.GET.get('brand', None)
+    brand = request.GET.get("brand", None)
     models = es.get_models(brand)
     models.sort()
-    jason = [{'model': model} for model in models]
+    jason = [{"model": model} for model in models]
     return JsonResponse(jason, safe=False)
 
 
 def show_model(request):
-    model = request.GET.get('model')
-    page = int(request.GET.get('page', 1))
+    model = request.GET.get("model")
+    page = int(request.GET.get("page", 1))
     page_num = page - 1
     per_page = 10
     _from = page_num * per_page
@@ -57,18 +57,18 @@ def show_model(request):
         "on_page": on_page
     }
     if page > total_num_pages:
-        return redirect(reverse('show_model') + f'?model={model}')
-    return render(request, 'model-parts-list.html', context)
+        return redirect(reverse("show_model") + f"?model={model}")
+    return render(request, "model-parts-list.html", context)
 
 
 def check_out(request):
-    return render(request, 'checkout.html')
+    return render(request, "checkout.html")
 
 
 def order(request):
-    if request.method != 'POST':
-        return redirect(reverse('index'))
-    payload = request.body.decode('utf-8')
+    if request.method != "POST":
+        return redirect(reverse("index"))
+    payload = request.body.decode("utf-8")
     body = json.loads(payload)
     products = body["products"]
     save_orders(products)
@@ -77,7 +77,7 @@ def order(request):
 
 
 def about(request):
-    return render(request, 'onama.html')
+    return render(request, "onama.html")
 
 
 def show_models(request, brand):
@@ -101,7 +101,7 @@ def search_parts(request):
     else:
         model = None
     part = request.GET.get("search")
-    page = int(request.GET.get('page', 1))
+    page = int(request.GET.get("page", 1))
     page_num = page - 1
     per_page = 10
     _from = page_num * per_page

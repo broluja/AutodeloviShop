@@ -20,7 +20,7 @@ def send_email(data):
          "image": "Slika", "cart_count": "Kolicina"})
     products = tabulate(
         data["products"],
-        tablefmt='html',
+        tablefmt="html",
         headers="firstrow")
     html = f"{products} <br> TOTAL: {str(data['total'])} <br> Kupac: {json.dumps(data['user'])}"
 

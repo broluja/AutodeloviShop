@@ -1220,8 +1220,10 @@ h6 {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  -webkit-transition: background .12s, color .12s;
-  transition: background .12s, color .12s;
+  -webkit-transition: background .12s,
+ color .12s;
+  transition: background .12s,
+ color .12s;
 }
 
 .button-toggle__button:hover {
@@ -1718,10 +1720,19 @@ h6 {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  -webkit-transition: border-color .15s ease-in-out, background .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
-  transition: border-color .15s ease-in-out, background .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out, background .15s ease-in-out;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out, background .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+  -webkit-transition: border-color .15s ease-in-out,
+ background .15s ease-in-out,
+ -webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,
+ background .15s ease-in-out,
+ -webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,
+ box-shadow .15s ease-in-out,
+ background .15s ease-in-out;
+  transition: border-color .15s ease-in-out,
+ box-shadow .15s ease-in-out,
+ background .15s ease-in-out,
+ -webkit-box-shadow .15s ease-in-out;
   color: #262626;
   background-color: #ebebeb;
   border-color: #ebebeb;
@@ -3262,8 +3273,10 @@ select.form-control::-ms-expand {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 10'%3E%3Cpath fill='rgba(0, 0, 0, 0.55)' d='M4.503,4 L0.497,4 C0.094,4 -0.142,3.492 0.089,3.122 L2.095,0.233 C2.293,-0.084 2.712,-0.084 2.911,0.233 L4.911,3.122 C5.142,3.492 4.906,4 4.503,4 ZM0.497,6 L4.503,6 C4.906,6 5.142,6.504 4.911,6.871 L2.905,9.737 C2.707,10.052 2.288,10.052 2.089,9.737 L0.089,6.871 C-0.142,6.504 0.094,6 0.497,6 Z'/%3E%3C/svg%3E%0A");
   background-repeat: no-repeat;
   background-size: 5px 10px;
-  -webkit-transition: border-color .15s ease-in-out, background .15s ease-in-out;
-  transition: border-color .15s ease-in-out, background .15s ease-in-out;
+  -webkit-transition: border-color .15s ease-in-out,
+ background .15s ease-in-out;
+  transition: border-color .15s ease-in-out,
+ background .15s ease-in-out;
 }
 
 .form-control + .select2-container .select2-selection--single:focus {
@@ -3681,8 +3694,10 @@ select.form-control::-ms-expand {
     padding: 0 0 2px;
     -ms-flex-negative: 0;
         flex-shrink: 0;
-    -webkit-transition: background-color .15s, color .15s;
-    transition: background-color .15s, color .15s;
+    -webkit-transition: background-color .15s,
+ color .15s;
+    transition: background-color .15s,
+ color .15s;
     background-color: #fff;
     color: #ccc;
   }
@@ -3814,8 +3829,10 @@ select.form-control::-ms-expand {
   padding: 0 0 2px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
-  -webkit-transition: background-color .15s, color .15s;
-  transition: background-color .15s, color .15s;
+  -webkit-transition: background-color .15s,
+ color .15s;
+  transition: background-color .15s,
+ color .15s;
   background-color: #fff;
   color: #ccc;
 }
@@ -4639,8 +4656,10 @@ select.form-control::-ms-expand {
   margin: 0;
   border-radius: 2px;
   fill: currentColor;
-  -webkit-transition: background-color .15s, color .15s;
-  transition: background-color .15s, color .15s;
+  -webkit-transition: background-color .15s,
+ color .15s;
+  transition: background-color .15s,
+ color .15s;
   background-color: #fff;
   color: #ccc;
 }
@@ -5560,8 +5579,10 @@ select.form-control::-ms-expand {
   border-style: solid;
   border-color: transparent;
   background-clip: padding-box;
-  -webkit-transition: border .2s, background .2s;
-  transition: border .2s, background .2s;
+  -webkit-transition: border .2s,
+ background .2s;
+  transition: border .2s,
+ background .2s;
   color: #fff;
   background-color: #4c4c4c;
   border-color: #4c4c4c;
@@ -5651,8 +5672,10 @@ select.form-control::-ms-expand {
   padding: 0 20px;
   font-family: inherit;
   font-size: 15px;
-  -webkit-transition: background .2s, color .2s;
-  transition: background .2s, color .2s;
+  -webkit-transition: background .2s,
+ color .2s;
+  transition: background .2s,
+ color .2s;
   background-color: #e52727;
   color: #fff;
   background-color: #e52727;
@@ -6408,10 +6431,15 @@ select.form-control::-ms-expand {
   height: calc(100% + 20px);
   left: -10px;
   top: -10px;
-  -webkit-transition: opacity .3s ease-out, -webkit-transform .3s ease-out;
-  transition: opacity .3s ease-out, -webkit-transform .3s ease-out;
-  transition: transform .3s ease-out, opacity .3s ease-out;
-  transition: transform .3s ease-out, opacity .3s ease-out, -webkit-transform .3s ease-out;
+  -webkit-transition: opacity .3s ease-out,
+ -webkit-transform .3s ease-out;
+  transition: opacity .3s ease-out,
+ -webkit-transform .3s ease-out;
+  transition: transform .3s ease-out,
+ opacity .3s ease-out;
+  transition: transform .3s ease-out,
+ opacity .3s ease-out,
+ -webkit-transform .3s ease-out;
 }
 
 .block-banners__item-image img {
@@ -7198,8 +7226,10 @@ select.form-control::-ms-expand {
   background-repeat: no-repeat;
   background-size: 5px 10px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 10'%3E%3Cpath fill='%234d4d4d' d='M4.503,4 L0.497,4 C0.094,4 -0.142,3.492 0.089,3.122 L2.095,0.233 C2.293,-0.084 2.712,-0.084 2.911,0.233 L4.911,3.122 C5.142,3.492 4.906,4 4.503,4 ZM0.497,6 L4.503,6 C4.906,6 5.142,6.504 4.911,6.871 L2.905,9.737 C2.707,10.052 2.288,10.052 2.089,9.737 L0.089,6.871 C-0.142,6.504 0.094,6 0.497,6 Z'/%3E%3C/svg%3E%0A");
-  -webkit-transition: opacity .25s ease-in-out, color .25s ease-in-out;
-  transition: opacity .25s ease-in-out, color .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out,
+ color .25s ease-in-out;
+  transition: opacity .25s ease-in-out,
+ color .25s ease-in-out;
 }
 
 [dir=ltr] .block-finder__form-control--select select, [dir=ltr]
@@ -7271,8 +7301,10 @@ select.form-control::-ms-expand {
   border-radius: 2px;
   border: none;
   padding: 0 40px;
-  -webkit-transition: background .2s, color .2s;
-  transition: background .2s, color .2s;
+  -webkit-transition: background .2s,
+ color .2s;
+  transition: background .2s,
+ color .2s;
   background-color: #e52727;
   color: #fff;
 }
@@ -8149,8 +8181,10 @@ select.form-control::-ms-expand {
   z-index: 2;
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: opacity .3s, visibility 0s .3s;
-  transition: opacity .3s, visibility 0s .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s .3s;
+  transition: opacity .3s,
+ visibility 0s .3s;
 }
 
 .block-products-carousel__carousel-loader:before {
@@ -9405,10 +9439,15 @@ select.form-control::-ms-expand {
   padding: 2px 8px 0;
   margin-bottom: 12px;
   opacity: 0;
-  -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;
-  transition: opacity .5s .5s, -webkit-transform .5s .5s;
-  transition: transform .5s .5s, opacity .5s .5s;
-  transition: transform .5s .5s, opacity .5s .5s, -webkit-transform .5s .5s;
+  -webkit-transition: opacity .5s .5s,
+ -webkit-transform .5s .5s;
+  transition: opacity .5s .5s,
+ -webkit-transform .5s .5s;
+  transition: transform .5s .5s,
+ opacity .5s .5s;
+  transition: transform .5s .5s,
+ opacity .5s .5s,
+ -webkit-transform .5s .5s;
 }
 
 [dir=ltr] .block-slideshow__item-offer {
@@ -9453,10 +9492,15 @@ select.form-control::-ms-expand {
   -webkit-transform: translateY(12px);
           transform: translateY(12px);
   opacity: 0;
-  -webkit-transition: opacity .5s .5s, -webkit-transform .5s .5s;
-  transition: opacity .5s .5s, -webkit-transform .5s .5s;
-  transition: transform .5s .5s, opacity .5s .5s;
-  transition: transform .5s .5s, opacity .5s .5s, -webkit-transform .5s .5s;
+  -webkit-transition: opacity .5s .5s,
+ -webkit-transform .5s .5s;
+  transition: opacity .5s .5s,
+ -webkit-transform .5s .5s;
+  transition: transform .5s .5s,
+ opacity .5s .5s;
+  transition: transform .5s .5s,
+ opacity .5s .5s,
+ -webkit-transform .5s .5s;
 }
 
 .owl-item.active .block-slideshow__item-details {
@@ -9473,8 +9517,12 @@ select.form-control::-ms-expand {
   line-height: 28px;
   padding: 10px 40px;
   border-radius: 2px;
-  -webkit-transition: background-color .2s, color .2s, opacity .5s .5s;
-  transition: background-color .2s, color .2s, opacity .5s .5s;
+  -webkit-transition: background-color .2s,
+ color .2s,
+ opacity .5s .5s;
+  transition: background-color .2s,
+ color .2s,
+ opacity .5s .5s;
   background: #e52727;
   color: #fff;
   opacity: 0;
@@ -9917,8 +9965,10 @@ select.form-control::-ms-expand {
   font-size: 16px;
   font-weight: 500;
   border-bottom: 2px solid #ebebeb;
-  -webkit-transition: background .12s, border-color .12s;
-  transition: background .12s, border-color .12s;
+  -webkit-transition: background .12s,
+ border-color .12s;
+  transition: background .12s,
+ border-color .12s;
 }
 
 [dir=ltr] .block-zone__tabs-button {
@@ -10235,8 +10285,10 @@ select.form-control::-ms-expand {
   z-index: 2;
   visibility: hidden;
   opacity: 0;
-  -webkit-transition: opacity .3s, visibility 0s .3s;
-  transition: opacity .3s, visibility 0s .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s .3s;
+  transition: opacity .3s,
+ visibility 0s .3s;
 }
 
 .block-zone__carousel-loader:before {
@@ -10453,8 +10505,10 @@ select.form-control::-ms-expand {
   overflow: hidden;
   height: 0;
   opacity: 0;
-  -webkit-transition: height .2s ease-in-out, opacity .2s ease-in-out;
-  transition: height .2s ease-in-out, opacity .2s ease-in-out;
+  -webkit-transition: height .2s ease-in-out,
+ opacity .2s ease-in-out;
+  transition: height .2s ease-in-out,
+ opacity .2s ease-in-out;
 }
 
 .widget-categories-list__child-item {
@@ -10575,8 +10629,10 @@ select.form-control::-ms-expand {
   width: 26px;
   height: 26px;
   border-radius: 2px;
-  -webkit-transition: color .15s, background .15s;
-  transition: color .15s, background .15s;
+  -webkit-transition: color .15s,
+ background .15s;
+  transition: color .15s,
+ background .15s;
   background-color: #fff;
   color: #ccc;
 }
@@ -10639,8 +10695,10 @@ select.form-control::-ms-expand {
   overflow: hidden;
   height: 0;
   opacity: 0;
-  -webkit-transition: height .2s ease-in-out, opacity .2s ease-in-out;
-  transition: height .2s ease-in-out, opacity .2s ease-in-out;
+  -webkit-transition: height .2s ease-in-out,
+ opacity .2s ease-in-out;
+  transition: height .2s ease-in-out,
+ opacity .2s ease-in-out;
 }
 
 .widget-categories__container:before, .widget-categories__container:after {
@@ -10940,8 +10998,10 @@ select.form-control::-ms-expand {
   font-size: 15px;
   font-family: inherit;
   background-clip: padding-box;
-  -webkit-transition: border .2s, background .2s;
-  transition: border .2s, background .2s;
+  -webkit-transition: border .2s,
+ background .2s;
+  transition: border .2s,
+ background .2s;
   color: #fff;
   background-color: #4c4c4c;
   border-color: #4c4c4c;
@@ -11030,8 +11090,10 @@ select.form-control::-ms-expand {
   padding: .5rem 1.3125rem;
   margin-top: 1.25rem;
   width: 100%;
-  -webkit-transition: background .2s, color .2s;
-  transition: background .2s, color .2s;
+  -webkit-transition: background .2s,
+ color .2s;
+  transition: background .2s,
+ color .2s;
   background-color: #e52727;
   color: #fff;
 }
@@ -11602,8 +11664,10 @@ select.form-control::-ms-expand {
   line-height: 1;
   color: inherit;
   background-color: #f0f0f0;
-  -webkit-transition: background .12s, color .12s;
-  transition: background .12s, color .12s;
+  -webkit-transition: background .12s,
+ color .12s;
+  transition: background .12s,
+ color .12s;
   border-radius: 11.5px;
   position: relative;
   border: none;
@@ -12798,10 +12862,15 @@ select.form-control::-ms-expand {
 .category-card--layout--overlay .category-card__overlay-image--blur {
   z-index: -2;
   opacity: 0;
-  -webkit-transition: opacity .3s ease-out, -webkit-transform .3s ease-out;
-  transition: opacity .3s ease-out, -webkit-transform .3s ease-out;
-  transition: transform .3s ease-out, opacity .3s ease-out;
-  transition: transform .3s ease-out, opacity .3s ease-out, -webkit-transform .3s ease-out;
+  -webkit-transition: opacity .3s ease-out,
+ -webkit-transform .3s ease-out;
+  transition: opacity .3s ease-out,
+ -webkit-transform .3s ease-out;
+  transition: transform .3s ease-out,
+ opacity .3s ease-out;
+  transition: transform .3s ease-out,
+ opacity .3s ease-out,
+ -webkit-transform .3s ease-out;
 }
 
 .category-card--layout--overlay .category-card__overlay-image--blur img {
@@ -13679,8 +13748,10 @@ select.form-control::-ms-expand {
   border-radius: 2px;
   padding-bottom: 2px;
   border: 1px solid #ebebeb;
-  -webkit-transition: background .12s, border-color .12s;
-  transition: background .12s, border-color .12s;
+  -webkit-transition: background .12s,
+ border-color .12s;
+  transition: background .12s,
+ border-color .12s;
 }
 
 .payment-methods__item + .payment-methods__item {
@@ -13723,8 +13794,10 @@ select.form-control::-ms-expand {
   overflow: hidden;
   opacity: 0;
   height: 0;
-  -webkit-transition: height .3s, opacity .3s;
-  transition: height .3s, opacity .3s;
+  -webkit-transition: height .3s,
+ opacity .3s;
+  transition: height .3s,
+ opacity .3s;
 }
 
 .payment-methods__item--active, .payment-methods__item--active:hover {
@@ -13956,8 +14029,10 @@ select.form-control::-ms-expand {
   padding-top: 7px;
   padding-bottom: 5px;
   border-radius: 2px;
-  -webkit-transition: background .15s, fill .15s;
-  transition: background .15s, fill .15s;
+  -webkit-transition: background .15s,
+ fill .15s;
+  transition: background .15s,
+ fill .15s;
 }
 
 [dir=ltr] .product__actions-item--wishlist, [dir=ltr]
@@ -15178,8 +15253,10 @@ select.form-control::-ms-expand {
   padding: 8px;
   margin: 0;
   border: none;
-  -webkit-transition: color .08s, background .08s;
-  transition: color .08s, background .08s;
+  -webkit-transition: color .08s,
+ background .08s;
+  transition: color .08s,
+ background .08s;
   background-color: #fff;
   color: #ccc;
 }
@@ -15337,8 +15414,10 @@ select.form-control::-ms-expand {
   border: none;
   border-radius: 2px;
   font-weight: 500;
-  -webkit-transition: background-color .15s, color .15s;
-  transition: background-color .15s, color .15s;
+  -webkit-transition: background-color .15s,
+ color .15s;
+  transition: background-color .15s,
+ color .15s;
 }
 
 .product-card .product-card__addtocart-full:focus {
@@ -15362,8 +15441,10 @@ select.form-control::-ms-expand {
   color: #262626;
   fill: #d9d9d9;
   border-radius: 2px;
-  -webkit-transition: background .15s, fill .15s;
-  transition: background .15s, fill .15s;
+  -webkit-transition: background .15s,
+ fill .15s;
+  transition: background .15s,
+ fill .15s;
 }
 
 .product-card .product-card__wishlist:focus,
@@ -15413,10 +15494,15 @@ select.form-control::-ms-expand {
   border-radius: 50%;
   -webkit-transform: scale(0);
           transform: scale(0);
-  -webkit-transition: background .2s, -webkit-transform .2s;
-  transition: background .2s, -webkit-transform .2s;
-  transition: transform .2s, background .2s;
-  transition: transform .2s, background .2s, -webkit-transform .2s;
+  -webkit-transition: background .2s,
+ -webkit-transform .2s;
+  transition: background .2s,
+ -webkit-transform .2s;
+  transition: transform .2s,
+ background .2s;
+  transition: transform .2s,
+ background .2s,
+ -webkit-transform .2s;
 }
 
 .product-card .product-card__addtocart-icon:focus {
@@ -15882,8 +15968,10 @@ select.form-control::-ms-expand {
   border-radius: 21px;
   fill: currentColor;
   z-index: 2;
-  -webkit-transition: background .15s, color .15s;
-  transition: background .15s, color .15s;
+  -webkit-transition: background .15s,
+ color .15s;
+  transition: background .15s,
+ color .15s;
   background-color: #fff;
   color: #ccc;
 }
@@ -16022,10 +16110,15 @@ select.form-control::-ms-expand {
   display: -ms-flexbox;
   display: flex;
   padding: 14px 18px 13px;
-  -webkit-transition: background .12s, -webkit-box-shadow .12s;
-  transition: background .12s, -webkit-box-shadow .12s;
-  transition: background .12s, box-shadow .12s;
-  transition: background .12s, box-shadow .12s, -webkit-box-shadow .12s;
+  -webkit-transition: background .12s,
+ -webkit-box-shadow .12s;
+  transition: background .12s,
+ -webkit-box-shadow .12s;
+  transition: background .12s,
+ box-shadow .12s;
+  transition: background .12s,
+ box-shadow .12s,
+ -webkit-box-shadow .12s;
 }
 
 .product-tabs__item a:hover {
@@ -17635,8 +17728,10 @@ select.form-control::-ms-expand {
   border-radius: 0 2.5px 0 2.5px;
   background: transparent;
   fill: currentColor;
-  -webkit-transition: background .2s, color .2s;
-  transition: background .2s, color .2s;
+  -webkit-transition: background .2s,
+ color .2s;
+  transition: background .2s,
+ color .2s;
   background-color: #fff;
   color: #ccc;
 }
@@ -17842,8 +17937,10 @@ select.form-control::-ms-expand {
   font-size: 15px;
   height: 52px;
   line-height: 50px;
-  -webkit-transition: background .15s, border-color .15s;
-  transition: background .15s, border-color .15s;
+  -webkit-transition: background .15s,
+ border-color .15s;
+  transition: background .15s,
+ border-color .15s;
 }
 
 .quickview__see-details:hover {
@@ -18101,8 +18198,10 @@ select.form-control::-ms-expand {
   border-radius: 0 2.5px 0 2.5px;
   background: transparent;
   fill: currentColor;
-  -webkit-transition: background .2s, color .2s;
-  transition: background .2s, color .2s;
+  -webkit-transition: background .2s,
+ color .2s;
+  transition: background .2s,
+ color .2s;
   background-color: #fff;
   color: #ccc;
 }

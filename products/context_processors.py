@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch('http://localhost:9200')
+es = Elasticsearch("http://localhost:9200")
 
 
 def brands(request):
@@ -24,9 +24,9 @@ def brands(request):
         index="test-index",
         body=body
     )
-    brands_raw = r['aggregations']['models']['buckets'][6:]
-    b = [brand['key'] for brand in brands_raw]
-    return {'brands': b}
+    brands_raw = r["aggregations"]["models"]["buckets"][6:]
+    b = [brand["key"] for brand in brands_raw]
+    return {"brands": b}
 
 
 def my_car(request):

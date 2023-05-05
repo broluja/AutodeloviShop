@@ -34,5 +34,5 @@ def product_details(request, product_id):
             item.views += 1
             item.save()
         articles, total = es.show_model(model, _from=0, per_page=3)
-        context = {'article': article, "item": item, "articles": articles}
-        return render(request, 'product.html', context)
+        context = {"article": article, "item": item, "articles": articles}
+        return render(request, "product.html", context)
