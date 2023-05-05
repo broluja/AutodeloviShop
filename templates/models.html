@@ -14,28 +14,28 @@
                     <div class="row container">
                         <table class="table table-bordered border-primary table-hover" style="margin-left:15px;">
                         <tr>
-                            <th class="col-md-2" scope="col"></th>
-                            <th class="col-5 text-center" scope="col">Marka: {{ brand|upper }}</th>
-                            <th class="col-5" scope="col"></th>
+                            <th class="col-md-2" ></th>
+                            <th class="col-5 text-center" >Marka: {{ brand|upper }}</th>
+                            <th class="col-5" ></th>
                         </tr>
                         {% for model in models %}
                         <tr>
-                            <td scope="col">
+                            <td>
                                 {% for brand_model in brand_models %}
                                     {% if brand_model.name == model %}
-                                <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
-                                    <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.JPG" style="width:100%;" type="image/jpg" class="rounded float-start img-thumbnail">
-                                        <img src="{% static 'images/default.jpg' %}" class="rounded float-start img-thumbnail" style="width:100%;">
+                                <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" type="image/jpg" class="img-fluid rounded mx-auto d-block">
+                                    <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.JPG" type="image/jpg" class="img-fluid rounded mx-auto d-block">
+                                        <img src="{% static 'images/default.jpg' %}" class="img-fluid rounded mx-auto d-block">
                                     </object>
                                 </object>
                                     {% endif %}
                                 {% endfor %}
                             </td>
-                            <td scope="col">
+                            <td>
                                 <p class="text-center" style="margin-top: 5px;">MODEL</p>
-                                <p class="text-center">{{ model }}</p>
+                                <p class="text-center">{{ model|truncatechars:15 }}</p>
                             </td>
-                            <td scope="col-4">
+                            <td>
                                 <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-secondary" style="width: 100%;">Delovi</button></a>
                                 <button style="width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">
                                   Detalji
