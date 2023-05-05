@@ -36,9 +36,9 @@
                                 <p class="text-center">{{ model|truncatechars:15 }}</p>
                             </td>
                             <td>
-                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-secondary" style="width: 100%;">Delovi</button></a>
-                                <button style="width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">
-                                  Detalji
+                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-primary" style="border-radius:5px; width: 100%;"><h5>Delovi</h5></button></a>
+                                <button style="border-radius:5px; width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">
+                                  <h5>Detalji</h5>
                                 </button>
                             </td>
                         </tr>
