@@ -2,8 +2,9 @@
 
 <div class="container">
     <div class="row">
+        <hr>
         <div class="col">
-            <img src="{{article.image}}" style="width:100%;">
+            <img src="{{article.image}}" class="img-fluid img-thumbnail">
         </div>
     </div>
     <hr>
@@ -45,8 +46,8 @@
             <h6>Broj porudžbina: {{ item.orders }}</h6>
         </div>
         <div class="col-md-6">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
-            <button type="button" class="btn btn-secondary"><a href="{% url 'item:product_details' article.gbg_id %}">Pregledaj</a></button>
+            <button style="border-radius:5px;" type="button" class="btn btn-primary" data-bs-dismiss="modal">Zatvori</button>
+            <button style="border-radius:5px;" type="button" class="btn btn-secondary"><a href="{% url 'item:product_details' article.gbg_id %}">Pregledaj</a></button>
         </div>
     </div>
     <hr>
