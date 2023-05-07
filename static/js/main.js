@@ -377,7 +377,6 @@
                     '                            </li><li class="dropcart__divider" role="presentation"></li>';
                 $('.dropcart__list').append(cartItem);
             }
-//            location.reload();
         });
     });
 
@@ -432,7 +431,6 @@
         $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
         $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
         htmx.process(htmx.find('.dropcart__list'))
-
     });
 
 
@@ -449,7 +447,7 @@
     $(function() {
         $(document).on("click","#closeModalButton", function () {
             location.reload();
-            $('#cart-modal').delay(500).fadeOut(400);
+            $('#cart-modal').delay(250).fadeOut(700);
         })
     });
 
@@ -470,13 +468,33 @@
             const itemData =  JSON.parse(values[i]);
             price += parseFloat(itemData.price * itemData.cart_count);
             const side = itemData.side.trim() === "R" ? 'Desna' : 'Leva';
-            let cartItem = '<tr><td>'+itemData.description+itemData.model+side+'</td><td>'+itemData.price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+' RSD</td></tr>';
+            let cartItem = `
+            <tr>
+                <td style="width: 260px;">
+                    <strong>${itemData.model.slice(0, 20)}</strong><br>${itemData.description.slice(0, 20)}<br>Strana: ${side}
+                    <strong> x</strong>${itemData.cart_count}
+                </td>
+                <td class="text-right">${(itemData.price * itemData.cart_count).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</td>
+                <td class="text-right">
+                    <button style="border-radius:5px;" id=${itemData.gbg_id} type="button" class="item-remove-on-checkout vehicles-list__item-remove">
+                        <svg width="16" height="16"><path d="M2,4V2h3V1h6v1h3v2H2z M13,13c0,1.1-0.9,2-2,2H5c-1.1,0-2-0.9-2-2V5h10V13z"/></svg>
+                    </button>
+                </td>
+            </tr>
+            `;
             $('.checkout__totals-products').append(cartItem);
-
         }
-        $('.checkout__totals-footer').append('<tr><td style="width: 150px;">Ukupno</td><td>'+price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+' RSD</td></tr>');
+        $('.checkout__totals-footer').append('<tr><td>Ukupno (RSD)</td><td>'+(price + 250).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+'</td></tr>');
         $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD");
         $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
+    });
+
+    $(function() {
+        const localStorage = window.localStorage;
+        $(document).on("click",".item-remove-on-checkout", function () {
+            localStorage.removeItem(this.getAttribute("id"));
+            location.reload();
+        })
     });
 
     /* Završi porudžbinu */

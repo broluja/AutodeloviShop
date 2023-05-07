@@ -7,8 +7,28 @@ IMAGE_PATH = "https://slike.autodelovishop.rs/PARTS"
 class ElasticSearchAgent:
 
     def __init__(self):
-        self.port = "http://localhost:9200"
-        self.agent = Elasticsearch(self.port)
+        self._port = "http://localhost:9200"
+        self._agent = Elasticsearch(self.port)
+
+    @property
+    def port(self):
+        return self._port
+
+    @property
+    def agent(self):
+        return self._agent
+
+    @staticmethod
+    def image_exists(image_url: str) -> bool:
+        image_formats = ("image/png", "image/jpeg", "image/jpg")
+        r = requests.head(image_url)
+        return r.headers["content-type"] in image_formats
+
+    @staticmethod
+    def get_parts_and_total(results: dict) -> tuple:
+        total = results["hits"]["total"]["value"]
+        parts = results["hits"]["hits"]
+        return parts, total
 
     def get_image(self, gbg_id):
         query = {
@@ -21,24 +41,18 @@ class ElasticSearchAgent:
         image = r["hits"]["hits"]
         return image if len(image) else None
 
-    @staticmethod
-    def image_exists(image_url):
-        image_formats = ("image/png", "image/jpeg", "image/jpg")
-        r = requests.head(image_url)
-        return r.headers["content-type"] in image_formats
-
     def img(self, gbg_id):
         model_id = str(gbg_id)[:4]
         trd = self.get_image(gbg_id)
-        file1 = f"{IMAGE_PATH}/{model_id}/{gbg_id}.jpg"
-        file2 = f"{IMAGE_PATH}/{model_id}/{gbg_id}.JPG"
-        first = self.image_exists(file1)
-        second = self.image_exists(file2)
+        image_one = f"{IMAGE_PATH}/{model_id}/{gbg_id}.jpg"
+        image_two = f"{IMAGE_PATH}/{model_id}/{gbg_id}.JPG"
+        first = self.image_exists(image_one)
+        second = self.image_exists(image_two)
         third = str(trd[0])[:4] if trd is not None else None
         if first:
-            image = file1
+            image = image_one
         elif second:
-            image = file2
+            image = image_two
         elif third:
             f1 = f"{IMAGE_PATH}/{third}.jpg"
             f2 = f"{IMAGE_PATH}/{third}.JPG"
@@ -52,7 +66,6 @@ class ElasticSearchAgent:
                 image = f"{IMAGE_PATH}/default.jpg"
         else:
             image = f"{IMAGE_PATH}/default.jpg"
-
         return image
 
     def get_models(self, brand):
@@ -92,18 +105,17 @@ class ElasticSearchAgent:
                 }
             }
         }
-        s = self.agent.search(index="test-index", body=parts)
-        items = s["hits"]["hits"]
-        total = s["hits"]["total"]["value"]
+        results = self.agent.search(index="test-index", body=parts)
+        parts, total = self.get_parts_and_total(results)
 
-        for x in items:
+        for x in parts:
             jsn = x["_source"]
             gbg_id = jsn.get("gbg_id")
             image = self.img(gbg_id)
             jsn["image"] = image
-        return [item["_source"] for item in items], total
+        return [item["_source"] for item in parts], total
 
-    def search_part_query(self, part, from_=0, model=None, images=True):
+    def search_part_query(self, part, from_=0, model=None, with_images=True):
         query = {
             "from": from_,
             "query": {
@@ -130,10 +142,9 @@ class ElasticSearchAgent:
                     }]
                 }
             }
-        s = self.agent.search(index='test-index', body=query)
-        parts = s["hits"]["hits"]
-        total = s["hits"]["total"]["value"]
-        if images:
+        results = self.agent.search(index='test-index', body=query)
+        parts, total = self.get_parts_and_total(results)
+        if with_images:
             for item in parts:
                 item = item["_source"]
                 gbg_id = item.get("gbg_id")
@@ -159,14 +170,13 @@ class ElasticSearchAgent:
 
     def fine_tune_search(self, term: str):
         query = {
-          "query": {
-            "combined_fields" : {
-              "query" : term,
-              "fields" : [ "model^2", "description" ]
+            "query": {
+                "combined_fields": {
+                    "query": term,
+                    "fields": ["model^2", "description"]
+                }
             }
-          }
         }
         results = self.agent.search(index="test-index", body=query)
-        total = results["hits"]["total"]["value"]
-        parts = results["hits"]["hits"]
+        parts, total = self.get_parts_and_total(results)
         return [item["_source"] for item in parts], total

@@ -35,19 +35,23 @@ def get_models(request):
     brand = request.GET.get("brand", None)
     models = es.get_models(brand)
     models.sort()
-    jason = [{"model": model} for model in models]
-    return JsonResponse(jason, safe=False)
+    json_object = [{"model": model} for model in models]
+    return JsonResponse(json_object, safe=False)
 
 
 def show_model(request):
     model = request.GET.get("model")
     page = int(request.GET.get("page", 1))
+    if page > 1000:
+        return redirect(reverse("show_model") + f"?model={model}")
     page_num = page - 1
     per_page = 10
     _from = page_num * per_page
     articles, total = es.show_model(model, _from)
     on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
+    if page > total_num_pages:
+        return redirect(reverse("show_model") + f"?model={model}")
     context = {
         "model": model,
         "articles": articles,
@@ -56,8 +60,6 @@ def show_model(request):
         "total_parts": total,
         "on_page": on_page
     }
-    if page > total_num_pages:
-        return redirect(reverse("show_model") + f"?model={model}")
     return render(request, "model-parts-list.html", context)
 
 
@@ -102,12 +104,16 @@ def search_parts(request):
         model = None
     part = request.GET.get("search")
     page = int(request.GET.get("page", 1))
+    if page > 1000:
+        return redirect(reverse("index"))
     page_num = page - 1
     per_page = 10
     _from = page_num * per_page
     parts, total = es.search_part_query(part, _from, model)
     on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
+    if page > total_num_pages:
+        return redirect(reverse("index"))
     context = {
         "articles": parts,
         "page": page,
