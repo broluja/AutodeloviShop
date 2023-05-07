@@ -112,8 +112,6 @@ def search_parts(request):
     parts, total = es.search_part_query(part, _from, model)
     on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
-    if page > total_num_pages:
-        return redirect(reverse("index"))
     context = {
         "articles": parts,
         "page": page,
