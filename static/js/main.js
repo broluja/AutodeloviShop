@@ -332,6 +332,9 @@
             var str = $(this).attr('podaci');
             var podaci = str.replace(/'/g, '"')
             var itemQuantity = $("#itemQuantity").val()
+            if (itemQuantity === undefined) {
+                itemQuantity = 1
+            }
             const itemData =  JSON.parse(podaci);
             const localStorage = window.localStorage;
             var getItemData = localStorage.getItem(itemData.gbg_id);
