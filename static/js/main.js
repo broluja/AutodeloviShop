@@ -340,7 +340,7 @@
             var getItemData = localStorage.getItem(itemData.gbg_id);
             if (getItemData !== null) {
                 var obj = JSON.parse(localStorage.getItem(itemData.gbg_id));
-                obj['cart_count'] = obj['cart_count'] + itemQuantity;
+                obj['cart_count'] = parseInt(obj['cart_count']) + parseInt(itemQuantity);
                 localStorage.setItem(itemData.gbg_id, JSON.stringify(obj));
                 $('#cart_item_quantity'+itemData.gbg_id).text(obj['cart_count']);
 
