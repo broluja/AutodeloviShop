@@ -331,19 +331,20 @@
         $(document).on("click","#dodaj_korpa", function () {
             var str = $(this).attr('podaci');
             var podaci = str.replace(/'/g, '"')
+            var itemQuantity = $("#itemQuantity").val()
             const itemData =  JSON.parse(podaci);
             const localStorage = window.localStorage;
             var getItemData = localStorage.getItem(itemData.gbg_id);
             if (getItemData !== null) {
                 var obj = JSON.parse(localStorage.getItem(itemData.gbg_id));
-                obj['cart_count'] = obj['cart_count'] + 1;
+                obj['cart_count'] = obj['cart_count'] + itemQuantity;
                 localStorage.setItem(itemData.gbg_id, JSON.stringify(obj));
                 $('#cart_item_quantity'+itemData.gbg_id).text(obj['cart_count']);
 
             } else {
                 localStorage.setItem(itemData.gbg_id, podaci);
                 var obj = JSON.parse(localStorage.getItem(itemData.gbg_id));
-                obj['cart_count'] = 1;
+                obj['cart_count'] = itemQuantity;
                 localStorage.setItem(itemData.gbg_id, JSON.stringify(obj));
                 console.log(itemData)
                 let cartItem = '<li class="dropcart__item">\n' +
