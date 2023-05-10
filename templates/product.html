@@ -117,7 +117,7 @@
                                                     <td>{{article.weight|mul:0.5}} kg</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>OEM broj</th>
+                                                    <th>Kat. broj</th>
                                                     <td>{{article.gbg_id}}</td>
                                                 </tr>
                                             </table>
@@ -324,11 +324,13 @@
                 <div class="product__info-card">
                     <div class="product__info-body">
                         <div class="product__badge tag-badge tag-badge--sale">
-                            <a style="color:white;" href="{% url 'item:product_details' article.gbg_id %}"><strong>{{article.description}}</strong></a>
+                            <strong>{{ article.price|floatformat:"2g" }} RSD</strong>
                         </div>
                         <div class="product__prices-stock">
                             <div class="product__prices">
-                                <div class="product__price product__price--current">{{ article.price|floatformat:"2g" }} RSD</div>
+                                <div class="product__price product__price--current">
+                                    <a style="color:black;" href="{% url 'item:product_details' article.gbg_id %}">{{article.description}}</a>
+                                </div>
                             </div>
                         </div>
                         <div class="product__meta">
@@ -339,7 +341,7 @@
                                 </tr>
                                 <tr>
                                     <th>Težina</th>
-                                    <td>{{article.weight|mul:0.5}} g</td>
+                                    <td>{{article.weight|mul:0.5}} kg</td>
                                 </tr>
                                 <tr>
                                     <th>Kataloški broj</th>
