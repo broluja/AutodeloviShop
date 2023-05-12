@@ -21,7 +21,7 @@ def brands(request):
         }
     }
     r = es.search(index="test-index", body=body)
-    brands_raw = r["aggregations"]["models"]["buckets"][4:]
+    brands_raw = r["aggregations"]["models"]["buckets"][5:]
     b = [brand["key"] for brand in brands_raw]
     return {"brands": b}
 
