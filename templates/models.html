@@ -14,9 +14,9 @@
                     <div class="row container">
                         <table class="table table-bordered border-primary table-hover" style="margin-left:15px;">
                         <tr>
-                            <th class="col-md-2">Slike</th>
-                            <th class="col-5 text-center">Marka: {{ brand|upper }}</th>
-                            <th class="col-5">Opcije</th>
+                            <th class="col-md-3">Slike</th>
+                            <th class="col-6 text-center">Marka: {{ brand|upper }}</th>
+                            <th class="col-3">Opcije</th>
                         </tr>
                         {% for model in models %}
                         <tr>
@@ -32,8 +32,8 @@
                                 {% endfor %}
                             </td>
                             <td>
-                                <p class="text-center" style="margin-top: 5px;">MODEL</p>
-                                <p class="text-center">{{ model|truncatechars:15 }}</p>
+                                <h4 class="text-left" style="margin-top: 10px;">MODEL</h4>
+                                <div class="text-center" style="width:130px; height: 100px;"><h5>{{ model|title|cut:"  " }}</h5></div>
                             </td>
                             <td>
                                 <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-primary" style="border-radius:5px; width: 100%;"><h5>Delovi</h5></button></a>

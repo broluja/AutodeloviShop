@@ -170,3 +170,21 @@ def quick_view(request, product_id):
         item.save()
     return render(request, "product-scratch.html", context={"item": item, "article": article})
 
+
+def search_oem(request):
+    oem = request.GET.get("oemNumber")
+    article = es.search_product_by_oem(oem)
+    if not article:
+        return render(request, "unknown-oem-number.html")
+
+    model = article.get("model")
+    item = Item.objects.filter(gbg_id=article.get("gbg_id")).first()
+    if not item:
+        item = Item.objects.create(gbg_id=article.get("gbg_id"))
+    else:
+        item.views += 1
+        item.save()
+    articles, total = es.show_model(model, _from=0, per_page=3)
+    context = {"article": article, "item": item, "articles": articles}
+    return render(request, "product.html", context)
+

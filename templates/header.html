@@ -60,8 +60,13 @@
         <div class="header__topbar-start-bg"></div>
         <div class="header__topbar-start">
             <div class="topbar topbar--spaceship-start">
-                <div class="topbar__item-text d-none d-xxl-flex">Tel: +381 60 3033 754</div>
-                <div class="topbar__item-text"><a class="topbar__link" href="#">Prati pošiljku</a></div>
+                <div class="topbar__item-text d-none d-xxl-flex">Pretraži OEM broj</div>
+                <div class="topbar__item-text">
+                    <form action="{% url 'search_oem' %}">
+                    <input name="oemNumber" required style="display: inline; height: 30px;  width:65%;" type="text" class="form-control" placeholder="OEM" aria-label="Username" aria-describedby="addon-wrapping">
+                    <input type="submit" hidden/>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="header__topbar-end-bg"></div>

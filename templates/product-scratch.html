@@ -1,5 +1,6 @@
 {% load mathfilters %}
 
+{% if article %}
 <div class="container">
     <div class="row">
         <hr>
@@ -52,3 +53,6 @@
     </div>
     <hr>
 </div>
+{% else %}
+<p>No product</p>
+{% endif %}
