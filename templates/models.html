@@ -16,30 +16,32 @@
                         <tr>
                             <th class="col-md-3">Slike</th>
                             <th class="col-6 text-center">Marka: {{ brand|upper }}</th>
-                            <th class="col-3">Opcije</th>
+<!--                            <th class="col-3">Opcije</th>-->
                         </tr>
                         {% for model in models %}
                         <tr>
                             <td>
                                 {% for brand_model in brand_models %}
                                     {% if brand_model.name == model %}
-                                <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" type="image/jpg" class="img-fluid rounded mx-auto d-block">
-                                    <object data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.JPG" type="image/jpg" class="img-fluid rounded mx-auto d-block">
-                                        <img src="{% static 'images/default.jpg' %}" class="img-fluid rounded mx-auto d-block">
+                                <a href="{% url 'show_model' %}?model={{ model }}"><object style="object-fit: contain; max-width: 160px; max-height:160px;" data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.jpg" type="image/jpg" class="img-fluid rounded mx-auto d-block">
+                                    <object style="object-fit: contain; max-width: 160px; max-height:160px;" data="https://slike.autodelovishop.rs/EFAR/{{ brand_model.brand_id }}.JPG" type="image/jpg" class="img-fluid rounded mx-auto d-block">
+                                        <img style="object-fit: contain; max-width: 160px; max-height:160px;" src="{% static 'images/default.jpg' %}" class="img-fluid rounded mx-auto d-block">
                                     </object>
-                                </object>
+                                </object></a>
                                     {% endif %}
                                 {% endfor %}
                             </td>
                             <td>
-                                <h4 class="text-left" style="margin-top: 10px;">MODEL</h4>
-                                <div class="text-center" style="width:130px; height: 100px;"><h5>{{ model|title|cut:"  " }}</h5></div>
-                            </td>
-                            <td>
-                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-primary" style="border-radius:5px; width: 100%;"><h5>Delovi</h5></button></a>
-                                <button style="border-radius:5px; width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">
-                                  <h5>Detalji</h5>
-                                </button>
+                                <h6 class="text-left" style="margin-top: 10px;">MODEL</h6>
+                                <div class="text-left" style="width:150px; height: 100px;">
+                                    <a href="{% url 'show_model' %}?model={{ model }}"><h6>{{ model|title|cut:"  "|truncatechars:"40" }}</h6></a>
+                                </div>
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-primary" style="border-radius:5px; width: 100%;"><h5>Delovi karoserije</h5></button></a>-->
+<!--                                <button style="border-radius:5px; width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">-->
+<!--                                  <h5>Detalji</h5>-->
+<!--                                </button>-->
                             </td>
                         </tr>
                         {% endfor %}
@@ -48,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="margin-top:5px;">
                     <h4 style="margin:5px;" class="text-center">Brzi meni</h4>
                 </div>

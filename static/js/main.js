@@ -488,7 +488,7 @@
             `;
             $('.checkout__totals-products').append(cartItem);
         }
-        $('.checkout__totals-footer').append('<tr><td><h5>Ukupno (RSD)</h5></td><td>'+(price + 250).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+'</td></tr>');
+        $('.checkout__totals-footer').append('<tr><td><h5>Ukupno (RSD)</h5></td><td>'+(price + 400).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+'</td></tr>');
         $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD");
         $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
     });
