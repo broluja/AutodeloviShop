@@ -38,29 +38,36 @@
                     <li data-mobile-menu-item>
                         <a href="{% url 'about' %}" class="">O nama</a>
                     </li>
-                    <li data-mobile-menu-item>
-                        <a href="#contact" class="">Kontakt</a>
-                    </li>
                 </ul>
-                <form class="block-finder__form">
-                    <div class="block-finder__form-control block-finder__form-control--select">
-                        <select name="brand" aria-label="Marka">
-                            <option value="none">Izaberi marku</option>
-                            {% for brand in brands %}
-                                <option value="{{ brand }}">{{ brand }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="block-finder__form-control block-finder__form-control--select">
-                        <select name="model" aria-label="Model" disabled>
-                            <option value="none">Izaberi model</option>
-                        </select>
-                    </div>
-                    <button class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch">
-                        Pretraga
-                    </button>
-                </form>
+                <hr>
+                <h6 class="text-center mb-3">Pretražite</h6>
+                <div class="container text-center">
+                    <form action="{% url 'search_oem' %}">
+                        <div class="form-check text-left mb-2">
+                          <input class="form-check-input" type="radio" name="searchRadioGroup" id="flexRadioDefault1" value="oem" checked>
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Po OEM broju
+                          </label>
+                        </div>
+                        <div class="form-check text-left mb-2">
+                          <input class="form-check-input" type="radio" name="searchRadioGroup" id="flexRadioDefault2" value="kat">
+                          <label class="form-check-label" for="flexRadioDefault2">
+                            Po kataloškom broju
+                          </label>
+                        </div>
+                        <div class="form-check text-left mb-2">
+                          <input class="form-check-input" type="radio" name="searchRadioGroup" id="flexRadioDefault3" value="deo">
+                          <label class="form-check-label" for="flexRadioDefault3">
+                            Po nazivu dela
+                          </label>
+                        </div>
+                        <input name="searchedItem" required type="text" class="form-control"  aria-label="Username" aria-describedby="addon-wrapping">
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Pretraži</button>
+                    </form>
+                </div>
 
+                <!-- Footer (telephone) -->
                 <div class="mobile-menu__spring"></div>
                 <div class="mobile-menu__divider"></div>
                 <a class="mobile-menu__contacts" href="tel:+381 60 3033 754">

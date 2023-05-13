@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from products.elastic_agent import ElasticSearchAgent
 from .models import Item
 from products.utils import send_questions
+from .utils import add_views
 
 es = ElasticSearchAgent()
 
@@ -27,12 +28,7 @@ def product_details(request, product_id):
     else:
         article = es.get_product(product_id)
         model = article.get("model")
-        item = Item.objects.filter(gbg_id=product_id).first()
-        if not item:
-            item = Item.objects.create(gbg_id=product_id)
-        else:
-            item.views += 1
-            item.save()
+        item = add_views(product_id)
         articles, total = es.show_model(model, _from=0, per_page=3)
         context = {"article": article, "item": item, "articles": articles}
         return render(request, "product.html", context)

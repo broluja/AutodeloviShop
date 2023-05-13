@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, reverse
 from django.http import JsonResponse, HttpResponse
 from django.utils.text import slugify
 
+from items.utils import add_views
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
 from items.models import Brand, Item
@@ -162,29 +163,41 @@ def remove_from_cart(request):
 
 def quick_view(request, product_id):
     article = es.get_product(product_id)
-    item = Item.objects.filter(gbg_id=product_id).first()
-    if not item:
-        item = Item.objects.create(gbg_id=product_id)
-    else:
-        item.views += 1
-        item.save()
+    item = add_views(product_id)
     return render(request, "product-scratch.html", context={"item": item, "article": article})
 
 
 def search_oem(request):
-    oem = request.GET.get("oemNumber")
-    article = es.search_product_by_oem(oem)
-    if not article:
-        return render(request, "unknown-oem-number.html")
-
-    model = article.get("model")
-    item = Item.objects.filter(gbg_id=article.get("gbg_id")).first()
-    if not item:
-        item = Item.objects.create(gbg_id=article.get("gbg_id"))
+    search_type = request.GET.get("searchRadioGroup")
+    if search_type == "oem":
+        oem = request.GET.get("searchedItem")
+        article = es.search_product_by_oem(oem)
+        if not article:
+            return render(request, "unknown-search.html", context={"oem_number": "unknown"})
+        model = article.get("model")
+        gbg_id = article.get("gbg_id")
+        item = add_views(gbg_id)
+        articles, total = es.show_model(model, _from=0, per_page=3)
+        context = {"article": article, "item": item, "articles": articles}
+        return render(request, "product.html", context)
+    elif search_type == "kat":
+        gbg_id = request.GET.get("searchedItem")
+        article = es.get_product(gbg_id)
+        context = {"gbg_id": "unknown"}
+        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html", context)
     else:
-        item.views += 1
-        item.save()
-    articles, total = es.show_model(model, _from=0, per_page=3)
-    context = {"article": article, "item": item, "articles": articles}
-    return render(request, "product.html", context)
-
+        part = request.GET.get("searchedItem")
+        _from = 0
+        parts, total = es.search_part_query(part, _from)
+        on_page = min(total - _from, 10)
+        total_num_pages = ceil(total / 10)
+        context = {
+            "articles": parts,
+            "page": 0,
+            "total_parts": total,
+            "total": total_num_pages,
+            "on_page": on_page,
+            "part": part,
+            "model": None
+        }
+        return render(request, "search-parts-list.html", context)

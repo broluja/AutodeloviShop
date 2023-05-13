@@ -160,18 +160,21 @@ class ElasticSearchAgent:
                 }
             }
         }
-        p = self.agent.search(index="test-index", body=product_query)
-        product_dictionary = p["hits"]["hits"][0]
-        product = product_dictionary["_source"]
-        gbg_id = product["gbg_id"]
-        image = self.img(gbg_id)
-        product['image'] = image
-        return product
+        try:
+            p = self.agent.search(index="test-index", body=product_query)
+            product_dictionary = p["hits"]["hits"][0]
+            product = product_dictionary["_source"]
+            gbg_id = product["gbg_id"]
+            image = self.img(gbg_id)
+            product['image'] = image
+            return product
+        except IndexError as exc:
+            return []
 
     def search_product_by_oem(self, oem):
         product_query = {
             "query": {
-                "match": {
+                "match_phrase": {
                     "genuine_code": oem
                 }
             }
@@ -186,6 +189,7 @@ class ElasticSearchAgent:
             return product
         except IndexError as exc:
             return []
+
 
     def fine_tune_search(self, term: str):
         query = {
