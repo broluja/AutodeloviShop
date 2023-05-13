@@ -516,7 +516,7 @@
             user.phone = document.getElementById("checkout-phone").value;
             user.comment = document.getElementById("checkout-comment").value;
             if (!user.name || !user.surname || !user.street || !user.number || !user.phone || !user.city) {
-                alert("Sva polja su obavezna, osim komentara.")
+                alert("Popunite sva obavezna polja.")
                 return []
             }
             var values = [],
