@@ -17,6 +17,14 @@ def index(request):
     return render(request, "home.html")
 
 
+def about(request):
+    return render(request, "onama.html")
+
+
+def check_out(request):
+    return render(request, "checkout.html")
+
+
 def check_for_part(request):
     if request.method != "POST":
         item = request.GET.get("item")
@@ -64,10 +72,6 @@ def show_model(request):
     return render(request, "model-parts-list.html", context)
 
 
-def check_out(request):
-    return render(request, "checkout.html")
-
-
 def order(request):
     if request.method != "POST":
         return redirect(reverse("index"))
@@ -79,15 +83,11 @@ def order(request):
     return JsonResponse(r.json())
 
 
-def about(request):
-    return render(request, "onama.html")
-
-
 def show_models(request, brand):
     models = es.get_models(brand)
-    brand_models_ids = [Brand.objects.filter(name=model).first() for model in models]
+    brand_model_ids = [Brand.objects.filter(name=model).first() for model in models]
     models.sort()
-    return render(request, "models.html", context={"models": models, "brand": brand, "brand_models": brand_models_ids})
+    return render(request, "models.html", context={"models": models, "brand": brand, "brand_models": brand_model_ids})
 
 
 def dynamic_search(request):
@@ -142,6 +142,41 @@ def search_parts(request):
     return render(request, "search-parts-list.html", context)
 
 
+def search_on_mobile(request):
+    search_type = request.GET.get("searchRadioGroup")
+    if search_type == "oem":
+        oem = request.GET.get("search")
+        article = es.search_product_by_oem(oem)
+        if not article:
+            return render(request, "unknown-search.html", context={"oem_number": "unknown"})
+        model = article.get("model")
+        gbg_id = article.get("gbg_id")
+        item = add_views(gbg_id)
+        articles, total = es.show_model(model, _from=0, per_page=3)
+        context = {"article": article, "item": item, "articles": articles}
+        return render(request, "product.html", context)
+    elif search_type == "kat":
+        gbg_id = request.GET.get("search")
+        article = es.get_product(gbg_id)
+        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html")
+    else:
+        part = request.GET.get("search")
+        _from = 0
+        parts, total = es.search_part_query(part, _from)
+        on_page = min(total - _from, 10)
+        total_num_pages = ceil(total / 10)
+        context = {
+            "articles": parts,
+            "page": 0,
+            "total_parts": total,
+            "total": total_num_pages,
+            "on_page": on_page,
+            "part": part,
+            "model": None
+        }
+        return render(request, "search-parts-list.html", context)
+
+
 def get_options(request):
     brand = request.GET.get("make", None)
     models = es.get_models(brand)
@@ -182,38 +217,3 @@ def quick_view(request, product_id):
     article = es.get_product(product_id)
     item = add_views(product_id)
     return render(request, "product-scratch.html", context={"item": item, "article": article})
-
-
-def search_on_mobile(request):
-    search_type = request.GET.get("searchRadioGroup")
-    if search_type == "oem":
-        oem = request.GET.get("search")
-        article = es.search_product_by_oem(oem)
-        if not article:
-            return render(request, "unknown-search.html", context={"oem_number": "unknown"})
-        model = article.get("model")
-        gbg_id = article.get("gbg_id")
-        item = add_views(gbg_id)
-        articles, total = es.show_model(model, _from=0, per_page=3)
-        context = {"article": article, "item": item, "articles": articles}
-        return render(request, "product.html", context)
-    elif search_type == "kat":
-        gbg_id = request.GET.get("search")
-        article = es.get_product(gbg_id)
-        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html")
-    else:
-        part = request.GET.get("search")
-        _from = 0
-        parts, total = es.search_part_query(part, _from)
-        on_page = min(total - _from, 10)
-        total_num_pages = ceil(total / 10)
-        context = {
-            "articles": parts,
-            "page": 0,
-            "total_parts": total,
-            "total": total_num_pages,
-            "on_page": on_page,
-            "part": part,
-            "model": None
-        }
-        return render(request, "search-parts-list.html", context)
