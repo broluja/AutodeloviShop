@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from products.elastic_agent import ElasticSearchAgent
-from .models import Item
 from products.utils import send_questions
 from .utils import add_views
 

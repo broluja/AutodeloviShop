@@ -13,7 +13,7 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("brand/<str:brand>/", views.show_models, name="open_model"),
     path("part-search/", views.search_parts, name="search_parts"),
-    path("parts/oem/", views.search_oem, name="search_oem")
+    path("parts/oem/", views.search_on_mobile, name="search_oem")
 ]
 
 htmx_urlpatterns = [

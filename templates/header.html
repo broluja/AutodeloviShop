@@ -109,22 +109,22 @@
                         <div class="search__decor-start"></div>
                         <div class="search__decor-end"></div>
                     </div>
-                    <div class="search__dropdown search__dropdown--suggestions suggestions">
+                    <div class="search__dropdown search__dropdown--suggestions">
                         <div class="suggestions__group">
-                            <div class="suggestions__group-title">Delovi</div>
+                            <div class="suggestions__group-title">Rezultati</div>
                             <div class="suggestions__group-content" id="dynamic-search">
                                 <!-- insert dynamic search here -->
                             </div>
                         </div>
-                        <div class="suggestions__group">
-                            <div class="suggestions__group-title">Pretražite</div>
-                            <div class="suggestions__group-content">
-                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=sijalica">Sijalice</a>
-                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=far">Farovi</a>
-                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=hladnjak">Hladnjaci</a>
-                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=branik">Branici</a>
-                            </div>
-                        </div>
+<!--                        <div class="suggestions__group">-->
+<!--                            <div class="suggestions__group-title">Delovi</div>-->
+<!--                            <div class="suggestions__group-content">-->
+<!--                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=sijalica">Sijalice</a>-->
+<!--                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=far">Farovi</a>-->
+<!--                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=hladnjak">Hladnjaci</a>-->
+<!--                                <a class="suggestions__item suggestions__category" href="{% url 'search_parts' %}?search=branik">Branici</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="search__dropdown search__dropdown--vehicle-picker vehicle-picker">
                         <div class="search__dropdown-arrow"></div>
@@ -158,10 +158,33 @@
                                         <div class="vehicle-picker__actions">
                                             <button style="border-radius:5px;" type="button" class="btn btn-primary btn-sm" data-to-panel="form">Dodaj/Zameni vozilo</button>
                                         </div>
-                                        <div class="vehicle-picker__actions" style="margin-left: 2px;">
-                                            <button style="border-radius:5px;" type="button" class="btn btn-primary btn-sm" data-to-panel="close">Zatvori</button>
-                                        </div>
                                     </div>
+                                </div>
+                                <hr>
+                                <div class="vehicle-picker__text">
+                                    Pretražite delove po:
+                                </div>
+
+                                <div class="form-check text-left mb-2">
+                                  <input class="form-check-input" type="radio" name="searchRadioGroup" id="flexRadio3" value="deo" checked>
+                                  <label class="form-check-label" for="flexRadio3">
+                                    Po nazivu dela
+                                  </label>
+                                </div>
+                                <div class="form-check text-left mb-2">
+                                  <input class="form-check-input" type="radio" name="searchRadioGroup" id="flexRadio1" value="oem">
+                                  <label class="form-check-label" for="flexRadio1">
+                                    Po OEM broju
+                                  </label>
+                                </div>
+                                <div class="form-check text-left mb-2">
+                                  <input class="form-check-input" type="radio" name="searchRadioGroup" id="flexRadio2" value="kat">
+                                  <label class="form-check-label" for="flexRadio2">
+                                    Po kataloškom broju
+                                  </label>
+                                </div>
+                                <div class="vehicle-picker__actions" style="margin-left: 2px;">
+                                    <button style="border-radius:5px;" type="button" class="btn btn-primary btn-sm" data-to-panel="close">Zatvori</button>
                                 </div>
                             </div>
                         </div>

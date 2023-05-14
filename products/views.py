@@ -8,7 +8,7 @@ from django.utils.text import slugify
 from items.utils import add_views
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders
-from items.models import Brand, Item
+from items.models import Brand
 
 es = ElasticSearchAgent()
 
@@ -97,6 +97,23 @@ def dynamic_search(request):
 
 
 def search_parts(request):
+    search_type = request.GET.get("searchRadioGroup")
+    if search_type == "oem":
+        oem = request.GET.get("search")
+        article = es.search_product_by_oem(oem)
+        if not article:
+            return render(request, "unknown-search.html", context={"oem_number": "unknown"})
+        model = article.get("model")
+        gbg_id = article.get("gbg_id")
+        item = add_views(gbg_id)
+        articles, total = es.show_model(model, _from=0, per_page=3)
+        context = {"article": article, "item": item, "articles": articles}
+        return render(request, "product.html", context)
+    elif search_type == "kat":
+        gbg_id = request.GET.get("search")
+        article = es.get_product(gbg_id)
+        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html")
+
     if request.GET.get("checkbox"):
         model = request.GET.get("myModel")
     elif request.GET.get("modelSearch"):
@@ -167,10 +184,10 @@ def quick_view(request, product_id):
     return render(request, "product-scratch.html", context={"item": item, "article": article})
 
 
-def search_oem(request):
+def search_on_mobile(request):
     search_type = request.GET.get("searchRadioGroup")
     if search_type == "oem":
-        oem = request.GET.get("searchedItem")
+        oem = request.GET.get("search")
         article = es.search_product_by_oem(oem)
         if not article:
             return render(request, "unknown-search.html", context={"oem_number": "unknown"})
@@ -181,12 +198,11 @@ def search_oem(request):
         context = {"article": article, "item": item, "articles": articles}
         return render(request, "product.html", context)
     elif search_type == "kat":
-        gbg_id = request.GET.get("searchedItem")
+        gbg_id = request.GET.get("search")
         article = es.get_product(gbg_id)
-        context = {"gbg_id": "unknown"}
-        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html", context)
+        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html")
     else:
-        part = request.GET.get("searchedItem")
+        part = request.GET.get("search")
         _from = 0
         parts, total = es.search_part_query(part, _from)
         on_page = min(total - _from, 10)
