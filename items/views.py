@@ -19,10 +19,10 @@ def product_details(request, product_id):
         brand = request.POST.get("brand")
         model = request.POST.get("model")
         part_description = request.POST.get("part_description")
-        genuine_code = request.POST.get("genuine_code")
+        gen_code = request.POST.get("genuine_code")
         gbg_id = request.POST.get("gbg_id")
         question = request.POST.get("question")
-        send_questions(first_name, last_name, brand, model, part_description, gbg_id, genuine_code, question,phone, email)
+        send_questions(first_name, last_name, brand, model, part_description, gbg_id, gen_code, question,phone, email)
         return HttpResponse(status=204)
     else:
         article = es.get_product(product_id)
