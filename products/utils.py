@@ -13,6 +13,8 @@ from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY
 mailjet = Client(auth=(MAIL_API_KEY, MAIL_SECRET_KEY), version="v3.1")
 
 def send_email(data):
+    if not data:
+        return
     data["products"].insert(
         0,
         {"gbg_id": "gbg_id", "genuine_code": "genuine_code", "description": "Naziv", "side": "Strana",

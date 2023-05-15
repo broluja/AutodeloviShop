@@ -505,6 +505,10 @@
     $(function() {
         const localStorage = window.localStorage;
         $(document).on("click","#posalji-porudzbinu", function () {
+            if (localStorage.length === 0) {
+                alert("vasa korpa je prazna")
+                return []
+            }
             var user = {};
             user.name = document.getElementById("checkout-first-name").value;
             user.surname = document.getElementById("checkout-last-name").value;
@@ -526,7 +530,6 @@
             while (i--) {
                 values.push(localStorage.getItem(keys[i]));
             }
-
             let price = 0;
             let products = [];
             for (let i = 0; i < values.length; i++) {
@@ -539,7 +542,6 @@
                 "products": products,
                 "total": price
             };
-
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.open("POST", "/order");
             xmlhttp.setRequestHeader("Content-Type", "application/json");
