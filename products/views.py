@@ -77,6 +77,7 @@ def order(request):
         return redirect(reverse("index"))
     payload = request.body.decode("utf-8")
     body = json.loads(payload)
+    print(body)
     products = body["products"]
     save_orders(products)
     r = send_email(body)

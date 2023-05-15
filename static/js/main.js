@@ -531,7 +531,7 @@
             let products = [];
             for (let i = 0; i < values.length; i++) {
                 const itemData = JSON.parse(values[i]);
-                price += parseFloat(itemData.price * itemData.cart_count).toFixed(2);
+                price += parseFloat(itemData.price.toFixed(2) * itemData.cart_count);
                 products.push(itemData)
             }
             const data = {
@@ -552,9 +552,8 @@
                     console.log(this.responseText)
                     if (jsonResponse["Messages"][0]["Status"] == "success") {
                         document.getElementById("porudzbina-forma").innerHTML =
-                            "Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!";
+                            "<h6>Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!</h6>";
                         localStorage.clear();
-                        location.reload();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
                             "Došlo je do greške u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";

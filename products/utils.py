@@ -22,7 +22,12 @@ def send_email(data):
         data["products"],
         tablefmt="html",
         headers="firstrow")
-    html = f"{products} <br> TOTAL: {str(data['total'])} <br> Kupac: {json.dumps(data['user'])}"
+    byer = data['user']
+    html = f"{products} <br> TOTAL: {data['total']:.2f} RSD<br> Kupac: {byer.get('name')} {byer.get('surname')}"
+    html += f"<br>Ulica {byer.get('street')} broj, {byer.get('number')}, {byer.get('city')} - {byer.get('postcode')}"
+    html += f"<br>Email: {byer.get('email')}"
+    html +=  f"<br>Telefon: {byer.get('phone')}"
+    html += f"<br>Komentar: {byer.get('comment')}"
 
     email = {
         "Messages": [
@@ -33,7 +38,7 @@ def send_email(data):
                 },
                 "To": [
                     {
-                        "Email": "autodelovi011@gmail.com",
+                        "Email": "olujic.branko@gmail.com",
                         "Name": "User"
                     }
                 ],
