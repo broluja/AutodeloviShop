@@ -171,6 +171,29 @@ class ElasticSearchAgent:
         except IndexError as exc:
             return []
 
+    def get_products_twin(self, product, side):
+        product_query = {
+                          "query": {
+                            "bool": {
+                              "must": [
+                                { "match": { "model": product.get('model')}},
+                                { "match": { "description": product.get('description')}},
+                                { "match": { "side": side}},
+                              ]
+                            }
+                          }
+                        }
+        try:
+            p = self.agent.search(index="test-index", body=product_query)
+            product_dictionary = p["hits"]["hits"][0]
+            product = product_dictionary["_source"]
+            gbg_id = product["gbg_id"]
+            image = self.img(gbg_id)
+            product['image'] = image
+            return product
+        except IndexError as exc:
+            return []
+
     def search_product_by_oem(self, oem):
         product_query = {
             "query": {

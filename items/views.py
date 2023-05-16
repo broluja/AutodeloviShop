@@ -26,8 +26,16 @@ def product_details(request, product_id):
         return HttpResponse(status=204)
     else:
         article = es.get_product(product_id)
+        if article.get('side') == "R":
+            first_suggestion = es.get_products_twin(article, side="L")
+        elif article.get('side') == "L":
+            first_suggestion = es.get_products_twin(article, side="R")
+        else:
+            first_suggestion = None
         model = article.get("model")
         item = add_views(product_id)
         articles, total = es.show_model(model, _from=0, per_page=3)
+        if first_suggestion:
+            articles[0] = first_suggestion
         context = {"article": article, "item": item, "articles": articles}
         return render(request, "product.html", context)

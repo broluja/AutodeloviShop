@@ -136,8 +136,10 @@
                                                     <div>
                                                         <small>Model: {{ article.model }}</small>
                                                     </div>
+                                                    <div>
+                                                        <small>Strana: {% if article.side == "R" %}Desna{% elif article.side == "L" %}Leva{% else %}Univerzalna{% endif %}</small>
+                                                    </div>
                                                 </div>
-
                                                 <div class="product-card__rating">
                                                     <div class="rating product-card__rating-stars">
                                                         <div class="rating__body">

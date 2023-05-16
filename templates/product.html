@@ -89,7 +89,7 @@
                                         <li>Pun naziv: <span>{{article.description}}</span></li>
                                         <li>Marka: <span>{{article.brand}}</span></li>
                                         <li>Model: <span>{{article.model}}</span></li>
-                                        <li>Strana: <span>{% if article.side == "R" %}Desna{% else %}Leva{% endif %}</span></li>
+                                        <li>Strana: <span>{% if article.side == "R" %}Desna{% elif article.side == "L"  %}Leva{% else %}Univerzalna{% endif %}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -138,10 +138,15 @@
                                                                     <input type="radio" name="material" class="input-radio-label__input">
                                                                     <span class="input-radio-label__title">Desna</span>
                                                                 </label>
-                                                            {% else %}
+                                                            {% elif article.side == "L" %}
                                                                 <label class="input-radio-label__item">
                                                                     <input type="radio" name="material" class="input-radio-label__input">
                                                                     <span class="input-radio-label__title">Leva</span>
+                                                                </label>
+                                                            {% else %}
+                                                                <label class="input-radio-label__item">
+                                                                    <input type="radio" name="material" class="input-radio-label__input">
+                                                                    <span class="input-radio-label__title">Univerzalna</span>
                                                                 </label>
                                                             {% endif %}
                                                         </div>
@@ -216,7 +221,6 @@
 </div>
 
 
-<!-- forma -->
 <div class="container">
     <hr>
     <div class="row">
@@ -254,7 +258,8 @@
                                     <td>{{article.gbg_id}}</td>
                                 </tr>
                             </table>
-                        </div></div>
+                        </div>
+                    </div>
                     <div class="product-form product__form">
                         <div class="product-form__body">
                             <div class="product-form__row">
@@ -266,10 +271,15 @@
                                                     <input type="radio" name="material" class="input-radio-label__input">
                                                     <span class="input-radio-label__title">Strana: Desna</span>
                                                 </label>
-                                            {% else %}
+                                            {% elif article.side == "L" %}
                                                 <label class="input-radio-label__item">
                                                     <input type="radio" name="material" class="input-radio-label__input">
                                                     <span class="input-radio-label__title">Strana: Leva</span>
+                                                </label>
+                                            {% else %}
+                                                <label class="input-radio-label__item">
+                                                    <input type="radio" name="material" class="input-radio-label__input">
+                                                    <span class="input-radio-label__title">Strana: Univerzalna</span>
                                                 </label>
                                             {% endif %}
                                         </div>
@@ -282,6 +292,7 @@
             </div>
             {% endfor %}
         </div>
+        <!-- forma -->
         {% endif %}
         <div class="col-md-4">
             <h4>Imate pitanje u vezi ovog dela?</h4>
