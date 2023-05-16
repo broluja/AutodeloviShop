@@ -115,6 +115,20 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBlog" aria-expanded="false" aria-controls="flush-collapseThree">
+                              <h5>Blog</h5>
+                          </button>
+                        </h2>
+                    <div id="flush-collapseBlog" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        {% for post in posts %}
+                        <div class="accordion-body">
+                            <a href="{% url 'blog:read_post' post.slug %}">{{ post.title }}</a><hr>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
                                 <h5>Ko smo mi?</h5>
                             </button>
