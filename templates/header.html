@@ -82,9 +82,11 @@
                             Blog
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              {% if posts %}
                               {% for post in posts %}
                                 <a class="dropdown-item" href="{% url 'blog:read_post' post.slug %}">{{post.title}}</a>
                               {% endfor %}
+                              {% endif %}
                           </div>
                         </div>
                     </ul>
