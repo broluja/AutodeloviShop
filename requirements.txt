@@ -10,6 +10,7 @@ click==8.1.0
 csv23==0.3.3
 Django==4.2
 django-mathfilters==1.0.0
+django-taggit==4.0.0
 elastic-transport==8.1.2
 elasticsearch==8.2.0
 fastapi-versioning==0.10.0
@@ -24,6 +25,7 @@ Mako==1.2.0
 MarkupSafe==2.1.1
 orjson==3.5.2
 packaging==21.3
+Pillow==9.5.0
 pluggy==0.13.1
 psycopg2-binary==2.9.3
 py==1.10.0

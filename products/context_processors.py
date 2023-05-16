@@ -1,4 +1,5 @@
 from elasticsearch import Elasticsearch
+from blog.models import Post
 
 es = Elasticsearch("http://localhost:9200")
 
@@ -32,3 +33,8 @@ def my_car(request):
     if all([my_model, my_brand]):
         return {"my_car": {"my_brand": my_brand, "my_model": my_model}}
     return {"my_car": None}
+
+
+def posts(request):
+    site_posts = Post.objects.all()
+    return {"posts": site_posts}

@@ -33,10 +33,22 @@
                 <div class="mobile-menu__divider"></div>
                 <ul class="mobile-menu__links">
                     <li data-mobile-menu-item>
-                        <a href="{% url 'index' %}" class="">Naslovna</a>
+                        <a href="{% url 'index' %}" class="btn">Naslovna</a>
                     </li>
                     <li data-mobile-menu-item>
-                        <a href="{% url 'about' %}" class="">O nama</a>
+                        <a href="{% url 'about' %}" class="btn">O nama</a>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                          <a style="margin-left:5px;" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Blog
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                        </div>
                     </li>
                 </ul>
                 <hr>

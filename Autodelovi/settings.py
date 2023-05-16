@@ -28,10 +28,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Custom Apps
+    # Custom APPs
     "products.apps.ProductsConfig",
     "items.apps.ItemsConfig",
-    "mathfilters"
+    "blog.apps.BlogConfig",
+    "mathfilters",
+    # Third-parties APPs
+    'taggit'
 ]
 
 MIDDLEWARE = [
@@ -59,6 +62,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "products.context_processors.brands",
                 "products.context_processors.my_car",
+                "products.context_processors.posts",
             ],
         },
     },
@@ -117,3 +121,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MAIL_API_KEY = os.getenv("KEY")
 MAIL_SECRET_KEY = os.getenv("SECRET")
 HOST_EMAIL = os.getenv("FROM")
+
+# Taggit settings
+TAGGIT_CASE_INSENSITIVE = True
