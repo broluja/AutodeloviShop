@@ -112,9 +112,12 @@
                                                         <a href="{% url 'item:product_details' article.gbg_id %}">{{article.description}}</a>
                                                     </div>
                                                 </div>
-                                                <div class="product-card__name" style="width:100px;">
+                                                <div class="product-card__name">
                                                     <div>
-                                                        <small>Marka: {{ article.model }}</small>
+                                                        <small>Model: {{ article.model }}</small>
+                                                    </div>
+                                                    <div>
+                                                        <small>Strana: {% if article.side == "R" %}Desna{% elif article.side == "L" %}Leva{% else %}Univerzalna{% endif %}</small>
                                                     </div>
                                                 </div>
                                                 <div class="product-card__rating">
