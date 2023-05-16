@@ -14,7 +14,7 @@ class Post(models.Model):
     conclusion = models.TextField()
     views = models.PositiveIntegerField(default=1)
     slug = models.SlugField(default=None, blank=True, null=True, unique=True)
-    image = models.ImageField(default='blog-03.jpg', blank=True, null=True)
+    image = models.ImageField(default='default.jpg', blank=True, null=True)
 
     objects = models.Manager()
     tags = TaggableManager()
@@ -29,7 +29,7 @@ class Post(models.Model):
         super().save()
         if self.slug is None:
             value = self.subtitle
-            self.slug = slugify(value)
+            self.slug = slugify(value[:50])
             self.save()
 
         img = Image.open(self.image.path)
