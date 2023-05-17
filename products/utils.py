@@ -55,7 +55,7 @@ def send_email(data):
 
 
 def reply_on_order(email):
-    html = prolog + "<br>" + content + "<br>" + final
+    html = content + "<br>" + final
     email = {
         "Messages": [
             {
@@ -70,7 +70,7 @@ def reply_on_order(email):
                     }
                 ],
                 "Subject": "Porudzbina sa sajta",
-                "TextPart": json.dumps(data["user"]),
+                "TextPart": prolog,
                 "HTMLPart": html
             }
         ]
