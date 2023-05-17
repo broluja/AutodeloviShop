@@ -519,7 +519,7 @@
             user.email = document.getElementById("checkout-email").value;
             user.phone = document.getElementById("checkout-phone").value;
             user.comment = document.getElementById("checkout-comment").value;
-            if (!user.name || !user.surname || !user.street || !user.number || !user.phone || !user.city) {
+            if (!user.name || !user.surname || !user.street || !user.number || !user.phone || !user.email || !user.city) {
                 alert("Popunite sva obavezna polja.")
                 return []
             }
@@ -1493,12 +1493,14 @@
     /* Get info on search button */
     $(function() {
         $(document).on("click", "#btnSearch1", function() {
-//            console.log($('[name="brand"]').val())
-            console.log($('[name="model"]').val())
             if ($('[name="brand"]').val() === "none") {
-                alert("Izaberite marku i model automobila.")
+                document.getElementById("messageP").innerHTML = "Izaberite marku i model automobila."
+                const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
+                infoModal.show()
             }else if ($('[name="brand"]').val() !== "none" & $('[name="model"]').val() === "0") {
-                alert("Izaberite model automobila.")
+                document.getElementById("messageP").innerHTML = "Izaberite model automobila."
+                const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
+                infoModal.show()
             }
         })
     });
