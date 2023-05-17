@@ -54,17 +54,25 @@ def send_email(data):
     return mailjet.send.create(data=email)
 
 
-def reply_on_order(data):
-    email = data['user']["email"]
-    products = data["products"]
+def reply_on_order(order_data):
+    name = order_data["user"]["name"] + " " + order_data["user"]["surname"]
+    user_email = order_data['user']["email"]
+    products = order_data["products"][1:]
     product_names = [product["description"] for product in products]
     prices = [product["price"] for product in products]
     links = [product["image"] for product in products]
-    total = data["total"]
-    html = content + "<br>"
+    quantities = [product["cart_count"] for product in products]
+    total = order_data["total"]
+    html = f"Zdravo {name}, <br>"
+    html += prolog + "<br>"
+    html += content + "<br>"
     html += "Poručili ste: <br>"
-    for name, price, link in zip(product_names, prices, links):
-        html += f"{name} - cena: {price} | {link}"
+    for name, price, link, quantity in zip(product_names, prices, links, quantities):
+        html += f"{name} - cena: {price}, količina {quantity} | {link} <br>"
+
+    html += f"Konačna cena je: {total}<br>"
+    html += final
+
     email = {
         "Messages": [
             {
@@ -74,12 +82,11 @@ def reply_on_order(data):
                 },
                 "To": [
                     {
-                        "Email": email,
+                        "Email": user_email,
                         "Name": "User"
                     }
                 ],
                 "Subject": "AutoDeloviShop - Moja porudžbina",
-                "TextPart": prolog,
                 "HTMLPart": html
             }
         ]
