@@ -55,6 +55,8 @@ def send_email(data):
 
 
 def reply_on_order(order_data):
+    if not order_data:
+        return
     name = order_data["user"]["name"] + " " + order_data["user"]["surname"]
     user_email = order_data['user']["email"]
     products = order_data["products"][1:]

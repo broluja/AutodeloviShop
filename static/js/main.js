@@ -506,7 +506,9 @@
         const localStorage = window.localStorage;
         $(document).on("click","#posalji-porudzbinu", function () {
             if (localStorage.length === 0) {
-                alert("Vaša korpa je prazna!")
+                document.getElementById("messageP").innerHTML = "Vaša korpa je prazna!"
+                const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
+                infoModal.show()
                 return []
             }
             var user = {};
@@ -520,7 +522,9 @@
             user.phone = document.getElementById("checkout-phone").value;
             user.comment = document.getElementById("checkout-comment").value;
             if (!user.name || !user.surname || !user.street || !user.number || !user.phone || !user.email || !user.city) {
-                alert("Popunite sva obavezna polja.")
+                document.getElementById("messageP").innerHTML = "Popunite sva obavezna polja."
+                const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
+                infoModal.show()
                 return []
             }
             var values = [],
