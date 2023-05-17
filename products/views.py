@@ -82,9 +82,8 @@ def order(request):
         return JsonResponse({})
     save_orders(products)
     r = send_email(body)
-    email = body["user"]["email"]
     if r.json()["Messages"][0]["Status"] == "success":
-        reply_on_order(email)
+        reply_on_order(body)
     return JsonResponse(r.json())
 
 

@@ -17,4 +17,7 @@ Srdačan pozdrav,
 Vaš tim za podršku kupcima!
 
 Auto Delovi Shop
+
+Ovo je automatska poruka, nemojte odgovarati na nju, jer neće stići onome kome je namenjena.
+autodelovishop.rs@gmail.com
 """

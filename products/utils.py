@@ -37,7 +37,7 @@ def send_email(data):
             {
                 "From": {
                     "Email": "office@digitalconstruct.rs",
-                    "Name": "WebShop"
+                    "Name": "AutoDeloviShop"
                 },
                 "To": [
                     {
@@ -54,14 +54,23 @@ def send_email(data):
     return mailjet.send.create(data=email)
 
 
-def reply_on_order(email):
-    html = content + "<br>" + final
+def reply_on_order(data):
+    email = data['user']["email"]
+    products = data["products"]
+    product_names = [product["description"] for product in products]
+    prices = [product["price"] for product in products]
+    links = [product["image"] for product in products]
+    total = data["total"]
+    html = content + "<br>"
+    html += "Poručili ste: <br>"
+    for name, price, link in zip(product_names, prices, links):
+        html += f"{name} - cena: {price:.2f} | {link}"
     email = {
         "Messages": [
             {
                 "From": {
                     "Email": "office@digitalconstruct.rs",
-                    "Name": "WebShop"
+                    "Name": "AutoDeloviShop"
                 },
                 "To": [
                     {
@@ -69,7 +78,7 @@ def reply_on_order(email):
                         "Name": "User"
                     }
                 ],
-                "Subject": "Porudzbina sa sajta",
+                "Subject": "AutoDeloviShop - Moja porudžbina",
                 "TextPart": prolog,
                 "HTMLPart": html
             }
@@ -90,7 +99,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
             {
                 "From": {
                     "Email": "office@digitalconstruct.rs",
-                    "Name": "WebShop"
+                    "Name": "AutoDeloviShop"
                 },
                 "To": [
                     {
@@ -115,7 +124,7 @@ def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_
             {
                 "From": {
                     "Email": "office@digitalconstruct.rs",
-                    "Name": "WebShop"
+                    "Name": "AutoDeloviShop"
                 },
                 "To": [
                     {

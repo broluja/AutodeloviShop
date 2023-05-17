@@ -506,7 +506,7 @@
         const localStorage = window.localStorage;
         $(document).on("click","#posalji-porudzbinu", function () {
             if (localStorage.length === 0) {
-                alert("vasa korpa je prazna")
+                alert("Vaša korpa je prazna!")
                 return []
             }
             var user = {};
