@@ -82,6 +82,7 @@ def order(request):
         return JsonResponse({})
     save_orders(products)
     r = send_email(body)
+    print(r)
     return JsonResponse(r.json())
 
 

@@ -7,6 +7,7 @@ from django.http import Http404
 from django.conf import settings
 
 from items.models import Item
+from products.email_template import prolog, content, final
 from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY
 
 
@@ -40,7 +41,31 @@ def send_email(data):
                 },
                 "To": [
                     {
-                        "Email": "autodelovi011@gmail.com",
+                        "Email": "autodelovishop.rs@gmail.com",
+                        "Name": "User"
+                    }
+                ],
+                "Subject": "Porudzbina sa sajta",
+                "TextPart": json.dumps(data["user"]),
+                "HTMLPart": html
+            }
+        ]
+    }
+    return mailjet.send.create(data=email)
+
+
+def reply_on_order(email):
+    html = prolog + "<br>"
+    email = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": "office@digitalconstruct.rs",
+                    "Name": "WebShop"
+                },
+                "To": [
+                    {
+                        "Email": "autodelovishop.rs@gmail.com",
                         "Name": "User"
                     }
                 ],
@@ -69,7 +94,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
                 },
                 "To": [
                     {
-                        "Email": "autodelovi011@gmail.com",
+                        "Email": "autodelovishop.rs@gmail.com",
                         "Name": "User"
                     }
                 ],
@@ -94,7 +119,7 @@ def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_
                 },
                 "To": [
                     {
-                        "Email": "autodelovi011@gmail.com",
+                        "Email": "autodelovishop.rs@gmail.com",
                         "Name": "User"
                     }
                 ],
