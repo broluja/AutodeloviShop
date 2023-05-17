@@ -41,7 +41,7 @@ def send_email(data):
                 },
                 "To": [
                     {
-                        "Email": "autodelovishop.rs@gmail.com",
+                        "Email": "olujic.branko@gmail.com",
                         "Name": "User"
                     }
                 ],
@@ -55,7 +55,7 @@ def send_email(data):
 
 
 def reply_on_order(email):
-    html = prolog + "<br>"
+    html = prolog + "<br>" + content + "<br>" + final
     email = {
         "Messages": [
             {
@@ -65,7 +65,7 @@ def reply_on_order(email):
                 },
                 "To": [
                     {
-                        "Email": "autodelovishop.rs@gmail.com",
+                        "Email": email,
                         "Name": "User"
                     }
                 ],

@@ -7,7 +7,7 @@ from django.utils.text import slugify
 
 from items.utils import add_views
 from .elastic_agent import ElasticSearchAgent
-from .utils import send_email, ask_for_part, set_cookie, save_orders
+from .utils import send_email, ask_for_part, set_cookie, save_orders, reply_on_order
 from items.models import Brand
 
 es = ElasticSearchAgent()
@@ -82,7 +82,9 @@ def order(request):
         return JsonResponse({})
     save_orders(products)
     r = send_email(body)
-    print(r)
+    email = body["user"]["email"]
+    if r.json()["Messages"][0]["Status"] == "success":
+        reply_on_order(email)
     return JsonResponse(r.json())
 
 
