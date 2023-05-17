@@ -1490,6 +1490,19 @@
         });
     });
 
+    /* Get info on search button */
+    $(function() {
+        $(document).on("click", "#btnSearch1", function() {
+//            console.log($('[name="brand"]').val())
+            console.log($('[name="model"]').val())
+            if ($('[name="brand"]').val() === "none") {
+                alert("Izaberite marku i model automobila.")
+            }else if ($('[name="brand"]').val() !== "none" & $('[name="model"]').val() === "0") {
+                alert("Izaberite model automobila.")
+            }
+        })
+    });
+
     $(function () {
         $('[name="brand"]').change(function(){
             let brand = this.value;
@@ -1498,7 +1511,6 @@
                 ddModels.empty();
                 ddModels.append($("<option />").val(0).text("Izaberi model"));
                 $.each(response, function( index, value ) {
-                console.log(value)
                     ddModels.append($("<option />").val(value.model).text(value.model));
                 });
             });
@@ -1508,13 +1520,11 @@
             const ddModels = $('[name="model"]');
             let model = ddModels.find(":selected").text()
             model = model.replace(/Izaberi model/g, "")
-            console.log(model);
+            ddModels.val(model)
             $('#btnSearch').click(function(){
-            console.log(model)
                 window.location.href='/autodelovi/?model='+ model;
             });
             $('#btnSearch1').click(function(){
-            console.log(model)
                 window.location.href='/autodelovi/?model='+ model;
             });
         })
