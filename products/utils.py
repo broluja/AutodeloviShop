@@ -64,7 +64,7 @@ def reply_on_order(data):
     html = content + "<br>"
     html += "Poručili ste: <br>"
     for name, price, link in zip(product_names, prices, links):
-        html += f"{name} - cena: {price:.2f} | {link}"
+        html += f"{name} - cena: {price} | {link}"
     email = {
         "Messages": [
             {
