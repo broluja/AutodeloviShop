@@ -33,7 +33,6 @@ def product_details(request, product_id):
         else:
             first_suggestion = None
         model = article.get("model")
-        item = add_views(product_id)
         familiar_parts = get_group_of_connected_parts(article.get("description").lower())
         articles = []
         if first_suggestion:
@@ -46,5 +45,6 @@ def product_details(request, product_id):
         if not articles:  # If no suggestions found
             articles, total = es.show_model(model, _from=0, per_page=3)
             message = f"Drugi proizvodi modela {model}"
+        item = add_views(product_id)
         context = {"article": article, "item": item, "articles": articles, "message": message}
         return render(request, "product.html", context)

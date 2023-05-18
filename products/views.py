@@ -107,12 +107,8 @@ def search_parts(request):
         article = es.search_product_by_oem(oem)
         if not article:
             return render(request, "unknown-search.html", context={"oem_number": "unknown"})
-        model = article.get("model")
         gbg_id = article.get("gbg_id")
-        item = add_views(gbg_id)
-        articles, total = es.show_model(model, _from=0, per_page=3)
-        context = {"article": article, "item": item, "articles": articles}
-        return render(request, "product.html", context)
+        return redirect("item:product_details", gbg_id)
     elif search_type == "kat":
         gbg_id = request.GET.get("search")
         article = es.get_product(gbg_id)
@@ -153,12 +149,8 @@ def search_on_mobile(request):
         article = es.search_product_by_oem(oem)
         if not article:
             return render(request, "unknown-search.html", context={"oem_number": "unknown"})
-        model = article.get("model")
         gbg_id = article.get("gbg_id")
-        item = add_views(gbg_id)
-        articles, total = es.show_model(model, _from=0, per_page=3)
-        context = {"article": article, "item": item, "articles": articles}
-        return render(request, "product.html", context)
+        return redirect("item:product_details", gbg_id)
     elif search_type == "kat":
         gbg_id = request.GET.get("search")
         article = es.get_product(gbg_id)
