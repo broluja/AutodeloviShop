@@ -121,8 +121,8 @@
                         </h2>
                     <div id="flush-collapseBlog" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         {% for post in posts %}
-                        <div class="accordion-body">
-                            <a href="{% url 'blog:read_post' post.slug %}">{{ post.title }}</a><hr>
+                        <div style="margin:10px;">
+                            <a href="{% url 'blog:read_post' post.slug %}">{{ post.title }}</a>
                         </div>
                         {% endfor %}
                     </div>

@@ -226,3 +226,19 @@ class ElasticSearchAgent:
         results = self.agent.search(index="test-index", body=query)
         parts, total = self.get_parts_and_total(results)
         return [item["_source"] for item in parts], total
+
+
+    def get_part_suggestion(self, term: str, model: str):
+        query = {
+                  "query": {
+                    "bool": {
+                      "must": [
+                        { "match_phrase": { "model": model}},
+                        { "match_phrase": { "description": term}}
+                      ]
+                    }
+                  }
+                }
+        result = self.agent.search(index="test-index", body=query)
+        if result.get("hits").get("hits"):
+            return result["hits"]["hits"][0]["_source"]

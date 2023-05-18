@@ -227,7 +227,7 @@
         {% if article.model %}
         <!-- Left side -->
         <div class="col-md-8">
-            <h4>Proizvodi za {{article.model}}</h4>
+            <h4>{{message}}</h4>
             <hr style="width:50%;text-align:left;margin-left:0;">
             {% for article in articles %}
             <div class="product__info">
@@ -297,7 +297,7 @@
         <div class="col-md-4">
             <h4>Imate pitanje u vezi ovog dela?</h4>
             <hr>
-            <h5>Lični Podaci</h5>
+            <h5>Lični podaci</h5>
             <hr style="width:50%;text-align:left;margin-left:0;">
             <form hx-post="{{request.path}}" hx-target="#emailModal">
                 {% csrf_token %}
@@ -333,54 +333,41 @@
                 <hr>
                 <h5>Podaci o proizvodu</h5>
                 <hr style="width:50%;text-align:left;margin-left:0;">
-                <div class="row">
-                    <div class="col" style="text-align:right">
-                        <label class="form-check-label" for="markaInput" style="margin-top: 6px;">Marka</label>
-                    </div>
-                    <div class="mb-3 col-10">
-                        <input readonly name="brand" type="text" class="form-control" id="markaInput" placeholder="{{article.brand}}" value="{{article.brand}}">
-                    </div>
+                <div class="mb-1" style="margin-left: 2px">
+                    <label class="form-check-label" for="markaInput">Marka</label>
                 </div>
-                <div class="row">
-                    <div class="col" style="text-align:right">
-                        <label class="form-check-label" for="modelInput" style="margin-top: 6px;" >Model</label>
-                    </div>
-                    <div class="mb-3 col-10">
-                        <input readonly name="model" type="text" class="form-control" id="modelInput" placeholder="{{article.model}}" value="{{article.model}}">
-                    </div>
+                <div class="mb-3">
+                    <input readonly name="brand" type="text" class="form-control" id="markaInput" placeholder="{{article.brand}}" value="{{article.brand}}">
                 </div>
-                <div class="row">
-                    <div class="col" style="text-align:right">
-                        <label class="form-check-label" for="catalog" style="margin-top: 6px;">Proizvod</label>
-                    </div>
-                    <div class="mb-3 col-10">
-                        <input readonly name="part_description" type="text" class="form-control" id="catalog" placeholder="{{article.description}}" value="{{article.description}}">
-                    </div>
+                <div class="mb-1" style="margin-left: 2px">
+                    <label class="form-check-label" for="modelInput" >Model</label>
                 </div>
-                <div class="row">
-                    <div class="col" style="text-align:right">
-                        <label class="form-check-label" for="productID" style="margin-top: 6px;">OEM broj</label>
-                    </div>
-                    <div class="mb-3 col-10">
-                        <input readonly name="genuine_code" type="text" class="form-control" id="productID" placeholder="{{article.genuine_code}}" value="{{article.genuine_code}}">
-                    </div>
+                <div class="mb-3">
+                    <input readonly name="model" type="text" class="form-control" id="modelInput" placeholder="{{article.model}}" value="{{article.model}}">
                 </div>
-                <div class="row">
-                    <div class="col" style="text-align:right">
-                        <label class="form-check-label" for="gbgID" style="margin-top: 6px;">Kat. broj</label>
-                    </div>
-                    <div class="mb-3 col-10">
-                        <input readonly type="text" class="form-control" name="gbg_id" id="gbgID" placeholder="{{article.gbg_id}}" value="{{article.gbg_id}}">
-                    </div>
+                <div class="mb-1" style="margin-left: 2px">
+                    <label class="form-check-label" for="catalog" style="margin-top: 6px;">Proizvod</label>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col" style="text-align:right">
-                        <label class="form-check-label" for="gbgID" style="margin-top: 6px;">Poruka</label>
-                    </div>
-                    <div class="mb-3 col-10">
-                        <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                    </div>
+                <div class="mb-3">
+                    <input readonly name="part_description" type="text" class="form-control" id="catalog" placeholder="{{article.description}}" value="{{article.description}}">
+                </div>
+                <div class="mb-1" style="margin-left: 2px">
+                    <label class="form-check-label" for="productID" style="margin-top: 6px;">OEM broj</label>
+                </div>
+                <div class="mb-3">
+                    <input readonly name="genuine_code" type="text" class="form-control" id="productID" placeholder="{{article.genuine_code}}" value="{{article.genuine_code}}">
+                </div>
+                <div class="mb-1" style="margin-left: 2px">
+                    <label class="form-check-label" for="gbgID" style="margin-top: 6px;">Kataloški broj</label>
+                </div>
+                <div class="mb-3">
+                    <input readonly type="text" class="form-control" name="gbg_id" id="gbgID" placeholder="{{article.gbg_id}}" value="{{article.gbg_id}}">
+                </div>
+                <div class="mb-1" style="margin-left: 2px">
+                    <label class="form-check-label" for="gbgID" style="margin-top: 6px;">Poruka</label>
+                </div>
+                <div class="mb-3">
+                    <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                 </div>
                 <div class="row">
                     <div class="col"></div>
