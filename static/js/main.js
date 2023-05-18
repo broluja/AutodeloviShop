@@ -470,13 +470,14 @@
         let price = 0;
         for (let i = 0; i < values.length; i++) {
             const itemData =  JSON.parse(values[i]);
+            console.log(itemData)
             price += parseFloat(itemData.price * itemData.cart_count);
             const side = itemData.side.trim() === "R" ? 'Desna' : 'Leva';
             let cartItem = `
             <tr>
                 <td style="width: 260px;">
-                    <strong>${itemData.model.slice(0, 20)}</strong><br>${itemData.description.slice(0, 20)}<br>Strana: ${side}
-                    <strong> x</strong>${itemData.cart_count}
+                    <strong>${itemData.model.slice(0, 20)}</strong><br>${itemData.description.slice(0, 20)}<br>Strana: ${side}<br>
+                    Cena: ${itemData.price.toFixed(2)} <strong><span aria-hidden="true">&times;</span> ${itemData.cart_count}</strong><br>
                 </td>
                 <td class="text-right">${(itemData.price * itemData.cart_count).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</td>
                 <td class="text-right">
