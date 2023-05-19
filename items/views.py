@@ -43,7 +43,7 @@ def product_details(request, product_id):
         articles = [obj for obj in articles if obj if obj.get("gbg_id") != article.get("gbg_id")]
         message = f"Povezani delovi modela {model}"
         if not articles:  # If no suggestions found
-            articles, total = es.show_model(model, _from=0, per_page=3)
+            articles, total = es.show_model(model, _from=0, per_page=5)
             message = f"Drugi proizvodi modela {model}"
         item = add_views(product_id)
         context = {"article": article, "item": item, "articles": articles, "message": message}

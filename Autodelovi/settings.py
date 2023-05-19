@@ -32,8 +32,8 @@ INSTALLED_APPS = [
     "products.apps.ProductsConfig",
     "items.apps.ItemsConfig",
     "blog.apps.BlogConfig",
-    "mathfilters",
     # Third-parties APPs
+    "mathfilters",
     'taggit'
 ]
 

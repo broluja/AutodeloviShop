@@ -302,18 +302,18 @@
             <form hx-post="{{request.path}}" hx-target="#emailModal">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="first_name" id="firstName" placeholder="Ime" required>
+                    <input type="text" class="form-control" name="first_name" id="firstName" placeholder="* Ime" required>
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Prezime" required>
+                    <input type="text" class="form-control" name="last_name" id="lastName" placeholder="* Prezime" required>
                 </div>
                 <div class="mb-3">
-                    <input type="email" placeholder="Email" name="user_email" class="form-control" id="emailInput" aria-describedby="emailHelp" required>
+                    <input type="email" placeholder="* Email" name="user_email" class="form-control" id="emailInput" aria-describedby="emailHelp" required>
                     <div id="emailHelp" class="form-text">Vaša email adresa je sigurna sa nama.</div>
                 </div>
                 <div class="row" style="margin-bottom:5px;">
                     <div class="col">
-                        <label class="form-check-label" for="selectCountry">Broj telefona</label>
+                        <label class="form-check-label" for="selectCountry"><strong style="color: red;">*</strong> Broj telefona</label>
                     </div>
                 </div>
 
@@ -364,7 +364,7 @@
                     <input readonly type="text" class="form-control" name="gbg_id" id="gbgID" placeholder="{{article.gbg_id}}" value="{{article.gbg_id}}">
                 </div>
                 <div class="mb-1" style="margin-left: 2px">
-                    <label class="form-check-label" for="gbgID" style="margin-top: 6px;">Poruka</label>
+                    <label class="form-check-label" for="gbgID" style="margin-top: 6px;"><strong style="color: red;">*</strong> Poruka</label>
                 </div>
                 <div class="mb-3">
                     <textarea name="question" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
