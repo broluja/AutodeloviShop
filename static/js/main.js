@@ -559,11 +559,13 @@
                     console.log(this.responseText)
                     if (jsonResponse["Messages"][0]["Status"] == "success") {
                         document.getElementById("porudzbina-forma").innerHTML =
-                            "<h6>Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!</h6>";
+                            "<h6 class='text-center'>Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!</h6>";
+                        document.getElementById("checkoutHeader").innerHTML = "<h1 class='text-center' style='color: green;'>Uspešno završena porudžbina.</h1>"
                         localStorage.clear();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
                             "Došlo je do greške u komunikaciji sa serverom, molimo vas da ponovo pritisnete dugme 'Poručite'";
+                        document.getElementById("checkoutHeader").innerHTML = "<h1 class='text-center' style='color: red;'>Ups, porudžbina nije završena.</h1>"
                     }
 
                 }

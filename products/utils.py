@@ -41,7 +41,7 @@ def send_email(data):
                 },
                 "To": [
                     {
-                        "Email": "autodelovishop.rs@gmail.com",
+                        "Email": "olujic.branko@gmail.com",
                         "Name": "User"
                     }
                 ],
