@@ -40,12 +40,6 @@
         <div class="col">
             <h6>Broj pregleda: {{ item.views }}</h6>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col" style="margin-bottom: 10px;">
-            <h6>Broj porudžbina: {{ item.orders }}</h6>
-        </div>
         <div class="col-md-6">
             <button style="border-radius:5px; margin-top: 10px;" type="button" class="btn btn-primary" data-bs-dismiss="modal">Zatvori</button>
             <button style="border-radius:5px; margin-top: 10px;" type="button" class="btn btn-secondary"><a href="{% url 'item:product_details' article.gbg_id %}">Pregledaj</a></button>
