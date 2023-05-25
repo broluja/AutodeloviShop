@@ -443,6 +443,7 @@
         const localStorage = window.localStorage;
         $(document).on("click",".dropcart__item-remove", function () {
             localStorage.removeItem(this.getAttribute("id"));
+            location.reload();
         })
     });
 
