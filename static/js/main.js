@@ -1518,7 +1518,7 @@
         $('[name="brand"]').change(function(){
             let brand = this.value;
             const ddModels = $('[name="model"]');
-            $.get("/getModels/?brand="+brand, function(response, status){
+            $.get("/products/getModels/?brand="+brand, function(response, status){
                 ddModels.empty();
                 ddModels.append($("<option />").val(0).text("Izaberi model"));
                 $.each(response, function( index, value ) {
@@ -1533,10 +1533,10 @@
             model = model.replace(/Izaberi model/g, "")
             ddModels.val(model)
             $('#btnSearch').click(function(){
-                window.location.href='/autodelovi/?model='+ model;
+                window.location.href='/products/autodelovi/?model='+ model;
             });
             $('#btnSearch1').click(function(){
-                window.location.href='/autodelovi/?model='+ model;
+                window.location.href='/products/autodelovi/?model='+ model;
             });
         })
     });
