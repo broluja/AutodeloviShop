@@ -6,23 +6,11 @@ from django.http import JsonResponse, HttpResponse
 from django.utils.text import slugify
 
 from items.utils import add_views
+from items.models import Brand
 from .elastic_agent import ElasticSearchAgent
 from .utils import send_email, ask_for_part, set_cookie, save_orders, reply_on_order
-from items.models import Brand
 
 es = ElasticSearchAgent()
-
-
-def index(request):
-    return render(request, "home.html")
-
-
-def about(request):
-    return render(request, "onama.html")
-
-
-def check_out(request):
-    return render(request, "checkout.html")
 
 
 def check_for_part(request):
@@ -193,7 +181,7 @@ def add_car(request):
 
 
 def clear(request):
-    print(request)
+    print(request.COOKIES)
     response = HttpResponse("")
     response.delete_cookie("my_brand")
     response.delete_cookie("my_model")

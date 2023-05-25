@@ -3,11 +3,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("products.urls")),
-    path("product/", include("items.urls")),
+    path("", views.index, name="index"),
+    path("about/", views.about, name="about"),
+    path("checkout/", views.check_out, name="check_out"),
+    path("products/", include("products.urls")),
+    path("item/", include("items.urls")),
     path("blog/", include("blog.urls"))
 ]
 if settings.DEBUG:

@@ -5,12 +5,9 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.index, name="index"),
     path("getModels/", views.get_models, name="get_models"),
     path("autodelovi/", views.show_model, name='show_model'),
-    path("checkout/", views.check_out, name="check_out"),
     path("order", views.order, name="order"),
-    path("about/", views.about, name="about"),
     path("brand/<str:brand>/", views.show_models, name="open_model"),
     path("part-search/", views.search_parts, name="search_parts"),
     path("parts/oem/", views.search_on_mobile, name="search_oem")

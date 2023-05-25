@@ -476,7 +476,7 @@
             let cartItem = `
             <tr>
                 <td style="width: 260px;">
-                    <strong>${itemData.model.slice(0, 20)}</strong><br>${itemData.description.slice(0, 20)}<br>Strana: ${side}<br>
+                    <strong>${itemData.model.slice(0, 20)}</strong><br><a href="" id=${itemData.gbg_id} hx-get=/products/quick-view/${itemData.gbg_id}/ hx-target=#quickViewModal>${itemData.description.slice(0, 20)}</a><br>Strana: ${side}<br>
                     Cena: ${itemData.price.toFixed(2)} <strong><span aria-hidden="true">&times;</span> ${itemData.cart_count}</strong><br>
                 </td>
                 <td class="text-right">${(itemData.price * itemData.cart_count).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</td>
@@ -492,6 +492,7 @@
         $('.checkout__totals-footer').append('<tr><td><h5>Ukupno (RSD)</h5></td><td>'+(price + 400).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')+'</td></tr>');
         $('#cena').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD");
         $('#ukupno').text(price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " RSD")
+        htmx.process(htmx.find('.checkout__totals'))
     });
 
     $(function() {
