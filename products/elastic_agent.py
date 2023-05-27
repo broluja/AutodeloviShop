@@ -131,7 +131,7 @@ class ElasticSearchAgent:
                     "should": [{"bool": {"must": [
                         {
                             "fuzzy": {  # Tolerates slight errors in spelling.
-                                "description": {"value": part, "fuzziness": "AUTO"}
+                                "description": {"value": part.lower(), "fuzziness": "AUTO"}
                             }
                         },
                         {
@@ -228,7 +228,7 @@ class ElasticSearchAgent:
                 "bool": {
                     "must": [
                         {"match_phrase": {"model": model}},
-                        {"match_phrase": {"description": {"query": term, "slop": 3}}}
+                        {"match_phrase": {"description": {"query": term, "slop": 5}}}
                     ]  # Slop represents how far you're willing to let a term move to satisfy a phrase (both directions)
                 }
             }
