@@ -15,7 +15,7 @@
                             <a href="/" class="breadcrumb__item-link">Naslovna</a>
                         </li>
                         <li class="breadcrumb__item breadcrumb__item--parent">
-                            <a href="/autodelovi?model={{article.model}}" class="breadcrumb__item-link">{{article.model}}</a>
+                            <a href="{% url 'open_model' article.brand %}" class="breadcrumb__item-link">{{article.model}}</a>
                         </li>
                         <li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
                             <span class="breadcrumb__item-link">{{article.description}}</span>
