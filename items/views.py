@@ -1,3 +1,5 @@
+from collections import deque
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -34,17 +36,18 @@ def product_details(request, product_id):
             first_suggestion = None
         model = article.get("model")
         familiar_parts = get_group_of_connected_parts(article.get("description").lower())
-        articles = []
-        if first_suggestion:
-            articles.append(first_suggestion)
+        articles = deque()
         for part in familiar_parts:  # Getting suggestion parts based on a group of familiar parts.
             part = es.get_part_suggestion(part, model)
             articles.append(part)
         message = f"Povezani delovi modela {model}"
         if not articles:  # If no suggestions found
-            articles, total = es.show_model(model, _from=0, per_page=5)
+            parts, total = es.show_model(model, _from=0, per_page=5)
             message = f"Drugi proizvodi modela {model}"
-        articles = [obj for obj in articles if obj if obj.get("gbg_id") != article.get("gbg_id")]  # Remove duplicates
+            articles = deque(parts)
+        articles = deque([obj for obj in articles if obj if obj.get("gbg_id") != article.get("gbg_id")])
+        if first_suggestion and first_suggestion not in articles:
+            articles.appendleft(first_suggestion)
         item = add_views(product_id)  # Increase views of Item by one.
         context = {"article": article, "item": item, "articles": articles, "message": message}
         return render(request, "product.html", context)
