@@ -130,8 +130,8 @@ class ElasticSearchAgent:
                 "bool": {
                     "should": [{"bool": {"must": [
                         {
-                            "match": {
-                                "description": part
+                            "fuzzy": {  # Tolerates slight errors in spelling.
+                                "description": {"value": part, "fuzziness": "AUTO"}
                             }
                         },
                         {
@@ -173,16 +173,16 @@ class ElasticSearchAgent:
 
     def get_products_twin(self, product, side):
         product_query = {
-                          "query": {
-                            "bool": {
-                              "must": [
-                                { "match": { "model": product.get('model')}},
-                                { "match": { "description": product.get('description')}},
-                                { "match": { "side": side}},
-                              ]
-                            }
-                          }
-                        }
+            "query": {
+                "bool": {
+                    "must": [
+                        {"match": {"model": product.get('model')}},
+                        {"match": {"description": product.get('description')}},
+                        {"match": {"side": side}},
+                    ]
+                }
+            }
+        }
         try:
             p = self.agent.search(index="test-index", body=product_query)
             product_dictionary = p["hits"]["hits"][0]
@@ -213,7 +213,6 @@ class ElasticSearchAgent:
         except IndexError as exc:
             return []
 
-
     def fine_tune_search(self, term: str):
         query = {
             "query": {
@@ -227,18 +226,17 @@ class ElasticSearchAgent:
         parts, total = self.get_parts_and_total(results)
         return [item["_source"] for item in parts], total
 
-
     def get_part_suggestion(self, term: str, model: str):
         query = {
-                  "query": {
-                    "bool": {
-                      "must": [
-                        { "match_phrase": { "model": model}},
-                        { "match_phrase": { "description": term}}
-                      ]
-                    }
-                  }
+            "query": {
+                "bool": {
+                    "must": [
+                        {"match_phrase": {"model": model}},
+                        {"match_phrase": {"description": {"query": term, "slop": 3}}}
+                    ]  # Slop represents how far you're willing to let a term move to satisfy a phrase (both directions)
                 }
+            }
+        }
         result = self.agent.search(index="test-index", body=query)
         if result.get("hits").get("hits"):
             return result["hits"]["hits"][0]["_source"]
