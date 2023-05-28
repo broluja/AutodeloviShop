@@ -169,6 +169,7 @@ class ElasticSearchAgent:
             product['image'] = image
             return product
         except IndexError as exc:
+            print(exc)
             return []
 
     def get_products_twin(self, product, side):
@@ -188,6 +189,7 @@ class ElasticSearchAgent:
             product_dictionary = p["hits"]["hits"][0]
             return product_dictionary["_source"]
         except IndexError as exc:
+            print(exc)
             return []
 
     def search_product_by_oem(self, oem):
@@ -207,6 +209,7 @@ class ElasticSearchAgent:
             product['image'] = image
             return product
         except IndexError as exc:
+            print(exc)
             return []
 
     def fine_tune_search(self, term: str):
