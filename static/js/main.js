@@ -353,13 +353,13 @@
                 let cartItem = '<li class="dropcart__item">\n' +
                     '                               <div class="row">\n' +
                     '                                <div class="col-5 dropcart__item-image image image--type--product">\n' +
-                    '                                    <a class="image__body" href="/product/'+itemData.gbg_id+'">\n' +
+                    '                                    <a class="image__body" href="/item/'+itemData.gbg_id+'">\n' +
                     '                                        <img class="image__tag" src="'+itemData.image+'" alt="">\n' +
                     '                                    </a>\n' +
                     '                                </div>\n' +
                     '                                <div class="col-5 dropcart__item-info">\n' +
                     '                                    <div class="dropcart__item-name">\n' +
-                    '                                        <a href="/product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
+                    '                                        <a href="/item/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
                     '                                    </div>\n' +
                     '                                    <ul class="dropcart__item-features">\n' +
                     '                                        <li>Marka '+itemData.brand+'</li>\n' +
@@ -403,13 +403,13 @@
             let cartItem = '<li class="dropcart__item">\n' +
                 '                                <div class="row">\n' +
                 '                                <div class="col dropcart__item-image image image--type--product">\n' +
-                '                                    <a class="image__body" href="/product/'+itemData.gbg_id+'">\n' +
+                '                                    <a class="image__body" href="/item/'+itemData.gbg_id+'">\n' +
                 '                                        <img class="image__tag" src="'+itemData.image+'" alt="">\n' +
                 '                                    </a>\n' +
                 '                                </div>\n' +
                 '                                <div class="col dropcart__item-info">\n' +
                 '                                    <div class="dropcart__item-name">\n' +
-                '                                        <a href="/product/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
+                '                                        <a href="/item/'+itemData.gbg_id+'">'+itemData.description+'</a>\n' +
                 '                                    </div>\n' +
                 '                                    <ul class="dropcart__item-features">\n' +
                 '                                        <li>Marka '+itemData.brand+'</li>\n' +
