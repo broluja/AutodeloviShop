@@ -190,7 +190,7 @@ class ElasticSearchAgent:
             return product_dictionary["_source"]
         except IndexError as exc:
             print(exc)
-            return []
+            return None
 
     def search_product_by_oem(self, oem):
         product_query = {

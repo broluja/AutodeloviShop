@@ -8,9 +8,9 @@ unzip /home/autodelovi/ftp/GENUINE_02850.ZIP
 
 unzip /home/autodelovi/ftp/REFAR_02850.ZIP
 
-cd /var/www/AutodeloviShop
+cd /var/www/AutodeloviShop || exit
 source venv/bin/activate
-cd commands
+cd commands || exit
 
 python stock.py
 python populate.py
