@@ -49,9 +49,7 @@ def update_price(item_price):
     else:
         new_price = wholesale_cost * 1.1
 
-    final_pdv = new_price * 0.2
-    final_price = new_price + final_pdv
-    final_price *= 1.15
+    final_price = new_price * 1.15
 
     return math.ceil(final_price / 10) * 10
 
