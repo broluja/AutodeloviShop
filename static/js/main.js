@@ -550,7 +550,7 @@
                 "total": price
             };
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "/order");
+            xmlhttp.open("POST", "/products/order");
             xmlhttp.setRequestHeader("Content-Type", "application/json");
             xmlhttp.setRequestHeader('X-CSRFToken', document.head.querySelector('meta[name="csrf-token"]').content);
             xmlhttp.send(JSON.stringify(data));
