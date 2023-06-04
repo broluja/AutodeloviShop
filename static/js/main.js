@@ -1506,7 +1506,7 @@
                 document.getElementById("messageP").innerHTML = "Izaberite marku i model automobila."
                 const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
                 infoModal.show()
-            }else if ($('[name="brand"]').val() !== "none" & $('[name="model"]').val() === "0") {
+            }else if ($('[name="brand"]').val() !== "none" & $('[name="model"]').find(":selected").text() === "Izaberi modelIzaberi model") {
                 document.getElementById("messageP").innerHTML = "Izaberite model automobila."
                 const infoModal = new bootstrap.Modal(document.getElementById('infoModal'))
                 infoModal.show()
@@ -1520,7 +1520,7 @@
             const ddModels = $('[name="model"]');
             $.get("/products/getModels/?brand="+brand, function(response, status){
                 ddModels.empty();
-                ddModels.append($("<option />").val(0).text("Izaberi model"));
+                ddModels.append($("<option />").val("none").text("Izaberi model"));
                 $.each(response, function( index, value ) {
                     ddModels.append($("<option />").val(value.model).text(value.model));
                 });
@@ -1531,12 +1531,19 @@
             const ddModels = $('[name="model"]');
             let model = ddModels.find(":selected").text()
             model = model.replace(/Izaberi model/g, "")
-            ddModels.val(model)
             $('#btnSearch').click(function(){
-                window.location.href='/products/autodelovi/?model='+ model;
+                if ($('[name="model"]').find(":selected").text() === "Izaberi modelIzaberi model") {
+                    return
+                    }
+                let category = $('[name="partCategory"]').val()
+                window.location.href='/products/autodelovi/?model='+ model + '&category=' + category;
             });
             $('#btnSearch1').click(function(){
-                window.location.href='/products/autodelovi/?model='+ model;
+                if ($('[name="model"]').find(":selected").text() === "Izaberi modelIzaberi model") {
+                    return
+                    }
+                let category = $('[name="partCategory"]').val()
+                window.location.href='/products/autodelovi/?model='+ model + '&category=' + category;
             });
         })
     });

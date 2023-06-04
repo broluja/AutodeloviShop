@@ -4,16 +4,24 @@
 {% block title%}Oops Page not found{% endblock title %}
 {% block content %}
 
-    <div class="block-space block-space--layout--divider-nl"></div>
-    <div class="block-space block-space--layout--divider-nl"></div>
-    <div class="block block-sale">
-        <div class="block-sale__content">
-            <div class="block-sale__header">
-                <div class="block-sale__title">Nepostojeća stranica!</div>
+        <div class="site__body">
+            <div class="block-space block-space--layout--spaceship-ledge-height"></div>
+            <div class="block">
+                <div class="container">
+                    <div class="not-found">
+                        <div class="not-found__404">
+                            Oops! Error 404
+                        </div>
+                        <div class="not-found__content">
+                            <h1 class="not-found__title">Page Not Found</h1>
+                            <p class="not-found__text">
+                                Stranica koju ste tražili ne postoji.<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="block-space block-space--layout--before-footer"></div>
         </div>
-    </div>
-    <div class="block-space block-space--layout--divider-nl"></div>
-    <div class="block-space block-space--layout--divider-nl"></div>
 
 {% endblock content %}
