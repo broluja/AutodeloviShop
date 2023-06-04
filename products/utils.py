@@ -116,7 +116,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
                         "Name": "User"
                     }
                 ],
-                "Subject": "Porudzbina sa sajta",
+                "Subject": "Upit za deo",
                 "HTMLPart": html
             }
         ]
