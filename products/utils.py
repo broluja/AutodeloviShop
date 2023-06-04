@@ -116,7 +116,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
                         "Name": "User"
                     }
                 ],
-                "Subject": "Upit za deo",
+                "Subject": "Upit sa sajta",
                 "HTMLPart": html
             }
         ]
@@ -128,6 +128,7 @@ def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_
     html += f"<p>Brand: {brand} | Model: {model} | Part: {part_desc} | ID: {part_id} | Gen. Code: {gen_code}</p><br>"
     html += f"<section>{question}</section>"
     html += f"<p>Moj kontakt telefon: {phone}</p><p>Moj email: {mail}</p>"
+    html += f"<p>Srdačan pozdrav, {first_name} {last_name}</p>"
     email = {
         "Messages": [
             {
@@ -141,7 +142,7 @@ def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_
                         "Name": "User"
                     }
                 ],
-                "Subject": f"Poruka od {first_name} {last_name}",
+                "Subject": f"Upit sa sajta",
                 "HTMLPart": html
             }
         ]
