@@ -121,7 +121,7 @@ class ElasticSearchAgent:
             "query": {
                 "combined_fields": {
                     "query": part,
-                    "fields": ["model^2", "description"]
+                    "fields": ["model^3", "description^2", "gbg_id", "genuine_code"]
                 }
             }
         }
@@ -239,3 +239,26 @@ class ElasticSearchAgent:
         result = self.agent.search(index="test-index", body=query)
         if result.get("hits").get("hits"):
             return result["hits"]["hits"][0]["_source"]
+
+    def get_parts_by_category(self, term: str, model: str):
+        query = {
+            "query": {
+                "bool": {
+                    "must": [
+                        {"match_phrase": {"model": model}},
+                        # {"match_phrase": {"description": {"query": term, "slop": 10}}},
+                        {"fuzzy": {"description": {"value": term.lower(), "fuzziness": "AUTO"}}}
+                    ]
+                }
+            }
+        }
+
+        result = self.agent.search(index="test-index", body=query)
+        if result.get("hits").get("hits"):
+            parts, total = self.get_parts_and_total(result)
+            for item in parts:
+                item = item["_source"]
+                gbg_id = item.get("gbg_id")
+                image = self.img(gbg_id)
+                item["image"] = image
+            return [item["_source"] for item in parts]
