@@ -15,6 +15,7 @@ class Post(models.Model):
     views = models.PositiveIntegerField(default=1)
     slug = models.SlugField(default=None, blank=True, null=True, unique=True)
     image = models.ImageField(default='default.jpg', blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     objects = models.Manager()
     tags = TaggableManager()

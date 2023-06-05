@@ -4,7 +4,7 @@ from .models import Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["title", "subtitle", "tag_list"]
+    list_display = ["title", "subtitle", "tag_list", "date_created"]
     list_filter = ["title", ]
     list_per_page = 20
     list_display_links = ["title", "subtitle"]

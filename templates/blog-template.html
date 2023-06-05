@@ -5,29 +5,98 @@
 
 {% block content %}
 
-<div class="site__body">
-    <div class="block-space block-space--layout--spaceship-ledge-height"></div>
-        <div class="block">
-            <div class="container">
-                <hr>
-                <div class="document">
-<!--                    <div class="block-finder__image container" style="background-image: url({{post.image.url}});"></div>-->
-                    <div class="container" style="width:75%"><img src="{{post.image.url}}" alt="image" class="img-thumbnail" style="width: 100%; height: 50%"/></div>
-                    <div class="document__header">
-                        <h2 class="document__title">{{post.title}}</h2>
-                        <div class="document__subtitle"><h5>{{post.subtitle|safe|linebreaksbr}}</h5></div>
+<!--<div class="site__body">-->
+<!--    <div class="block-space block-space&#45;&#45;layout&#45;&#45;spaceship-ledge-height"></div>-->
+<!--        <div class="block">-->
+<!--            <div class="container">-->
+<!--                <hr>-->
+<!--                <div class="document">-->
+<!--&lt;!&ndash;                    <div class="block-finder__image container" style="background-image: url({{post.image.url}});"></div>&ndash;&gt;-->
+<!--                    <div class="container" style="width:75%"><img src="{{post.image.url}}" alt="image" class="img-thumbnail" style="width: 100%; height: 50%"/></div>-->
+<!--                    <div class="document__header">-->
+<!--                        <h2 class="document__title">{{post.title}}</h2>-->
+<!--                        <div class="document__subtitle"><h5>{{post.subtitle|safe|linebreaksbr}}</h5></div>-->
+<!--                    </div>-->
+<!--                    <div class="document__content card">-->
+<!--                        <div class="typography">-->
+<!--                            <p>{{post.content|safe|linebreaksbr}}</p>-->
+<!--                            <h3>Zaključak</h3>-->
+<!--                            <p>{{post.conclusion|safe|linebreaksbr}}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    <div class="block-space block-space&#45;&#45;layout&#45;&#45;before-footer"></div>-->
+<!--</div>-->
+
+
+<div class="site">
+    <div class="site__body">
+            <div class="block post-view">
+                <div class="post-view__header post-header">
+                    <div class="post-header__body">
+                        <div class="post-header__categories">
+                            <ul class="post-header__categories-list">
+                                <li class="post-header__categories-item">
+                                    <a style="color:white;" class="post-header__categories-link">Blog</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h1 class="post-header__title">{{ post.title }}</h1>
+                        <div class="post-header__meta">
+                            <ul class="post-header__meta-list">
+                                <li class="post-header__meta-item">Napisao <a class="post-header__meta-link">Admin autor</a></li>
+                                <li class="post-header__meta-item">{{ post.date_created }}</li>
+                                <li class="post-header__meta-item"><a class="post-header__meta-link">{{post.views}} Pregleda</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="document__content card">
-                        <div class="typography">
-                            <p>{{post.content|safe|linebreaksbr}}</p>
-                            <h3>Zaključak</h3>
-                            <p>{{post.conclusion|safe|linebreaksbr}}</p>
+                    <div class="decor post-header__decor decor--type--bottom">
+                        <div class="decor__body">
+                            <div class="decor__start"></div>
+                            <div class="decor__end"></div>
+                            <div class="decor__center"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="post-view__body">
+                        <div class="post-view__item post-view__item-post">
+                            <div class="post-view__card post">
+                                <div class="post__body typography">
+                                    <p>{{ post.content|safe|linebreaksbr }}</p>
+                                    <blockquote>
+                                        <p>{{ post.subtitle|safe|linebreaksbr }}</p>
+                                        <p><cite>Admin Autor</cite></p>
+                                    </blockquote>
+                                    <h2>Zaključak</h2>
+                                    <p><strong>{{ post.title }}:</strong> <a href="">{{ post.subtitle|safe|linebreaksbr }}</a></p>
+                                    <figure>
+                                        <a href="">
+                                            <img src="{{post.image.url}}" alt="image">
+                                        </a>
+                                        <figcaption>{{ post.title }}</figcaption>
+                                    </figure>
+                                    <p>{{ post.conclusion|safe|linebreaksbr }}</p>
+                                </div>
+                                <div class="post__footer">
+                                    <div class="post__tags tags tags--sm">
+                                        <div class="tags__list">
+                                            {% for tag in post.tags.all %}
+                                            <a href="">{{ tag }}</a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <div class="block-space block-space--layout--before-footer"></div>
+        <div class="block-space block-space--layout--before-footer"></div>
+
+    </div>
 </div>
 
 {% endblock content %}
