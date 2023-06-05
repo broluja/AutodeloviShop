@@ -1,4 +1,66 @@
 
+<!--<footer class="site__footer">-->
+<!--    <div class="site-footer">-->
+<!--        <div class="decor site-footer__decor decor&#45;&#45;type&#45;&#45;bottom">-->
+<!--            <div class="decor__body">-->
+<!--                <div class="decor__start"></div>-->
+<!--                <div class="decor__end"></div>-->
+<!--                <div class="decor__center"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="site-footer__widgets">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-12 col-xl-4">-->
+<!--                        <div class="site-footer__widget footer-contacts">-->
+<!--                            <h5 class="footer-contacts__title">Kontakt</h5>-->
+<!--                            <div class="footer-contacts__text">-->
+<!--                                AUTO DELOVI ZA SVE TIPOVE I MARKE AUTOMOBILA-->
+<!--                            </div>-->
+<!--                            <div class="contact" id="contact">-->
+<!--                                <address class="footer-contacts__contacts">-->
+<!--                                    <dl>-->
+<!--                                        <dt>Telefon:</dt>-->
+<!--                                        <dd>Tel: +381 60 3033 754</dd>-->
+<!--                                    </dl>-->
+<!--                                    <dl>-->
+<!--                                        <dt>Email:</dt>-->
+<!--                                        <dd>autodelovishop.rs@gmail.com</dd>-->
+<!--                                    </dl>-->
+<!--                                    <dl>-->
+<!--                                        <dt>Adresa</dt>-->
+<!--                                        <dd>Borivoja Stevanovića 17, Beograd</dd>-->
+<!--                                    </dl>-->
+<!--                                    <dl>-->
+<!--                                        <dt>Radno vreme:</dt>-->
+<!--                                        <dd>Pon-Pet 09:00 - 17:00</dd>-->
+<!--                                    </dl>-->
+<!--                                </address>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="site-footer__bottom">-->
+<!--            <div class="container">-->
+<!--                <div class="site-footer__bottom-row">-->
+<!--                    <div class="site-footer__copyright">-->
+<!--                        Autodelovishop.rs<br>Sva prava zadržana.-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
+
+
+
+
+
+
+
 <footer class="site__footer">
     <div class="site-footer">
         <div class="decor site-footer__decor decor--type--bottom">
@@ -13,33 +75,74 @@
                 <div class="row">
                     <div class="col-12 col-xl-4">
                         <div class="site-footer__widget footer-contacts">
-                            <h5 class="footer-contacts__title">Kontakt</h5>
-                            <div class="footer-contacts__text">
-                                AUTO DELOVI ZA SVE TIPOVE I MARKE AUTOMOBILA
+                            <h5 class="footer-contacts__title">Kontaktirajte nas</h5>
+<!--                            <div class="footer-contacts__text">-->
+<!--                                AUTO DELOVI ZA SVE TIPOVE I MARKE AUTOMOBILA-->
+<!--                            </div>-->
+                            <address class="footer-contacts__contacts">
+                                <dl>
+                                    <dt>Telefon:</dt>
+                                    <dd>Tel: +381 60 3033 754</dd>
+                                </dl>
+                                <dl>
+                                    <dt>Email adresa:</dt>
+                                    <dd>autodelovishop.rs@gmail.com</dd>
+                                </dl>
+                                <dl>
+                                    <dt>Adresa:</dt>
+                                    <dd>Borivoja Stevanovića 17, Beograd</dd>
+                                </dl>
+                                <dl>
+                                    <dt>Radno vreme:</dt>
+                                    <dd>Pon-Pet 09:00 - 17:00</dd>
+                                </dl>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="site-footer__widget footer-links">
+                            <h5 class="footer-links__title">Informacije</h5>
+                            <ul class="footer-links__list">
+                                <li class="footer-links__item"><a href="{% url 'index' %}" class="footer-links__link">Auto delovi za sve marke i tipove automobila</a></li>
+                                <li class="footer-links__item"><a href="{% url 'about' %}" class="footer-links__link">O nama</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="site-footer__widget footer-links">
+                            <h5 class="footer-links__title">Blog</h5>
+                            <ul class="footer-links__list">
+                                {% for post in posts %}
+                                <li class="footer-links__item"><a href="{% url 'blog:read_post' post.slug %}" class="footer-links__link">{{post.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="site-footer__widget footer-newsletter">
+                            <h5 class="footer-newsletter__title">Društvene mreže</h5>
+<!--                            <div class="footer-newsletter__text">-->
+<!--                                Enter your email address below to subscribe to our newsletter and keep up to date with discounts and special offers.-->
+<!--                            </div>-->
+<!--                            <form action="" class="footer-newsletter__form">-->
+<!--                                <label class="sr-only" for="footer-newsletter-address">Email Address</label>-->
+<!--                                <input type="text" class="footer-newsletter__form-input" id="footer-newsletter-address" placeholder="Email Address...">-->
+<!--                                <button class="footer-newsletter__form-button">Subscribe</button>-->
+<!--                            </form>-->
+                            <div class="footer-newsletter__text footer-newsletter__text--social">
+                                Pratite nas na društvenim mrežama
                             </div>
-                            <div class="contact" id="contact">
-                                <address class="footer-contacts__contacts">
-                                    <dl>
-                                        <dt>Telefon:</dt>
-                                        <dd>Tel: +381 60 3033 754</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Email:</dt>
-                                        <dd>autodelovishop.rs@gmail.com</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Adresa</dt>
-                                        <dd>Borivoja Stevanovića 17, Beograd</dd>
-                                    </dl>
-                                    <dl>
-                                        <dt>Radno vreme:</dt>
-                                        <dd>Pon-Pet 09:00 - 17:00</dd>
-                                    </dl>
-                                </address>
+                            <div class="footer-newsletter__social-links social-links">
+                                <ul class="social-links__list">
+                                    <li class="social-links__item social-links__item--facebook"><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-links__item social-links__item--twitter"><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    <li class="social-links__item social-links__item--youtube"><a href="#" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                    <li class="social-links__item social-links__item--instagram"><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="social-links__item social-links__item--rss"><a href="#" target="_blank"><i class="fas fa-rss"></i></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -48,6 +151,9 @@
                 <div class="site-footer__bottom-row">
                     <div class="site-footer__copyright">
                         Autodelovishop.rs<br>Sva prava zadržana.
+                    </div>
+                    <div class="site-footer__payments">
+                        <img src="images/payments.png" alt="">
                     </div>
                 </div>
             </div>
