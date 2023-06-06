@@ -27,25 +27,25 @@
                             <div class="section-header__spring"></div>
                             <ul class="section-header__groups">
                                 <li class="section-header__groups-item">
-                                    <a href="{% url 'show_model' %}?model={{ model }}&category=svetlosna%20oprema" type="button" class="section-header__groups-button">Svetlosna oprema</a>
+                                    <a style="color:red;" href="{% url 'show_model' %}?model={{ model }}&category=svetlosna%20oprema" type="button" class="section-header__groups-button">Svetlosna oprema</a>
+                                </li>
+                                <li class="section-header__groups-item" style="color:red;">
+                                    <a style="color:red;" type="button" class="section-header__groups-button" href="{% url 'show_model' %}?model={{ model }}&category=branik">Branik i delovi branika</a>
                                 </li>
                                 <li class="section-header__groups-item">
-                                    <a type="button" class="section-header__groups-button" href="{% url 'show_model' %}?model={{ model }}&category=branik">Branik i delovi branika</a>
+                                    <a style="color:red;" href="{% url 'show_model' %}?model={{ model }}&category=zaštitne%20plastike" type="button" class="section-header__groups-button">Zaštitne plastike</a>
                                 </li>
                                 <li class="section-header__groups-item">
-                                    <a href="{% url 'show_model' %}?model={{ model }}&category=zaštitne%20plastike" type="button" class="section-header__groups-button">Zaštitne plastike</a>
+                                    <a style="color:red;" href="{% url 'show_model' %}?model={{ model }}&category=limarija" type="button" class="section-header__groups-button">Limarija</a>
                                 </li>
                                 <li class="section-header__groups-item">
-                                    <a href="{% url 'show_model' %}?model={{ model }}&category=limarija" type="button" class="section-header__groups-button">Limarija</a>
+                                    <a style="color:red;" href="{% url 'show_model' %}?model={{ model }}&category=hladnjaci" type="button" class="section-header__groups-button">Hladnjaci</a>
                                 </li>
                                 <li class="section-header__groups-item">
-                                    <a href="{% url 'show_model' %}?model={{ model }}&category=hladnjaci" type="button" class="section-header__groups-button">Hladnjaci</a>
+                                    <a style="color:red;" href="{% url 'show_model' %}?model={{ model }}&category=retrovizori" type="button" class="section-header__groups-button">Retrovizori i delovi retrovizora</a>
                                 </li>
                                 <li class="section-header__groups-item">
-                                    <a href="{% url 'show_model' %}?model={{ model }}&category=retrovizori" type="button" class="section-header__groups-button">Retrovizori i delovi retrovizora</a>
-                                </li>
-                                <li class="section-header__groups-item">
-                                    <a href="{% url 'show_model' %}?model={{ model }}&category=amortizeri" type="button" class="section-header__groups-button">Amortizeri</a>
+                                    <a style="color:red;" href="{% url 'show_model' %}?model={{ model }}&category=amortizeri" type="button" class="section-header__groups-button">Amortizeri</a>
                                 </li>
                             </ul>
                             <div class="section-header__divider"></div>
@@ -54,6 +54,9 @@
                     </ol>
                 </nav>
                 <h1 class="block-header__title">Karoserijski auto delovi za {{ model }}</h1>
+                {% if category_search %}
+                <h4 class="text-center" >{{ category_search|capfirst }}</h4>
+                {% endif %}
             </div>
         </div>
     </div>
