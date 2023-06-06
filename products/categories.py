@@ -8,18 +8,17 @@ amortizeri = ("amortizer", )
 
 
 def get_parts_by_categories(category: str) -> tuple:
-    match category:
-        case "svetlosna oprema":
-            return svetlosna_oprema
-        case "branik":
-            return branik
-        case "limarija":
-            return limarija
-        case "zaštitne plastike":
-            return zastitne_plastike
-        case "hladnjaci":
-            return hladnjaci
-        case "retrovizori":
-            return retrovizori
-        case "amortizeri":
-            return  amortizeri
+    if category == "svetlosna oprema":
+        return svetlosna_oprema
+    elif category == "branik":
+        return branik
+    elif category ==  "limarija":
+        return limarija
+    elif category == "zaštitne plastike":
+        return zastitne_plastike
+    elif category == "hladnjaci":
+        return hladnjaci
+    elif category == "retrovizori":
+        return retrovizori
+    elif category == "amortizeri":
+        return  amortizeri
