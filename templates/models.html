@@ -16,7 +16,6 @@
                         <tr>
                             <th class="col-md-3">Slike</th>
                             <th class="col-6 text-center">Marka: {{ brand|upper }}</th>
-<!--                            <th class="col-3">Opcije</th>-->
                         </tr>
                         {% for model in models %}
                         <tr>
@@ -36,12 +35,6 @@
                                 <div class="text-left" style="width:150px; height: 100px;">
                                     <a href="{% url 'show_model' %}?model={{ model }}"><h6>{{ model|title|cut:"  "|truncatechars:"40" }}</h6></a>
                                 </div>
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <a href="{% url 'show_model' %}?model={{ model }}"><button class="btn btn-primary" style="border-radius:5px; width: 100%;"><h5>Delovi karoserije</h5></button></a>-->
-<!--                                <button style="border-radius:5px; width: 100%; margin-top: 10px;" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="{{brand}} | {{model}}">-->
-<!--                                  <h5>Detalji</h5>-->
-<!--                                </button>-->
                             </td>
                         </tr>
                         {% endfor %}
@@ -77,8 +70,20 @@
                                   <option value="none">Izaberi model</option>
                                 </select>
                             </div>
+                            <div class="block-finder__form-control block-finder__form-control--select">
+                                <select name="partCategory" aria-label="Category" disabled>
+                                    <option value="none">Izaberi kategoriju</option>
+                                    <option value="svetlosna oprema">SVETLOSNA OPREMA</option>
+                                    <option value="branik">BRANIK I DELOVI BRANIKA</option>
+                                    <option value="limarija">LIMARIJA</option>
+                                    <option value="zaštitne plastike">ZAŠTITNE PLASTIKE</option>
+                                    <option value="hladnjaci">HLADNJACI</option>
+                                    <option value="retrovizori">RETROVIZORI I DELOVI RETROVIZORA</option>
+                                    <option value="amortizeri">AMORTIZERI</option>
+                                </select>
+                            </div>
                             <button style="border-radius:5px;" class="block-finder__form-control block-finder__form-control--button" type="button" id="btnSearch1">
-                                Pretraga
+                                Pretraži
                             </button>
                         </form>
                     </div>

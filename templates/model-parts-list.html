@@ -14,17 +14,54 @@
                         <li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
                             <a href="{% url 'index' %}" class="breadcrumb__item-link">Naslovna</a>
                         </li>
+                        {% if articles %}
                         <li class="breadcrumb__item breadcrumb__item--parent">
                             <a href="{% url 'show_model' %}?model={{ model }}" class="breadcrumb__item-link">{{ model }}</a>
                         </li>
-
-                        <li class="breadcrumb__title-safe-area" role="presentation"></li>
+                        {% endif %}
+                    </ol>
+                </nav>
+                <div class="section-header">
+                        <div class="section-header__body">
+                            <h2 class="section-header__title">Kategorije Delova</h2>
+                            <div class="section-header__spring"></div>
+                            <ul class="section-header__groups">
+                                <li class="section-header__groups-item">
+                                    <a href="{% url 'show_model' %}?model={{ model }}&category=svetlosna%20oprema" type="button" class="section-header__groups-button">Svetlosna oprema</a>
+                                </li>
+                                <li class="section-header__groups-item">
+                                    <a type="button" class="section-header__groups-button" href="{% url 'show_model' %}?model={{ model }}&category=branik">Branik i delovi branika</a>
+                                </li>
+                                <li class="section-header__groups-item">
+                                    <a href="{% url 'show_model' %}?model={{ model }}&category=zaštitne%20plastike" type="button" class="section-header__groups-button">Zaštitne plastike</a>
+                                </li>
+                                <li class="section-header__groups-item">
+                                    <a href="{% url 'show_model' %}?model={{ model }}&category=limarija" type="button" class="section-header__groups-button">Limarija</a>
+                                </li>
+                                <li class="section-header__groups-item">
+                                    <a href="{% url 'show_model' %}?model={{ model }}&category=hladnjaci" type="button" class="section-header__groups-button">Hladnjaci</a>
+                                </li>
+                                <li class="section-header__groups-item">
+                                    <a href="{% url 'show_model' %}?model={{ model }}&category=retrovizori" type="button" class="section-header__groups-button">Retrovizori i delovi retrovizora</a>
+                                </li>
+                                <li class="section-header__groups-item">
+                                    <a href="{% url 'show_model' %}?model={{ model }}&category=amortizeri" type="button" class="section-header__groups-button">Amortizeri</a>
+                                </li>
+                            </ul>
+                            <div class="section-header__divider"></div>
+                        </div>
+                    </div>
                     </ol>
                 </nav>
                 <h1 class="block-header__title">Karoserijski auto delovi za {{ model }}</h1>
             </div>
         </div>
     </div>
+    {% if not articles %}
+        <h3 class="text-center">Nema dostupnih delova po kategoriji "{{category}}".</h3>
+        <br>
+        <h3></h3>
+    {% else %}
     <div class="block-split">
         <div class="container">
             <div class="block-split__row row no-gutters">
@@ -179,10 +216,10 @@
 
                                         {% if page > 1 %}
                                             <li class="page-item">
-                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}"><<</a>
+                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&category={{ category_search }}"><<</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&page={{ page|add:'-1' }}"><</a>
+                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&category={{ category_search }}&page={{ page|add:'-1' }}"><</a>
                                             </li>
                                         {% endif %}
 
@@ -191,17 +228,17 @@
                                                 {% if forloop.counter == page %}
                                                     <li class="page-item" style="font-weight:bold; font-size:120%;">{{ page }}</li>
                                                 {% elif forloop.counter > page|add:'-3' and forloop.counter < page|add:'3' %}
-                                                    <li class="page-item"><a class="page-link" href="{% url 'show_model' %}?model={{ model }}&page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="{% url 'show_model' %}?model={{ model }}&category={{ category_search }}&page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
                                                 {% endif %}
                                             {% endfor %}
                                         {% endwith %}
 
                                         {% if page < total %}
                                             <li class="page-item">
-                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&page={{ page|add:'1' }}">></a>
+                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&category={{ category_search }}&page={{ page|add:'1' }}">></a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&page={{ total }}">>></a>
+                                                <a class="page-link" href="{% url 'show_model' %}?model={{ model }}&category={{ category_search }}&page={{ total }}">>></a>
                                             </li>
                                         {% endif %}
 
@@ -216,6 +253,7 @@
             <div class="block-space block-space--layout--before-footer"></div>
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock content %}

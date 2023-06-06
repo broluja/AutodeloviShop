@@ -8,7 +8,8 @@ from django.utils.text import slugify
 from items.utils import add_views
 from items.models import Brand
 from .elastic_agent import ElasticSearchAgent
-from .utils import send_email, ask_for_part, set_cookie, save_orders, reply_on_order
+from .utils import send_email, ask_for_part, set_cookie, save_orders, reply_on_order, get_category_parts
+from .categories import get_parts_by_categories
 
 es = ElasticSearchAgent()
 
@@ -39,12 +40,25 @@ def get_models(request):
 def show_model(request):
     model = request.GET.get("model")
     page = int(request.GET.get("page", 1))
+    category = request.GET.get("category", "none")
     if page > 1000:
         return redirect(reverse("show_model") + f"?model={model}")
     page_num = page - 1
     per_page = 10
     _from = page_num * per_page
-    articles, total = es.show_model(model, _from)
+    if category == "none":
+        articles, total = es.show_model(model, _from)
+    else:
+        parts_by_category = get_parts_by_categories(category)
+        articles = []
+        for category_part in parts_by_category:  # Getting parts based on a chosen category.
+            parts = get_category_parts(category_part, model)
+            articles.extend(parts if parts else [])
+        articles = [obj for obj in articles if obj]
+        total = len(articles)
+        articles = articles[(10*page-10): (10*page)]
+        if not articles:
+            return render(request, "model-parts-list.html", {"category": category, "model": model})
     on_page = min(total - _from, 10)
     total_num_pages = ceil(total / 10)
     if page > total_num_pages:
@@ -55,7 +69,8 @@ def show_model(request):
         "page": page,
         "total": total_num_pages,
         "total_parts": total,
-        "on_page": on_page
+        "on_page": on_page,
+        "category_search": category
     }
     return render(request, "model-parts-list.html", context)
 
@@ -89,19 +104,6 @@ def dynamic_search(request):
 
 
 def search_parts(request):
-    search_type = request.GET.get("searchRadioGroup")
-    if search_type == "oem":
-        oem = request.GET.get("search")
-        article = es.search_product_by_oem(oem)
-        if not article:
-            return render(request, "unknown-search.html", context={"oem_number": "unknown"})
-        gbg_id = article.get("gbg_id")
-        return redirect("item:product_details", gbg_id)
-    elif search_type == "kat":
-        gbg_id = request.GET.get("search")
-        article = es.get_product(gbg_id)
-        return redirect("item:product_details", gbg_id) if article else render(request, "unknown-search.html")
-
     if request.GET.get("checkbox"):
         model = request.GET.get("myModel")
     elif request.GET.get("modelSearch"):

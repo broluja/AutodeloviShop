@@ -1,4 +1,5 @@
 import json
+import redis
 import datetime
 from mailjet_rest import Client
 from tabulate import tabulate
@@ -9,8 +10,10 @@ from django.conf import settings
 from items.models import Item
 from products.email_template import prolog, content, final
 from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY
+from .elastic_agent import ElasticSearchAgent
 
 
+es = ElasticSearchAgent()
 mailjet = Client(auth=(MAIL_API_KEY, MAIL_SECRET_KEY), version="v3.1")
 
 def send_email(data):
@@ -179,3 +182,27 @@ def save_orders(products: list) -> None:
             item.save()
     except Exception as exc:
         print(exc)
+
+
+def memoize(func):
+    r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+    expire = 60 * 60 * 24
+
+    def wrapper(*args):
+        key = '_'.join(args)
+        if r.get(key):
+            data = r.get(key)
+            return json.loads(data)
+        else:
+            result = func(*args)
+            data = json.dumps(result)
+            r.set(key, data, ex=expire)
+            return result
+
+    return wrapper
+
+
+@memoize
+def get_category_parts(category_part, model):
+    parts = es.get_parts_by_category(category_part, model)
+    return parts
