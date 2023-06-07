@@ -54,8 +54,10 @@
                     </ol>
                 </nav>
                 <h1 class="block-header__title">Karoserijski auto delovi za {{ model }}</h1>
-                {% if category_search %}
+                {% if category_search != "none" %}
                 <h4 class="text-center" >{{ category_search|capfirst }}</h4>
+                {% else %}
+                <h4 class="text-center" >Svi delovi</h4>
                 {% endif %}
             </div>
         </div>

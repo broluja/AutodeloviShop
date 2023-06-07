@@ -2,7 +2,7 @@ svetlosna_oprema = ("far", "maglenka", "migavac", "lampa", "katadiopter", "svetl
 branik = ("branik", "spojler", "lajsna", "resetka", "nosac", "sina", "pvc", "maska")
 limarija = ("hauba", "krilo", "lim", "brava", "kvaka")
 zastitne_plastike = ("potkrilo", "zastita")
-hladnjaci = ("ventilator", "hladnjak", "grejac")
+hladnjaci = ("ventilator", "hladnjak", "grejac", "interkuler")
 retrovizori = ("retrovizor", "staklo", )
 amortizeri = ("amortizer", )
 
