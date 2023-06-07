@@ -1121,7 +1121,6 @@
                 }
 
                 cancelPreviousGroupChange();
-
                 $(this).closest('.section-header__groups').find('.section-header__groups-button').removeClass('section-header__groups-button--active');
                 $(this).addClass('section-header__groups-button--active');
 
@@ -1600,4 +1599,69 @@
             item.find('~ .vehicle-form__item--select select').trigger('change.select2');
         });
     });
+
+    /* Kategorije delova */
+    $(function() {
+        $(document).on("click","#svetlosnaOprema", function () {
+            let category = this.getAttribute("model")
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=svetlosna%20oprema";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#branik", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=branik";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#zastitnePlastike", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=zaštitne%20plastike";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#limarija", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=limarija";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#hladnjaci", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=hladnjaci";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#retrovizori", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=retrovizori";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#amortizeri", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category + "&category=amortizeri";
+        })
+    });
+
+    $(function() {
+        $(document).on("click","#sveKategorije", function () {
+            let category = this.getAttribute("model")
+            console.log(category)
+            window.location.href = "/products/autodelovi/?model=" + category;
+        })
+    });
+
 })(jQuery);
