@@ -220,81 +220,177 @@
     </div>
 </div>
 
+<!-- Carusel -->
 
-<div class="container">
-    <hr>
-    <div class="row">
-        {% if article.model %}
-        <!-- Left side -->
-        <div class="col-md-8">
-            <h4>{{message}}</h4>
-            <hr style="width:50%;text-align:left;margin-left:0;">
+<div class="block block-products-carousel" data-layout="grid-5">
+    <div class="container">
+    <div class="section-header">
+        <div class="section-header__body">
+            <h2 class="section-header__title">{{ message }}</h2>
+            <div class="section-header__spring"></div>
+            <div class="section-header__arrows">
+                <div class="arrow section-header__arrow section-header__arrow--prev arrow--prev">
+                    <button class="arrow__button" type="button"><svg width="7" height="11">
+                            <path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="arrow section-header__arrow section-header__arrow--next arrow--next">
+                    <button class="arrow__button" type="button"><svg width="7" height="11">
+                            <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9
+C-0.1,9.8-0.1,10.4,0.3,10.7z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="section-header__divider"></div>
+        </div>
+    </div>
+    <div class="block-products-carousel__carousel">
+        <div class="block-products-carousel__carousel-loader"></div>
+        <div class="owl-carousel">
             {% for article in articles %}
-            <div class="product__info">
-                <div class="product__info-card">
-                    <div class="product__info-body">
-                        <div class="product__badge tag-badge tag-badge--sale">
-                            <strong>{{ article.price|floatformat:"2g" }} RSD</strong>
+            <div class="block-products-carousel__column">
+                <div class="block-products-carousel__cell">
+                    <div class="product-card product-card--layout--grid">
+                        <div class="product-card__actions-list">
+                            <button id="{{article.gbg_id}}" hx-get="{% url 'quick_view' article.gbg_id %}" hx-target="#quickViewModal" class="product-card__action product-card__action--quickview" type="button" aria-label="Quick view">
+                                <svg width="16" height="16">
+                                    <path d="M14,15h-4v-2h3v-3h2v4C15,14.6,14.6,15,14,15z M13,3h-3V1h4c0.6,0,1,0.4,1,1v4h-2V3z M6,3H3v3H1V2c0-0.6,0.4-1,1-1h4V3z
+M3,13h3v2H2c-0.6,0-1-0.4-1-1v-4h2V13z" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="product__prices-stock">
-                            <div class="product__prices">
-                                <div class="product__price product__price--current">
-                                    <a style="color:black;" href="{% url 'item:product_details' article.gbg_id %}">{{article.description}}</a>
-                                </div>
+                        <div class="product-card__image">
+                            <div class="image image--type--product">
+                                <a href="{% url 'item:product_details' article.gbg_id %}" class="image__body">
+                                    <img class="image__tag" src="{{ article.image }}" alt="">
+                                </a>
                             </div>
-                        </div>
-                        <div class="product__meta">
-                            <table>
-                                <tr>
-                                    <th>OEM broj</th>
-                                    <td>{{article.genuine_code}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Težina</th>
-                                    <td>{{article.weight|mul:0.5}} kg</td>
-                                </tr>
-                                <tr>
-                                    <th>Kataloški broj</th>
-                                    <td>{{article.gbg_id}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="product-form product__form">
-                        <div class="product-form__body">
-                            <div class="product-form__row">
-                                <div class="product-form__control">
-                                    <div class="input-radio-label">
-                                        <div class="input-radio-label__list">
-                                            {% if article.side == "R" %}
-                                                <label class="input-radio-label__item">
-                                                    <input type="radio" name="material" class="input-radio-label__input">
-                                                    <span class="input-radio-label__title">Strana: Desna</span>
-                                                </label>
-                                            {% elif article.side == "L" %}
-                                                <label class="input-radio-label__item">
-                                                    <input type="radio" name="material" class="input-radio-label__input">
-                                                    <span class="input-radio-label__title">Strana: Leva</span>
-                                                </label>
-                                            {% else %}
-                                                <label class="input-radio-label__item">
-                                                    <input type="radio" name="material" class="input-radio-label__input">
-                                                    <span class="input-radio-label__title">Strana: Univerzalna</span>
-                                                </label>
-                                            {% endif %}
-                                        </div>
+                            <div class="status-badge status-badge--style--success product-card__fit status-badge--has-icon status-badge--has-text">
+                                <div class="status-badge__body">
+                                    <div class="status-badge__icon"><svg width="13" height="13">
+                                            <path d="M12,4.4L5.5,11L1,6.5l1.4-1.4l3.1,3.1L10.6,3L12,4.4z" />
+                                        </svg>
                                     </div>
+                                    <div class="status-badge__text">{{article.description}}</div>
+                                    <div class="status-badge__tooltip" tabindex="0" data-toggle="tooltip" title="{{article.description}}"></div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="product-card__info">
+                            <div class="product-card__meta"><span class="product-card__meta-title">OEM:</span>
+                                {{article.genuine_code}}</div>
+                            <div class="product-card__name">
+                                <div>
+                                    <div class="product-card__badges">
+                                        <div class="tag-badge tag-badge--new">Novo</div>
+                                    </div>
+                                    <a href="product-full.html">{{ article.description }}</a>
+                                </div>
+                            </div>
+                            <div class="product-card__rating">
+                                <div class="product-card__rating-label">Strana: {% if article.side == 'L' %}Leva{% elif article.side == 'R' %}Desna{% else %}Univerzalna{% endif %}</div>
+                            </div>
+                        </div>
+                        <div class="product-card__footer">
+                            <div class="product-card__prices">
+                                <div class="product-card__price product-card__price--current">{{ article.price|floatformat:"2g" }} RSD</div>
+                            </div>
+<!--                            <button id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' article.gbg_id %}" hx-target="#productForCart" hx-swap="innerHtml" class="product-card__addtocart-icon" type="button" aria-label="Add to cart">-->
+<!--                                <svg width="20" height="20">-->
+<!--                                    <circle cx="7" cy="17" r="2" />-->
+<!--                                    <circle cx="15" cy="17" r="2" />-->
+<!--                                    <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6-->
+<!--V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4-->
+<!--C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />-->
+<!--                                </svg>-->
+<!--                            </button>-->
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
+    </div>
+</div>
+</div>
+
+
+<div class="container">
+    <hr>
+    <div class="row">
+        {% if article.model %}
+        <!-- Left side -->
+<!--        <div class="col-md-8">-->
+<!--            <h4>{{message}}</h4>-->
+<!--            <hr style="width:50%;text-align:left;margin-left:0;">-->
+<!--            {% for article in articles %}-->
+<!--            <div class="product__info">-->
+<!--                <div class="product__info-card">-->
+<!--                    <div class="product__info-body">-->
+<!--                        <div class="product__badge tag-badge tag-badge&#45;&#45;sale">-->
+<!--                            <strong>{{ article.price|floatformat:"2g" }} RSD</strong>-->
+<!--                        </div>-->
+<!--                        <div class="product__prices-stock">-->
+<!--                            <div class="product__prices">-->
+<!--                                <div class="product__price product__price&#45;&#45;current">-->
+<!--                                    <a style="color:black;" href="{% url 'item:product_details' article.gbg_id %}">{{article.description}}</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product__meta">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <th>OEM broj</th>-->
+<!--                                    <td>{{article.genuine_code}}</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Težina</th>-->
+<!--                                    <td>{{article.weight|mul:0.5}} kg</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Kataloški broj</th>-->
+<!--                                    <td>{{article.gbg_id}}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-form product__form">-->
+<!--                        <div class="product-form__body">-->
+<!--                            <div class="product-form__row">-->
+<!--                                <div class="product-form__control">-->
+<!--                                    <div class="input-radio-label">-->
+<!--                                        <div class="input-radio-label__list">-->
+<!--                                            {% if article.side == "R" %}-->
+<!--                                                <label class="input-radio-label__item">-->
+<!--                                                    <input type="radio" name="material" class="input-radio-label__input">-->
+<!--                                                    <span class="input-radio-label__title">Strana: Desna</span>-->
+<!--                                                </label>-->
+<!--                                            {% elif article.side == "L" %}-->
+<!--                                                <label class="input-radio-label__item">-->
+<!--                                                    <input type="radio" name="material" class="input-radio-label__input">-->
+<!--                                                    <span class="input-radio-label__title">Strana: Leva</span>-->
+<!--                                                </label>-->
+<!--                                            {% else %}-->
+<!--                                                <label class="input-radio-label__item">-->
+<!--                                                    <input type="radio" name="material" class="input-radio-label__input">-->
+<!--                                                    <span class="input-radio-label__title">Strana: Univerzalna</span>-->
+<!--                                                </label>-->
+<!--                                            {% endif %}-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
         <!-- forma -->
         {% endif %}
-        <div class="col-md-4">
+        <div class="col">
             <h4>Imate pitanje u vezi ovog dela?</h4>
             <hr>
             <h5>Lični podaci</h5>

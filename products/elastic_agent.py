@@ -187,7 +187,11 @@ class ElasticSearchAgent:
         try:
             p = self.agent.search(index="test-index", body=product_query)
             product_dictionary = p["hits"]["hits"][0]
-            return product_dictionary["_source"]
+            product = product_dictionary["_source"]
+            gbg_id = product["gbg_id"]
+            image = self.img(gbg_id)
+            product['image'] = image
+            return product
         except IndexError as exc:
             print(exc)
             return None
@@ -238,7 +242,12 @@ class ElasticSearchAgent:
         }
         result = self.agent.search(index="test-index", body=query)
         if result.get("hits").get("hits"):
-            return result["hits"]["hits"][0]["_source"]
+            part = result["hits"]["hits"][0]["_source"]
+            gbg_id = part.get("gbg_id")
+            image = self.img(gbg_id)
+            part["image"] = image
+            return part
+
 
     def get_parts_by_category(self, term: str, model: str):
         query = {
