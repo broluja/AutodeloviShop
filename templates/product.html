@@ -286,7 +286,7 @@ M3,13h3v2H2c-0.6,0-1-0.4-1-1v-4h2V13z" />
                                     <div class="product-card__badges">
                                         <div class="tag-badge tag-badge--new">Novo</div>
                                     </div>
-                                    <a href="product-full.html">{{ article.description }}</a>
+                                    <a href="{% url 'item:product_details' article.gbg_id %}">{{ article.description }}</a>
                                 </div>
                             </div>
                             <div class="product-card__rating">
@@ -297,15 +297,15 @@ M3,13h3v2H2c-0.6,0-1-0.4-1-1v-4h2V13z" />
                             <div class="product-card__prices">
                                 <div class="product-card__price product-card__price--current">{{ article.price|floatformat:"2g" }} RSD</div>
                             </div>
-<!--                            <button id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' article.gbg_id %}" hx-target="#productForCart" hx-swap="innerHtml" class="product-card__addtocart-icon" type="button" aria-label="Add to cart">-->
-<!--                                <svg width="20" height="20">-->
-<!--                                    <circle cx="7" cy="17" r="2" />-->
-<!--                                    <circle cx="15" cy="17" r="2" />-->
-<!--                                    <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6-->
-<!--V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4-->
-<!--C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />-->
-<!--                                </svg>-->
-<!--                            </button>-->
+                            <button id="dodaj_korpa" podaci="{{article}}" hx-get="{% url 'add_to_cart' article.gbg_id %}" hx-target="#productForCart" hx-swap="innerHtml" class="product-card__addtocart-icon" type="button" aria-label="Add to cart">
+                                <svg width="20" height="20">
+                                    <circle cx="7" cy="17" r="2" />
+                                    <circle cx="15" cy="17" r="2" />
+                                    <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6
+V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4
+C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -390,7 +390,7 @@ M3,13h3v2H2c-0.6,0-1-0.4-1-1v-4h2V13z" />
 <!--        </div>-->
         <!-- forma -->
         {% endif %}
-        <div class="col">
+        <div class="col">  <!-- col-md-4 -->
             <h4>Imate pitanje u vezi ovog dela?</h4>
             <hr>
             <h5>Lični podaci</h5>
