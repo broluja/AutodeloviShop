@@ -161,14 +161,24 @@
                                                 <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}"><<</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'-1'}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}"><</a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'-1'}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">
+                                                    <span class="page-link__arrow page-link__arrow--left" aria-hidden="true">
+                                                        <svg width="7" height="11">
+                                                            <path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z" />
+                                                        </svg>
+                                                    </span>
+                                                </a>
                                             </li>
                                         {% endif %}
 
                                         {% with ''|center:total as range %}
                                             {% for _ in range %}
                                                 {% if forloop.counter == page %}
-                                                    <li class="page-item page-link--with-arrow" style="font-weight:bold; font-size:120%;">{{page}}</li>
+                                                    <li class="page-item active">
+                                                        <span class="page-link">{{ page }}
+                                                            <span class="sr-only">(current)</span>
+                                                        </span>
+                                                    </li>
                                                 {% elif forloop.counter > page|add:'-3' and forloop.counter < page|add:'3' %}
                                                     <li class="page-item"><a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{forloop.counter}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">{{forloop.counter}}</a></li>
                                                 {% endif %}
@@ -177,7 +187,13 @@
 
                                         {% if page < total %}
                                             <li class="page-item">
-                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'1'}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">></a>
+                                                <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{page|add:'1'}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">
+                                                    <span class="page-link__arrow page-link__arrow--right" aria-hidden="true">
+                                                        <svg width="7" height="11">
+                                                            <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9C-0.1,9.8-0.1,10.4,0.3,10." />
+                                                        </svg>
+                                                    </span>
+                                                </a>
                                             </li>
                                             <li class="page-item">
                                                 <a class="page-link page-link--with-arrow" href="{% url 'search_parts' %}?search={{part}}&page={{total}}{% if model %}&modelSearch={{my_car.my_model}}{%endif%}">>></a>
