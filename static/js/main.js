@@ -561,8 +561,9 @@
                     console.log(this.responseText)
                     if (jsonResponse["Messages"][0]["Status"] == "success") {
                         document.getElementById("porudzbina-forma").innerHTML =
-                            "<h6 class='text-center'>Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave. Hvala!</h6>";
-                        document.getElementById("checkoutHeader").innerHTML = "<h1 class='text-center' style='color: green;'>Uspešno završena porudžbina.</h1>"
+                            "<h5 class='text-center'>Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave.</h5>";
+                        document.getElementById("checkoutHeader").innerHTML =
+                            '<div class="order-success__header"><div class="order-success__icon"><svg width="100" height="100"><path d="M50,100C22.4,100,0,77.6,0,50S22.4,0,50,0s50,22.4,50,50S77.6,100,50,100z M50,2C23.5,2,2,23.5,2,50 s21.5,48,48,48s48-21.5,48-48S76.5,2,50,2z M44.2,71L22.3,49.1l1.4-1.4l21.2,21.2l34.4-34.4l1.4,1.4L45.6,71 C45.2,71.4,44.6,71.4,44.2,71z" /></svg></div><h1 style="color:green;" class="order-success__title">Hvala!</h1>'
                         localStorage.clear();
                     } else {
                         document.getElementById("porudzbina-error").innerHTML =
