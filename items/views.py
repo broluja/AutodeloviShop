@@ -43,7 +43,7 @@ def product_details(request, product_id):
                 articles.append(part)
         message = f"Povezani delovi modela {model}"
         if not articles:  # If no suggestions found
-            parts, total = es.show_model(model, _from=0, per_page=5)
+            parts, total = es.show_model(model, _from=0, per_page=6)
             message = f"Drugi proizvodi modela {model}"
             articles = deque(parts)
         articles = deque([obj for obj in articles if obj if obj.get("gbg_id") != article.get("gbg_id")])
