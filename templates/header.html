@@ -69,29 +69,35 @@
                 <div class="main-menu">
                     <ul class="main-menu__list">
                         <li class="main-menu__item">
-                            <a href="{% url 'index' %}" class="btn">Naslovna</a>
+                            <a href="{% url 'index' %}" class="main-menu__link">Naslovna</a>
                         </li>
                         <li class="main-menu__item">
-                            <a href="{% url 'about' %}" class="btn">O nama</a>
+                            <a href="{% url 'about' %}" class="main-menu__link">O nama</a>
                         </li>
                         <li class="main-menu__item">
-                            <a href="#contact" class="btn">Kontakt</a>
+                            <a href="#contact" class="main-menu__link">Kontakt</a>
                         </li>
-                        <div class="dropdown">
-                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Blog
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              {% if posts %}
-                              {% for post in posts %}
-                                <a class="dropdown-item" href="{% url 'blog:read_post' post.slug %}">{{post.title}}</a>
-                              {% endfor %}
-                              {% endif %}
+                        <li class="main-menu__item main-menu__item--submenu--menu main-menu__item--has-submenu">
+                            <a href="" class="main-menu__link">
+                                Blog
+                                <svg width="7px" height="5px">
+                                    <path d="M0.280,0.282 C0.645,-0.084 1.238,-0.077 1.596,0.297 L3.504,2.310 L5.413,0.297 C5.770,-0.077 6.363,-0.084 6.728,0.282 C7.080,0.634 7.088,1.203 6.746,1.565 L3.504,5.007 L0.262,1.565 C-0.080,1.203 -0.072,0.634 0.280,0.282 Z" />
+                                </svg>
+                            </a>
+                            <div class="main-menu__submenu">
+                                <ul class="menu">
+                                    {% if posts %}
+                                    {% for post in posts %}
+                                    <li class="menu__item menu__item--has-submenu">
+                                        <a class="menu__link" href="{% url 'blog:read_post' post.slug %}">{{post.title}}</a>
+                                    </li>
+                                    {% endfor %}
+                                    {% endif %}
+                                </ul>
                             </div>
-                        </div>
                         {% if user.is_staff%}
                         <li class="main-menu__item">
-                            <a href="{% url 'admin:index' %}" class="btn">Admin</a>
+                            <a href="{% url 'admin:index' %}" class="main-menu__link">Admin</a>
                         </li>
                         {% endif %}
                     </ul>
