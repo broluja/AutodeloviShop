@@ -52,6 +52,11 @@
                           </div>
                         </div>
                     </li>
+                    {% if user.is_staff%}
+                    <li data-mobile-menu-item>
+                        <a href="{% url 'admin:index' %}" class="btn">Admin</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <hr>
                 <h6 class="text-center mb-3">Pretražite delove</h6>
