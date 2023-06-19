@@ -78,17 +78,22 @@
                             <a href="#contact" class="btn">Kontakt</a>
                         </li>
                         <div class="dropdown">
-                          <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Blog
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               {% if posts %}
                               {% for post in posts %}
                                 <a class="dropdown-item" href="{% url 'blog:read_post' post.slug %}">{{post.title}}</a>
                               {% endfor %}
                               {% endif %}
-                          </div>
+                            </div>
                         </div>
+                        {% if user.is_staff%}
+                        <li class="main-menu__item">
+                            <a href="{% url 'admin:index' %}" class="btn">Admin</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
