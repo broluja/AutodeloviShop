@@ -10,6 +10,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ["__str__", "views", "orders", "open_item"]
     list_per_page = 20
     list_display_links = ["__str__", ]
+    ordering = ("-orders", )
 
     def open_item(self, obj):
         return mark_safe(  # Creating link to the Item page

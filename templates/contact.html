@@ -1,10 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Kontakt{% endblock title %}
+
+{% block content %}
+
+<div class="site">
+    <div class="site__body">
+        <div class="block-map block">
+            <div class="block-map__body">
+                <iframe src='https://maps.google.com/maps?q=Borivoja%20Stevanovica%2017&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed' frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>
+            </div>
+        </div>
+        <div class="block-header block-header--has-breadcrumb block-header--has-title">
+            <div class="container">
+                <div class="block-header__body">
+                    <h1 class="block-header__title">Kontaktirajte nas</h1>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="container container--max--lg">
+                <div class="card">
+                    <div class="card-body card-body--padding--2">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 pb-4 pb-lg-0">
+                                <div class="mr-1">
+                                    <h4 class="contact-us__header card-title">Naša Adresa</h4>
+                                    <div class="contact-us__address">
+                                        <p>
+                                            Borivoja Stevanovića 17, Beograd, Srbija<br>
+                                            Email: autodelovishop.rs@gmail.com<br>
+                                            Telefonski broj: +381 60 3033 754
+                                        </p>
+                                        <p>
+                                            <strong>Radno vreme</strong><br>
+                                            Od Ponedeljka do Petka: 09.00 - 17.00<br>
+                                        </p>
+                                        <p>
+                                            <strong>O tebi</strong><br>
+                                            Potreban ti je deo za tvoj auto? Bez zvanja telefonom, bez odlaska u
+                                            prodavnicu, bez čekanja na isporuku? Uz samo par klikova na
+                                            našem sajtu veoma jednostavno i lako možeš poručiti karoserijski deo za svoj auto.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="ml-1">
+                                    <h4 class="contact-us__header card-title">Pošaljite nam poruku</h4>
+                                    <form hx-post="{{request.path}}" hx-target="#productForCart" hx-swap="innerHtml">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="form-name">Ime</label>
+                                                <input required type="text" id="form-name" class="form-control" placeholder="Ime" name="name">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="form-email">Email</label>
+                                                <input required type="email" id="form-email" class="form-control" placeholder="Email Adresa" name="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="form-subject">Subject</label>
+                                            <input required type="text" id="form-subject" class="form-control" placeholder="Subject" name="subject">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="form-message">Poruka</label>
+                                            <textarea required id="form-message" class="form-control" rows="4" name="message"></textarea>
+                                        </div>
+                                        <button style="border-radius:5px;" type="submit" class="btn btn-primary">Pošalji</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-space block-space--layout--before-footer"></div>
+    </div>
+</div>
+
+{% endblock content %}

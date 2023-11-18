@@ -17,6 +17,7 @@ es = ElasticSearchAgent()
 mailjet = Client(auth=(MAIL_API_KEY, MAIL_SECRET_KEY), version="v3.1")
 
 def send_email(data):
+    """Send email on product order."""
     if not data:
         return
     data["products"].insert(
@@ -58,6 +59,7 @@ def send_email(data):
 
 
 def reply_on_order(order_data):
+    """Send email as order response."""
     if not order_data:
         return
     name = order_data["user"]["name"] + " " + order_data["user"]["surname"]
@@ -100,6 +102,7 @@ def reply_on_order(order_data):
 
 
 def ask_for_part(model, part_id, phone, email_address=None, text=None):
+    """Send email on product query."""
     html = f"<p>Molim Vas, proverite mi ovaj deo na stanju</p><br><p>Model: {model} | ID: {part_id}</p><br><br>"
     if text:
         html += f"<p>{text}</p><br><br>"
@@ -127,6 +130,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
     return mailjet.send.create(data=email)
 
 def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_code, question, phone, mail):
+    """Send email on product questions."""
     html = f"<p>Molim Vas, imam pitanja u vezi dela</p>"
     html += f"<p>Brand: {brand} | Model: {model} | Part: {part_desc} | ID: {part_id} | Gen. Code: {gen_code}</p><br>"
     html += f"<section>{question}</section>"
@@ -153,7 +157,42 @@ def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_
     return mailjet.send.create(data=email)
 
 
+def send_message(data: dict):
+    """Send message from 'Contact' page."""
+    name = data.get("name")
+    email = data.get("email")
+    subject = data.get("subject")
+    message = data.get("message")
+
+    html = "<p>Poštovani, </p><br>"
+    html += f"{message}<br>"
+    if email:
+        html += f"Dostupan sam na email adresi: {email}"
+
+    email = {
+        "Messages": [
+            {
+                "From": {
+                    "Email": "office@digitalconstruct.rs",
+                    "Name": "AutoDeloviShop"
+                },
+                "To": [
+                    {
+                        "Email": "autodelovishop.rs@gmail.com",
+                        "Name": f"Poruka od {name}"
+                    }
+                ],
+                "Subject": f"Poruka sa sajta - {subject}",
+                "TextPart": json.dumps(data["name"]),
+                "HTMLPart": html
+            }
+        ]
+    }
+    return mailjet.send.create(data=email)
+
+
 def set_cookie(response, key, value, days_expire=7):
+    """Setting cookie on the response."""
     if days_expire is None:
         max_age = 365 * 24 * 60 * 60  # one year
     else:
@@ -173,6 +212,7 @@ def set_cookie(response, key, value, days_expire=7):
 
 
 def save_orders(products: list) -> None:
+    """Increment orders on the ordered item."""
     try:
         for product in products:
             product_id = product["gbg_id"]
@@ -185,6 +225,7 @@ def save_orders(products: list) -> None:
 
 
 def memoize(func):
+    """Cache on redis results from func return results."""
     r = redis.Redis(host='localhost', port=6379, decode_responses=True)
     expire = 60 * 60 * 24
 
