@@ -8,6 +8,7 @@ from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
+    """Post model representing a page content on blog page."""
     title = models.CharField(max_length=99)
     subtitle = models.CharField(max_length=99)
     content = models.TextField()
@@ -27,6 +28,7 @@ class Post(models.Model):
         return reverse('blog:post_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
+        """Resizing image on post save."""
         super().save()
         if self.slug is None:
             value = self.subtitle
