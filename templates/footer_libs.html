@@ -52,6 +52,9 @@
                           </div>
                         </div>
                     </li>
+                    <li data-mobile-menu-item>
+                        <a href="{% url 'contact' %}" class="btn">Kontakt</a>
+                    </li>
                     {% if user.is_staff%}
                     <li data-mobile-menu-item>
                         <a href="{% url 'admin:index' %}" class="btn">Admin</a>

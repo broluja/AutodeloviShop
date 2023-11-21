@@ -1,3 +1,4 @@
+"""Elasticsearch agent for operating with elasticsearch engine."""
 import requests
 from elasticsearch import Elasticsearch
 
@@ -5,7 +6,7 @@ IMAGE_PATH = "https://slike.autodelovishop.rs/PARTS"
 
 
 class ElasticSearchAgent:
-
+    """Elasticsearch agent."""
     def __init__(self):
         self._port = "http://localhost:9200"
         self._agent = Elasticsearch(self.port)
@@ -41,14 +42,14 @@ class ElasticSearchAgent:
         image = r["hits"]["hits"]
         return image if len(image) else None
 
-    def img(self, gbg_id):
+    def get_image_path(self, gbg_id):
         model_id = str(gbg_id)[:4]
-        trd = self.get_image(gbg_id)
+        base_image = self.get_image(gbg_id)
         image_one = f"{IMAGE_PATH}/{model_id}/{gbg_id}.jpg"
         image_two = f"{IMAGE_PATH}/{model_id}/{gbg_id}.JPG"
         first = self.image_exists(image_one)
         second = self.image_exists(image_two)
-        third = str(trd[0])[:4] if trd is not None else None
+        third = str(base_image[0])[:4] if base_image is not None else None
         if first:
             image = image_one
         elif second:
@@ -111,7 +112,7 @@ class ElasticSearchAgent:
         for x in parts:
             jsn = x["_source"]
             gbg_id = jsn.get("gbg_id")
-            image = self.img(gbg_id)
+            image = self.get_image_path(gbg_id)
             jsn["image"] = image
         return [item["_source"] for item in parts], total
 
@@ -148,7 +149,7 @@ class ElasticSearchAgent:
             for item in parts:
                 item = item["_source"]
                 gbg_id = item.get("gbg_id")
-                image = self.img(gbg_id)
+                image = self.get_image_path(gbg_id)
                 item["image"] = image
         return [item["_source"] for item in parts], total
 
@@ -165,7 +166,7 @@ class ElasticSearchAgent:
             product_dictionary = p["hits"]["hits"][0]
             product = product_dictionary["_source"]
             gbg_id = product["gbg_id"]
-            image = self.img(gbg_id)
+            image = self.get_image_path(gbg_id)
             product['image'] = image
             return product
         except IndexError as exc:
@@ -189,7 +190,7 @@ class ElasticSearchAgent:
             product_dictionary = p["hits"]["hits"][0]
             product = product_dictionary["_source"]
             gbg_id = product["gbg_id"]
-            image = self.img(gbg_id)
+            image = self.get_image_path(gbg_id)
             product['image'] = image
             return product
         except IndexError as exc:
@@ -209,7 +210,7 @@ class ElasticSearchAgent:
             product_dictionary = p["hits"]["hits"][0]
             product = product_dictionary["_source"]
             gbg_id = product["gbg_id"]
-            image = self.img(gbg_id)
+            image = self.get_image_path(gbg_id)
             product['image'] = image
             return product
         except IndexError as exc:
@@ -244,10 +245,9 @@ class ElasticSearchAgent:
         if result.get("hits").get("hits"):
             part = result["hits"]["hits"][0]["_source"]
             gbg_id = part.get("gbg_id")
-            image = self.img(gbg_id)
+            image = self.get_image_path(gbg_id)
             part["image"] = image
             return part
-
 
     def get_parts_by_category(self, term: str, model: str):
         query = {
@@ -268,6 +268,6 @@ class ElasticSearchAgent:
             for item in parts:
                 item = item["_source"]
                 gbg_id = item.get("gbg_id")
-                image = self.img(gbg_id)
+                image = self.get_image_path(gbg_id)
                 item["image"] = image
             return [item["_source"] for item in parts]

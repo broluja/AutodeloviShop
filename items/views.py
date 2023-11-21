@@ -11,6 +11,10 @@ es = ElasticSearchAgent()
 
 
 def product_details(request, product_id):
+    """
+    Sending a question regarding product (POST),
+    rendering product and related products (GET).
+    """
     if request.method == "POST":
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
@@ -28,7 +32,7 @@ def product_details(request, product_id):
         return HttpResponse(status=204)
     else:
         article = es.get_product(product_id)
-        if article.get('side') == "R":  # Getting first suggestion in part suggestions (oposite side part, if exists.)
+        if article.get('side') == "R":  # Getting first suggestion in part suggestions (opposite side part, if exists.)
             first_suggestion = es.get_products_twin(article, side="L")
         elif article.get('side') == "L":
             first_suggestion = es.get_products_twin(article, side="R")

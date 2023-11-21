@@ -84,10 +84,11 @@ def order(request):
     if not products:
         return JsonResponse({})
     save_orders(products)
-    r = send_email(body)
-    if r.json()["Messages"][0]["Status"] == "success":
+    response = send_email(body)
+    print(response)
+    if response["success"]:
         reply_on_order(body)
-    return JsonResponse(r.json())
+    return JsonResponse(response)
 
 
 def show_models(request, brand):

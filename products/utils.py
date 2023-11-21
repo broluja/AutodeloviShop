@@ -1,20 +1,22 @@
-import json
-import redis
 import datetime
+import json
+import mailtrap as mt
+import redis
 from mailjet_rest import Client
 from tabulate import tabulate
 
-from django.http import Http404
 from django.conf import settings
+from django.http import Http404
 
+from Autodelovi.settings import MAILTRAP_TOKEN, MAILTRAP_MAIL
 from items.models import Item
 from products.email_template import prolog, content, final
-from Autodelovi.settings import MAIL_API_KEY, MAIL_SECRET_KEY
 from .elastic_agent import ElasticSearchAgent
 
+AUTODELOVI_MAIL = "autodelovishop.rs@gmail.com"
 
 es = ElasticSearchAgent()
-mailjet = Client(auth=(MAIL_API_KEY, MAIL_SECRET_KEY), version="v3.1")
+client = mt.MailtrapClient(token=MAILTRAP_TOKEN)
 
 def send_email(data):
     """Send email on product order."""
@@ -35,27 +37,10 @@ def send_email(data):
     html += f"<br>Email: {byer.get('email')}"
     html +=  f"<br>Telefon: {byer.get('phone')}"
     html += f"<br>Komentar: {byer.get('comment')}"
-
-    email = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "office@digitalconstruct.rs",
-                    "Name": "AutoDeloviShop"
-                },
-                "To": [
-                    {
-                        "Email": "autodelovishop.rs@gmail.com",
-                        "Name": "User"
-                    }
-                ],
-                "Subject": "Porudzbina sa sajta",
-                "TextPart": json.dumps(data["user"]),
-                "HTMLPart": html
-            }
-        ]
-    }
-    return mailjet.send.create(data=email)
+    subject = "Porudzbina sa sajta"
+    text = json.dumps(byer)
+    mail = make_mail(AUTODELOVI_MAIL, subject, html, text)
+    return client.send(mail)
 
 
 def reply_on_order(order_data):
@@ -75,30 +60,13 @@ def reply_on_order(order_data):
     html += content + "<br>"
     html += "Poručili ste: <br>"
     for name, price, link, quantity in zip(product_names, prices, links, quantities):
-        html += f"{name} - cena: {price}, količina {quantity} | {link} <br>"
+        html += f"{name} - cena: {price: .2f}, količina {quantity} | {link} <br>"
 
-    html += f"Konačna cena je: {total}<br>"
+    html += f"Konačna cena je: {total: .2f}<br>"
     html += final
-
-    email = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "office@digitalconstruct.rs",
-                    "Name": "AutoDeloviShop"
-                },
-                "To": [
-                    {
-                        "Email": user_email,
-                        "Name": "User"
-                    }
-                ],
-                "Subject": "AutoDeloviShop - Moja porudžbina",
-                "HTMLPart": html
-            }
-        ]
-    }
-    return mailjet.send.create(data=email)
+    subject = "AutoDeloviShop - Moja porudžbina"
+    mail = make_mail(user_email, subject, html)
+    return client.send(mail)
 
 
 def ask_for_part(model, part_id, phone, email_address=None, text=None):
@@ -109,25 +77,9 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
     html += f"<p>Moj kontakt telefon: {phone}"
     if email_address:
         html += f"<p>Moja email adresa: {email_address}"
-    email = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "office@digitalconstruct.rs",
-                    "Name": "AutoDeloviShop"
-                },
-                "To": [
-                    {
-                        "Email": "autodelovishop.rs@gmail.com",
-                        "Name": "User"
-                    }
-                ],
-                "Subject": "Upit sa sajta",
-                "HTMLPart": html
-            }
-        ]
-    }
-    return mailjet.send.create(data=email)
+    subject = "Upit sa sajta"
+    mail = make_mail(AUTODELOVI_MAIL, subject, html)
+    return client.send(mail)
 
 def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_code, question, phone, mail):
     """Send email on product questions."""
@@ -136,25 +88,9 @@ def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_
     html += f"<section>{question}</section>"
     html += f"<p>Moj kontakt telefon: {phone}</p><p>Moj email: {mail}</p>"
     html += f"<p>Srdačan pozdrav, {first_name} {last_name}</p>"
-    email = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "office@digitalconstruct.rs",
-                    "Name": "AutoDeloviShop"
-                },
-                "To": [
-                    {
-                        "Email": "autodelovishop.rs@gmail.com",
-                        "Name": "User"
-                    }
-                ],
-                "Subject": f"Upit sa sajta",
-                "HTMLPart": html
-            }
-        ]
-    }
-    return mailjet.send.create(data=email)
+    subject = "Upit sa sajta"
+    mail = make_mail(AUTODELOVI_MAIL, subject, html)
+    return client.send(mail)
 
 
 def send_message(data: dict):
@@ -168,27 +104,22 @@ def send_message(data: dict):
     html += f"{message}<br>"
     if email:
         html += f"Dostupan sam na email adresi: {email}"
+    subj = f"Poruka sa sajta - {subject}"
+    text = json.dumps(data["name"])
+    mail = make_mail(AUTODELOVI_MAIL, subj, html, text)
+    return client.send(mail)
 
-    email = {
-        "Messages": [
-            {
-                "From": {
-                    "Email": "office@digitalconstruct.rs",
-                    "Name": "AutoDeloviShop"
-                },
-                "To": [
-                    {
-                        "Email": "autodelovishop.rs@gmail.com",
-                        "Name": f"Poruka od {name}"
-                    }
-                ],
-                "Subject": f"Poruka sa sajta - {subject}",
-                "TextPart": json.dumps(data["name"]),
-                "HTMLPart": html
-            }
-        ]
-    }
-    return mailjet.send.create(data=email)
+
+def make_mail(to: str, subject:str, html: str, text: str = None, from_: str = MAILTRAP_MAIL):
+    """Make email for sendinf through mailtrap server."""
+    mail = mt.Mail(
+        sender=mt.Address(email=from_, name="AutoDeloviShop"),
+        to=[mt.Address(email=to)],
+        subject=subject,
+        text=text,
+        html=html,
+    )
+    return mail
 
 
 def set_cookie(response, key, value, days_expire=7):

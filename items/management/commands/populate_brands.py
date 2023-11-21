@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-
+    """Populate all brand models from the database."""
     def handle(self, *args, **options):
         es = Elasticsearch("http://localhost:9200")
         agent = ElasticSearchAgent()

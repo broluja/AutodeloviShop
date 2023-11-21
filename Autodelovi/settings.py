@@ -118,5 +118,8 @@ MAIL_API_KEY = os.getenv("KEY")
 MAIL_SECRET_KEY = os.getenv("SECRET")
 HOST_EMAIL = os.getenv("FROM")
 
+MAILTRAP_TOKEN = os.getenv("MAILTRAP_TOKEN")
+MAILTRAP_MAIL = os.getenv("MAILTRAP_MAIL")
+
 # Taggit settings
 TAGGIT_CASE_INSENSITIVE = True

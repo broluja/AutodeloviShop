@@ -11,6 +11,7 @@ part_groups = [group_one, group_two, group_three, group_four, group_five, group_
 
 
 def get_group_of_connected_parts(part_description):
+    """Getting all products close to desired product."""
     group_of_terms = []
     for group in part_groups:
         for element in group:
@@ -20,6 +21,7 @@ def get_group_of_connected_parts(part_description):
 
 
 def add_views(gbg_id):
+    """Getting Item helper function."""
     item = Item.objects.filter(gbg_id=gbg_id).first()
     if not item:
         item = Item.objects.create(gbg_id=gbg_id)

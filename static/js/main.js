@@ -559,7 +559,7 @@
                     var jsonResponse = JSON.parse(this.responseText);
                     console.log(jsonResponse)
                     console.log(this.responseText)
-                    if (jsonResponse["Messages"][0]["Status"] == "success") {
+                    if (jsonResponse["success"] == true) {
                         document.getElementById("porudzbina-forma").innerHTML =
                             "<h5 class='text-center'>Uspešno smo primili porudžbinu. Delovi će biti poslati na Vašu adresu. Plaćanje prilikom dostave.</h5>";
                         document.getElementById("checkoutHeader").innerHTML =

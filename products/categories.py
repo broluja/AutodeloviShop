@@ -8,11 +8,12 @@ amortizeri = ("amortizer", )
 
 
 def get_parts_by_categories(category: str) -> tuple:
+    """Get product related categories."""
     if category == "svetlosna oprema":
         return svetlosna_oprema
     elif category == "branik":
         return branik
-    elif category ==  "limarija":
+    elif category == "limarija":
         return limarija
     elif category == "zaštitne plastike":
         return zastitne_plastike
@@ -21,4 +22,4 @@ def get_parts_by_categories(category: str) -> tuple:
     elif category == "retrovizori":
         return retrovizori
     elif category == "amortizeri":
-        return  amortizeri
+        return amortizeri
