@@ -8,15 +8,19 @@ from tabulate import tabulate
 from django.conf import settings
 from django.http import Http404
 
-from Autodelovi.settings import MAILTRAP_TOKEN, MAILTRAP_MAIL
+from Autodelovi.settings import (
+    AUTODELOVI_MAIL,
+    MAILTRAP_TOKEN,
+    MAILTRAP_MAIL
+)
 from items.models import Item
 from products.email_template import prolog, content, final
-from .elastic_agent import ElasticSearchAgent
 
-AUTODELOVI_MAIL = "autodelovishop.rs@gmail.com"
+from .elastic_agent import ElasticSearchAgent
 
 es = ElasticSearchAgent()
 client = mt.MailtrapClient(token=MAILTRAP_TOKEN)
+
 
 def send_email(data):
     """Send email on product order."""
@@ -70,7 +74,7 @@ def reply_on_order(order_data):
 
 
 def ask_for_part(model, part_id, phone, email_address=None, text=None):
-    """Send email on product query."""
+    """Send email on product inquery."""
     html = f"<p>Molim Vas, proverite mi ovaj deo na stanju</p><br><p>Model: {model} | ID: {part_id}</p><br><br>"
     if text:
         html += f"<p>{text}</p><br><br>"
@@ -82,7 +86,7 @@ def ask_for_part(model, part_id, phone, email_address=None, text=None):
     return client.send(mail)
 
 def send_questions(first_name, last_name, brand, model, part_desc, part_id, gen_code, question, phone, mail):
-    """Send email on product questions."""
+    """Send email on product page."""
     html = f"<p>Molim Vas, imam pitanja u vezi dela</p>"
     html += f"<p>Brand: {brand} | Model: {model} | Part: {part_desc} | ID: {part_id} | Gen. Code: {gen_code}</p><br>"
     html += f"<section>{question}</section>"

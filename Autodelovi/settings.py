@@ -118,6 +118,9 @@ MAIL_API_KEY = os.getenv("KEY")
 MAIL_SECRET_KEY = os.getenv("SECRET")
 HOST_EMAIL = os.getenv("FROM")
 
+AUTODELOVI_MAIL = os.getenv("AUTODELOVI_MAIL")
+TEST_MAIL = os.getenv("TEST_MAIL")
+
 MAILTRAP_TOKEN = os.getenv("MAILTRAP_TOKEN")
 MAILTRAP_MAIL = os.getenv("MAILTRAP_MAIL")
 
