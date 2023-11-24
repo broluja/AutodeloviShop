@@ -85,7 +85,6 @@ def order(request):
         return JsonResponse({})
     save_orders(products)
     response = send_email(body)
-    print(response)
     if response["success"]:
         reply_on_order(body)
     return JsonResponse(response)
@@ -183,8 +182,7 @@ def add_car(request):
     return response
 
 
-def clear(request):
-    print(request.COOKIES)
+def clear(_request):
     response = HttpResponse("")
     response.delete_cookie("my_brand")
     response.delete_cookie("my_model")

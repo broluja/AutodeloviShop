@@ -180,5 +180,6 @@ def memoize(func):
 
 @memoize
 def get_category_parts(category_part, model):
+    """Cache parts on category parts search."""
     parts = es.get_parts_by_category(category_part, model)
     return parts
