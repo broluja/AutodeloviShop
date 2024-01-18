@@ -13,7 +13,7 @@ es.index(index="test-index", document={})
 
 def update_price(item_price):
     item_price = float(item_price)
-    pdv = item_price * 0.2
+    pdv = 0
     wholesale_cost = item_price + pdv
 
     if 0 <= wholesale_cost <= 500:
